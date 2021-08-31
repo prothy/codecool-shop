@@ -9,4 +9,6 @@
 		<url-pattern>/static/*</url-pattern>
 	</servlet-mapping>
 
+
+
 </web-app>

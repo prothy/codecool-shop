@@ -19,6 +19,7 @@
         <version.plugin.jetty>9.4.30.v20200611</version.plugin.jetty>
         <version.javax.servlet.api>4.0.1</version.javax.servlet.api>
         <version.thymeleaf>3.0.11.RELEASE</version.thymeleaf>
+        <jetty.http.port>8888</jetty.http.port>
     </properties>
 
     <build>
@@ -45,9 +46,13 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${version.plugin.jetty}</version>
                 <configuration>
+                    <httpConnector>
+                        <!--host>localhost</host-->
+                        <port>8888</port>
+                    </httpConnector>
                     <!-- On some configs this causes shutdown of context on -->
                     <!-- a page load so disabled. -->
-                    <!-- <reload>automatic</reload> -->
+                     <reload>automatic</reload>
                     <!-- <scanIntervalSeconds>1</scanIntervalSeconds> -->
                 </configuration>
             </plugin>
