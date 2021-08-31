@@ -1,6 +1,7 @@
 package com.codecool.shop.dao;
 
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.products.Product;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ public interface ProductCategoryDao {
     ProductCategory find(int id);
     void remove(int id);
 
+    List<Product> getDataFromJson();
     List<ProductCategory> getAll();
 
 }

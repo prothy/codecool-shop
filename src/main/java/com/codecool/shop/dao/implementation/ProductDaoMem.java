@@ -6,6 +6,9 @@ import com.codecool.shop.model.products.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +29,7 @@ public class ProductDaoMem implements ProductDao {
         }
         return instance;
     }
+
 
     @Override
     public void add(Product product) {
@@ -56,5 +60,22 @@ public class ProductDaoMem implements ProductDao {
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
         return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> createObjectsFromJson() throws IOException {
+        String file ="src/main/java/com/codecool/shop/resources/products.json";
+
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+
+        StringBuilder text = new StringBuilder();
+        String line = reader.readLine();
+        while (line != null){
+            text.append(line);
+            line = reader.readLine();
+        }
+        reader.close();
+
+        return null;
     }
 }

@@ -14,6 +14,7 @@ import com.codecool.shop.model.products.Product;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.io.IOException;
 import java.math.BigDecimal;
 
 @WebListener
@@ -25,18 +26,11 @@ public class Initializer implements ServletContextListener {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
-        //setting up a new supplier
-        Supplier amazon = new Supplier(1, "me");
-        supplierDataStore.add(amazon);
-
-//        setting up a new product category
-        ProductCategory tablet = new ProductCategory(1, "tablet");
-        productCategoryDataStore.add(tablet);
-
-        //setting up products and printing it
-//        productDataStore.add();
         Product a = new OS(1, "test", "des", new ProductCategory(1, "tablet"), new Supplier(1, "me"), "https://res.cloudinary.com/teepublic/image/private/s--RGjbI5F---/t_Resized%20Artwork/c_fit,g_north_west,h_954,w_954/co_ffffff,e_outline:48/co_ffffff,e_outline:inner_fill:48/co_ffffff,e_outline:48/co_ffffff,e_outline:inner_fill:48/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1565703885/production/designs/5596155_2.jpg", BigDecimal.valueOf(64.4), 64);
-        System.out.println(a.getPrice());
-        System.out.println(a.getName());
+        try {
+            System.out.println(productDataStore.getDataFromJson());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
