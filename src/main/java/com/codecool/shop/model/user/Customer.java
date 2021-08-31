@@ -23,8 +23,11 @@ public class Customer extends User{
         orders.add(new Order(1));
     }
 
-    public void cancelOrder() {
-        // [TODO]: not implemented
+    public void cancelOrder(int id) {
+        Order chosenOrder = orders.stream()
+                .parallel().filter(order -> order.getId() == id)
+                .findFirst().orElseThrow(NoSuchElementException::new);
+        orders.remove(chosenOrder);
     }
 
     private boolean confirmOrder() {
