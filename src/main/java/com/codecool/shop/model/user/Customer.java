@@ -16,5 +16,31 @@ public class Customer extends User{
         this.wallet = wallet;
     }
 
+    public void addOrder() {
+        // [TODO]: not implemented
+    }
+
+    public void cancelOrder() {
+        // [TODO]: not implemented
+    }
+
+    private boolean confirmOrder() {
+        // [TODO]: not implemented
+        return true;
+    }
+
+    private String choosePayment() {
+        // [TODO]: not implemented
+        return "";
+    }
+
+    private void decreaseWallet() {
+        // [TODO]: not implemented
+    }
+
+    private void checkPaymentType(String payment) {
+        // [TODO]: not implemented
+    }
+
 
 }
