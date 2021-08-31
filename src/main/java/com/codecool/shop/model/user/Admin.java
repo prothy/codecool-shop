@@ -15,4 +15,17 @@ public class Admin extends User{
         this.supplierDaoMem = new SupplierDaoMem();
         this.productDaoMem = new ProductDaoMem();
     }
+
+    public void changePriceOfProduct(int id) {
+        // [TODO]: not implemented
+    }
+
+    public void changePriceOfProduct(int id) {
+        // [TODO]: not implemented
+    }
+
+    public void addNewProductCategory(int id) {
+        // [TODO]: not implemented
+    }
+
 }
