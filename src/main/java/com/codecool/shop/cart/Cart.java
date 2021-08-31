@@ -1,6 +1,6 @@
 package com.codecool.shop.cart;
 
-import com.codecool.shop.model.Product;
+import com.codecool.shop.model.products.Product;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
