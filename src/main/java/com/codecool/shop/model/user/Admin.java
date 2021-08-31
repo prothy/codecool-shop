@@ -10,7 +10,7 @@ public class Admin extends User{
     private ProductDaoMem productDaoMem;
 
     public Admin(int id, String name, String email, String password, boolean isAdmin) {
-        super(id, name, email, password, true);
+        super(id, name, email, password, isAdmin);
         this.productCategoryDaoMem = new ProductCategoryDaoMem();
         this.supplierDaoMem = new SupplierDaoMem();
         this.productDaoMem = new ProductDaoMem();

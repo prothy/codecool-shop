@@ -1,0 +1,27 @@
+[
+  {
+    "id": 0,
+    "name": "admin",
+    "email": "admin@noideashop.com",
+    "password": "admin",
+    "isAdmin": true
+  },
+  {
+    "id": 1,
+    "name": "guest",
+    "email": "",
+    "password": "",
+    "isAdmin": false,
+    "orders": {},
+    "wallet": 0
+  },
+  {
+    "id": 2,
+    "name": "test",
+    "email": "test@test.com",
+    "password": "test",
+    "isAdmin": false,
+    "orders": {},
+    "wallet": 100
+  }
+]

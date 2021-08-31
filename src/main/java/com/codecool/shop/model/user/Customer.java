@@ -10,7 +10,7 @@ public class Customer extends User{
     private Payment payment;
 
     public Customer(int id, String name, String email, String password, boolean isAdmin, HashSet<Order> orders, Currency wallet) {
-        super(id, name, email, password, false);
+        super(id, name, email, password, isAdmin);
         this.cart = new Cart;
         this.orders = orders;
         this.wallet = wallet;
