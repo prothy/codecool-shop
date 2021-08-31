@@ -1,4 +1,8 @@
-package com.codecool.shop.model;
+package com.codecool.shop.model.products;
+
+import com.codecool.shop.model.BaseModel;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 
 import java.math.BigDecimal;
 import java.util.Currency;
@@ -10,25 +14,7 @@ public abstract class Product extends BaseModel {
     protected ProductCategory productCategory;
     protected Supplier supplier;
     protected String image;
-
-
-
-//    this.setPrice(defaultPrice, currencyString);
-//        this.setSupplier(supplier);
-//        this.setProductCategory(productCategory);
-
-
-    public Currency getDefaultCurrency() {
-        return defaultCurrency;
-    }
-
-    public void setDefaultCurrency(Currency defaultCurrency) {
-        this.defaultCurrency = defaultCurrency;
-    }
-
-//    public String getPrice() {
-//        return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
-//    }
+    protected BigDecimal price;
 
     public ProductCategory getProductCategory() {
         return productCategory;
@@ -37,6 +23,15 @@ public abstract class Product extends BaseModel {
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
         this.productCategory.addProduct(this);
+    }
+
+    public String getPrice() {
+        return price + " " + defaultCurrency.toString();
+    }
+
+    public void setPrice(BigDecimal price, String currency) {
+        this.price = price;
+        this.defaultCurrency = Currency.getInstance(currency);
     }
 
     public Supplier getSupplier() {

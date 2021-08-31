@@ -6,9 +6,10 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.products.OS;
+import com.codecool.shop.model.products.Product;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -25,18 +26,17 @@ public class Initializer implements ServletContextListener {
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         //setting up a new supplier
-        Supplier amazon = new Supplier("Amazon", "Digital content and services");
+        Supplier amazon = new Supplier(1, "me");
         supplierDataStore.add(amazon);
-        Supplier lenovo = new Supplier("Lenovo", "Computers");
-        supplierDataStore.add(lenovo);
 
-        //setting up a new product category
-        ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+//        setting up a new product category
+        ProductCategory tablet = new ProductCategory(1, "tablet");
         productCategoryDataStore.add(tablet);
 
         //setting up products and printing it
-        productDataStore.add(new Product("Amazon Fire", new BigDecimal("49.9"), "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
-        productDataStore.add(new Product("Lenovo IdeaPad Miix 700", new BigDecimal("479"), "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
-        productDataStore.add(new Product("Amazon Fire HD 8", new BigDecimal("89"), "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
+//        productDataStore.add();
+        Product a = new OS(1, "test", "des", new ProductCategory(1, "tablet"), new Supplier(1, "me"), "https://res.cloudinary.com/teepublic/image/private/s--RGjbI5F---/t_Resized%20Artwork/c_fit,g_north_west,h_954,w_954/co_ffffff,e_outline:48/co_ffffff,e_outline:inner_fill:48/co_ffffff,e_outline:48/co_ffffff,e_outline:inner_fill:48/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1565703885/production/designs/5596155_2.jpg", BigDecimal.valueOf(64.4), 64);
+        System.out.println(a.getPrice());
+        System.out.println(a.getName());
     }
 }
