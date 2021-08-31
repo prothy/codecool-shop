@@ -35,7 +35,7 @@ public class Cart {
             calculatePrice(product, false, content.get(product));
         } else {
             content.remove(product);
-            calculatePrice(product, true, 0);
+            calculatePrice(product, false, 0);
         }
 
         System.out.println("Item has been removed successfully!");
