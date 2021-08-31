@@ -1,7 +1,10 @@
 package com.codecool.shop.model.user;
 
+import com.codecool.shop.model.Order;
+
 import java.util.Currency;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 
 public class Customer extends User{
     private Cart cart;
@@ -17,7 +20,7 @@ public class Customer extends User{
     }
 
     public void addOrder() {
-        // [TODO]: not implemented
+        orders.add(new Order(1));
     }
 
     public void cancelOrder() {
