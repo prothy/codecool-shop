@@ -59,18 +59,4 @@ public abstract class Product extends BaseModel {
         this.image = image;
     }
 
-    @Override
-    public String toString() {
-        return String.format("id: %1$d, " +
-                        "name: %2$s, " +
-                        "defaultPrice: %3$f, " +
-                        "defaultCurrency: %4$s, " +
-                        "productCategory: %5$s, " +
-                        "supplier: %6$s",
-                this.id,
-                this.name,
-                this.defaultCurrency.toString(),
-                this.productCategory.getName(),
-                this.supplier.getName());
-    }
 }

@@ -38,8 +38,8 @@
     "category": "Cloud",
     "supplier": "Google",
     "description": "",
-    "yearPrice": "contact",
-    "monthPrice": "contact",
+    "yearPrice": "200.00",
+    "monthPrice": "20.00",
     "url-img": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpluspng.com%2Fimg-png%2Fgoogle-cloud-logo-png-library-of-google-cloud-logo-picture-royalty-free-stock-png-files-960x960.png&f=1&nofb=1"
   },
   {
@@ -48,8 +48,8 @@
     "category": "Cloud",
     "supplier": "Amazon",
     "description": "",
-    "yearPrice": "contact",
-    "monthPrice": "contact",
+    "yearPrice": "200.00",
+    "monthPrice": "20.00",
     "url-img": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Flogos-download.com%2Fwp-content%2Fuploads%2F2016%2F12%2FAmazon_Web_Services_logo_AWS.png&f=1&nofb=1"
   },
   {
@@ -88,8 +88,8 @@
     "category": "WorkTool",
     "supplier": "Atlassian",
     "description": "",
-    "yearPrice": "84",
-    "monthPrice": "7",
+    "yearPrice": "84.00",
+    "monthPrice": "7.00",
     "img-url": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdoversus.com%2Fwp-content%2Fuploads%2F2020%2F01%2Fjira-standard.png&f=1&nofb=1"
   }
 ]
