@@ -1,0 +1,86 @@
+[
+  {
+    "id": 0,
+    "name": "Visual Studio Project",
+    "category": "IDE",
+    "supplier": "Microsoft",
+    "description": "",
+    "languages:": "C, C++, C#, Javascript, Visual Basic",
+    "yearPrice": "149.50",
+    "monthPrice": "14.95"
+  },
+  {
+    "id": 1,
+    "name": "Pycharm",
+    "category": "IDE",
+    "supplier": "JetBrains",
+    "description": "",
+    "languages:": "Python, Javascript",
+    "yearPrice": "89.00",
+    "monthPrice": "8.90"
+  },
+  {
+    "id": 2,
+    "name": "IntelliJ IDEA",
+    "category": "IDE",
+    "supplier": "JetBrains",
+    "description": "",
+    "languages:": "Java, Kotlin, Scala, Groovy",
+    "yearPrice": "149.00",
+    "monthPrice": "14.90"
+  },
+  {
+    "id": 3,
+    "name": "Google Cloud Platform",
+    "category": "Cloud",
+    "supplier": "Google",
+    "description": "",
+    "yearPrice": "contact",
+    "monthPrice": "contact"
+  },
+  {
+    "id": 4,
+    "name": "Amazon Web Services",
+    "category": "Cloud",
+    "supplier": "",
+    "description": "",
+    "yearPrice": "contact",
+    "monthPrice": "contact"
+  },
+  {
+    "id": 5,
+    "name": "Windows 10 Pro",
+    "category": "OS",
+    "supplier": "Microsoft",
+    "description": "",
+    "price": "122.99",
+    "bitversion": "64"
+  },
+  {
+    "id": 6,
+    "name": "Windows 10 Home",
+    "category": "OS",
+    "supplier": "Microsoft",
+    "description": "",
+    "price": "90.00",
+    "bitversion": "64"
+  },
+  {
+    "id": 7,
+    "name": "Slack Pro",
+    "category": "WorkTool",
+    "supplier": "Slack",
+    "description": "",
+    "yearPrice": "72.67",
+    "monthPrice": "6.67"
+  },
+  {
+    "id": 8,
+    "name": "Jira Standard",
+    "category": "WorkTool",
+    "supplier": "Atlassian",
+    "description": "",
+    "yearPrice": "84",
+    "monthPrice": "7"
+  }
+]
