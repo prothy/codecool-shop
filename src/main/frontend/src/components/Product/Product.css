@@ -1,0 +1,24 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow: hidden;
+
+  border: 1px solid #e5e5e5;
+}
+
+.product-card-info {
+  width: 100%;
+  padding: 1.5rem 1rem;
+}
+
+.product-card-info > span {
+  display: block;
+  width: 100%;
+}
+
+.product-card-info > span:first-of-type {
+  font-size: 20pt;
+  font-weight: bold;
+}

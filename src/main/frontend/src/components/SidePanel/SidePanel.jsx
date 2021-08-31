@@ -1,9 +1,15 @@
 import React from 'react'
+import './SidePanel.css'
 
 function SidePanel() {
-	return (
-		<div>This is going to be a sidepanel</div>
-	)
+  return (
+    <div>
+      <div>asdf</div>
+      <div>asdf</div>
+      <div>asf</div>
+      <div>adsf</div>
+    </div>
+  )
 }
 
 export default SidePanel

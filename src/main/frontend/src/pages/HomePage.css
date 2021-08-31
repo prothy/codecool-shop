@@ -1,0 +1,16 @@
+.side-panel {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.sort-cart-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 17rem;
+  gap: 3rem;
+}
