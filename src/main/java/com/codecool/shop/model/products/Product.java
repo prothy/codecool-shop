@@ -3,28 +3,20 @@ package com.codecool.shop.model;
 import java.math.BigDecimal;
 import java.util.Currency;
 
-public class Product extends BaseModel {
+public abstract class Product extends BaseModel {
 
-    private BigDecimal defaultPrice;
-    private Currency defaultCurrency;
-    private ProductCategory productCategory;
-    private Supplier supplier;
+    protected Currency defaultCurrency;
+    protected String description;
+    protected ProductCategory productCategory;
+    protected Supplier supplier;
+    protected String image;
 
 
-    public Product(String name, BigDecimal defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
-        super(name, description);
-        this.setPrice(defaultPrice, currencyString);
-        this.setSupplier(supplier);
-        this.setProductCategory(productCategory);
-    }
 
-    public BigDecimal getDefaultPrice() {
-        return defaultPrice;
-    }
+//    this.setPrice(defaultPrice, currencyString);
+//        this.setSupplier(supplier);
+//        this.setProductCategory(productCategory);
 
-    public void setDefaultPrice(BigDecimal defaultPrice) {
-        this.defaultPrice = defaultPrice;
-    }
 
     public Currency getDefaultCurrency() {
         return defaultCurrency;
@@ -34,14 +26,9 @@ public class Product extends BaseModel {
         this.defaultCurrency = defaultCurrency;
     }
 
-    public String getPrice() {
-        return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
-    }
-
-    public void setPrice(BigDecimal price, String currency) {
-        this.defaultPrice = price;
-        this.defaultCurrency = Currency.getInstance(currency);
-    }
+//    public String getPrice() {
+//        return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
+//    }
 
     public ProductCategory getProductCategory() {
         return productCategory;
@@ -61,6 +48,22 @@ public class Product extends BaseModel {
         this.supplier.addProduct(this);
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return String.format("id: %1$d, " +
@@ -71,7 +74,6 @@ public class Product extends BaseModel {
                         "supplier: %6$s",
                 this.id,
                 this.name,
-                this.defaultPrice,
                 this.defaultCurrency.toString(),
                 this.productCategory.getName(),
                 this.supplier.getName());
