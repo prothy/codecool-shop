@@ -7,15 +7,14 @@ public class BaseModel {
 
     protected int id;
     protected String name;
-    protected String description;
 
     public BaseModel(String name) {
         this.name = name;
     }
 
-    public BaseModel(String name, String description) {
+    public BaseModel(int id, String name) {
+        this.id = id;
         this.name = name;
-        this.description = description;
     }
 
 
@@ -33,14 +32,6 @@ public class BaseModel {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override
