@@ -14,12 +14,28 @@ public class Cart {
     }
 
     public void addProduct(Product product) {
-        content.put(product, 1);
+
+        if (content.containsKey(product)) {
+            int getQuantity = content.get(product);
+            content.put(product, getQuantity+1);
+        }
+        else {
+            content.put(product, 1);
+        }
+
         System.out.println("Item has been added to the card");
     }
 
     public void removeProduct(Product product) {
-        content.remove(product);
+
+        if (content.containsKey(product) && content.get(product) > 1) {
+            int getQuantity = content.get(product);
+            content.remove(product, getQuantity-1);
+        }
+        else {
+            content.remove(product);
+        }
+
         System.out.println("Item has been removed successfully!");
     }
 
