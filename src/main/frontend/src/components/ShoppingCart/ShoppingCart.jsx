@@ -1,23 +1,15 @@
 import React from 'react'
+import ShoppingCartItem from '../ShoppingCartItem/ShoppingCartItem'
 import './ShoppingCart.css'
 
-function ShoppingCart(jsonData) {
+function ShoppingCart(props) {
   return (
     <div className="shopping-cart">
       <div>
-        {jsonData.data.map((el) => (
-          <div className="shopping-cart__product" key="{el.name}">
-            <span className="shopping-cart__product-title">{el.name}</span>
-            <span>
-              <span className="shopping-cart__product-quantity">
-                <button>+</button>
-                <input type="number" value="1"></input>
-                <button>-</button>
-              </span>
-              <span className="shopping-cart__product-price">{el.price}</span>
-            </span>
-          </div>
-        ))}
+        {props.data.map((el, i) => {
+          console.log(el)
+          return <ShoppingCartItem key={i} data={el} />
+        })}
       </div>
       <button>Checkout</button>
     </div>
