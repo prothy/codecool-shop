@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.products.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,11 @@ public class SupplierDaoMem implements SupplierDao {
     @Override
     public void remove(int id) {
         data.remove(find(id));
+    }
+
+    @Override
+    public List<Product> getDataFromJson() {
+        return null;
     }
 
     @Override
