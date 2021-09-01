@@ -39,6 +39,17 @@ public class ProductService{
         return sortedProductList;
     }
 
+    public List<Product> getProductsForSupplier(String supplierName, List<Product> products) {
+        List<Product> sortedProductList = new ArrayList<>();
+        products.forEach(product -> {
+            if (product.getSupplier().getName().equals(supplierName)) {
+                sortedProductList.add(product);
+            }
+        });
+
+        return sortedProductList;
+    }
+
     public List<List<Product>> createProductListFromJson() throws IOException {
         return productDao.createObjectsFromJson();
     }

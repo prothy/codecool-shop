@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "productServlet",urlPatterns = {"/api.noIDEaSHop", "/api.noIDEaSHop?category=*", "/api.noIDEaSHop?suppliers=*"})
+@WebServlet(name = "productServlet",urlPatterns = {"/api.noIDEaSHop", "/api.noIDEaSHop?category=*", "/api.noIDEaSHop?supplier=*"})
 public class ProductController extends HttpServlet {
 
     @Override
@@ -41,6 +41,8 @@ public class ProductController extends HttpServlet {
 
         if (request.getParameter("category") != null) {
             productList = productService.getProductsForCategory(request.getParameter("category"), productList);
+        } else if (request.getParameter("supplier") != null) {
+            productList = productService.getProductsForSupplier(request.getParameter("supplier"), productList);
         }
 
         PrintWriter out = response.getWriter();
