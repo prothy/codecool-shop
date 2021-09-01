@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Product from '../components/Product/Product'
 import SidePanel from '../components/SidePanel/SidePanel'
 import ShoppingCart from '../components/ShoppingCart/ShoppingCart'
@@ -19,6 +19,21 @@ function HomePage() {
   // useEffect(() => {
   //     fetch
   // }, [])
+
+  const fetchApi = async () => {
+    return fetch('/api.noIDEaSHop', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+  }
+
+  useEffect(() => {
+    fetchApi()
+  }, [])
+
   return (
     <div className="product-page">
       <SidePanel />
