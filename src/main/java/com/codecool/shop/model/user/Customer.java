@@ -1,7 +1,10 @@
 package com.codecool.shop.model.user;
 
+import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.Payment;
 
+import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
@@ -9,15 +12,26 @@ import java.util.NoSuchElementException;
 public class Customer extends User{
     private Cart cart;
     private HashSet<Order> orders;
-    private Currency wallet;
+    private BigDecimal wallet;
+    private Currency defaultCurrency;
     private Payment payment;
 
-    public Customer(int id, String name, String email, String password, boolean isAdmin, HashSet<Order> orders, Currency wallet) {
+    public Customer(int id, String name, String email, String password, boolean isAdmin, HashSet<Order> orders, BigDecimal wallet, Currency defaultCurrency) {
         super(id, name, email, password, isAdmin);
-        this.cart = new Cart;
+        this.cart = new Cart();
         this.orders = orders;
         this.wallet = wallet;
+        this.defaultCurrency = defaultCurrency;
     }
+
+    public Customer() {
+        super(1, "guest", null, null, false);
+        this.cart = new Cart();
+        this.orders = new HashSet<>();
+        this.wallet = new BigDecimal(42);
+        this.defaultCurrency = Currency.getInstance("EUR");
+    }
+
 
     public void addOrder() {
         orders.add(new Order(1));
@@ -48,5 +62,7 @@ public class Customer extends User{
         // [TODO]: not implemented
     }
 
-
+    public HashSet<Order> getOrders() {
+        return orders;
+    }
 }
