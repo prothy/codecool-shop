@@ -15,16 +15,16 @@ public class Admin extends User{
         this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
-        this.productCategoryDaoMem = new ProductCategoryDaoMem();
-        this.supplierDaoMem = new SupplierDaoMem();
-        this.productDaoMem = new ProductDaoMem();
+        this.productCategoryDaoMem = ProductCategoryDaoMem.getInstance();
+        this.supplierDaoMem = SupplierDaoMem.getInstance();
+        this.productDaoMem = ProductDaoMem.getInstance();
     }
 
     public void changePriceOfProduct(int id) {
         // [TODO]: not implemented
     }
 
-    public void changePriceOfProduct(int id) {
+    public void addNewProduct(int id) {
         // [TODO]: not implemented
     }
 
