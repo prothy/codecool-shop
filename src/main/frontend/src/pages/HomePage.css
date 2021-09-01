@@ -3,11 +3,18 @@
   grid-template-columns: 1fr 4fr;
 }
 
+.shopping-cart__button {
+  height: 2.5rem;
+  width: auto;
+}
+
 .sort-cart-container {
   display: flex;
   justify-content: space-between;
 
   margin-bottom: 1rem;
+
+  height: 2.5em;
 }
 
 .product-card-container {

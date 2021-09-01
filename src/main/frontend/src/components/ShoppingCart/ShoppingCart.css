@@ -1,3 +1,42 @@
 .shopping-cart {
-  height: 2.5rem;
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  right: 13.8rem;
+
+  width: 20rem;
+  height: 20rem;
+
+  margin-right: -20rem;
+
+  background: white;
+  border: 1px solid #d7d7d7;
+}
+
+.shopping-cart__product {
+  padding: 0.2rem 0.5rem;
+
+  width: 100%;
+}
+
+.shopping-cart__product > span {
+  display: flex;
+  align-items: center;
+
+  height: 2rem;
+}
+
+.shopping-cart__product input,
+button {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0 0.4rem;
+
+  height: 2rem;
+  width: 4rem;
+}
+
+.shopping-cart__product-title {
+  display: block;
 }
