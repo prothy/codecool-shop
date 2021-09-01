@@ -3,6 +3,7 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.products.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,11 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
     @Override
     public void remove(int id) {
         data.remove(find(id));
+    }
+
+    @Override
+    public List<Product> getDataFromJson() {
+        return null;
     }
 
     @Override

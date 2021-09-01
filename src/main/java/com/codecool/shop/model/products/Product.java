@@ -59,6 +59,13 @@ public abstract class Product extends BaseModel {
         this.image = image;
     }
 
+//    public abstract BigDecimal getYearlyPrice();
+//
+//    public abstract void setYearlyPrice(BigDecimal yearlyPrice);
+//
+//    public abstract BigDecimal getMonthlyPrice();
+//
+//    public abstract void setMonthlyPrice(BigDecimal monthlyPrice);
     @Override
     public String toString() {
         return "Product{" +
