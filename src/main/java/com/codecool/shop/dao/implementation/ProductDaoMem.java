@@ -82,7 +82,7 @@ public class ProductDaoMem implements ProductDao {
         List<List<Product>> products = new ArrayList<>();
         products.add(getJsonOfCloud(jsonText.toString()));
         products.add(getJsonOfOs(jsonText.toString()));
-//        products.add(getJsonOfIDE(jsonText.toString()));
+        products.add(getJsonOfIDE(jsonText.toString()));
 //        products.add(getJsonOfWorkTool(jsonText.toString()));
 
 
@@ -116,38 +116,20 @@ public class ProductDaoMem implements ProductDao {
                 .collect(Collectors.toList());
     }
 //
-//    private List<Product> getJsonOfIDE(String jsonString) {
-//        //Deserialize
-//        GsonBuilder gsonBuilder = new GsonBuilder();
-//
-//        JsonDeserializer<IDE> deserializer = (json, typeOfT, context) -> {
-//            JsonObject jsonObject = json.getAsJsonObject();
-//
-//            if (jsonObject.get("category").getAsString().equals("IDE")) {
-//                return new IDE(
-//                    jsonObject.get("id").getAsInt(),
-//                    jsonObject.get("name").getAsString(),
-//                    jsonObject.get("description").getAsString(),
-//                    new ProductCategory(0, jsonObject.get("category").getAsString()),
-//                    new Supplier(2, jsonObject.get("supplier").getAsString()),
-//                    jsonObject.get("url-img").getAsString(),
-//                    new BigDecimal(0),
-//                    jsonObject.get("yearPrice").getAsBigDecimal(),
-//                    jsonObject.get("monthPrice").getAsBigDecimal(),
-//                    jsonObject.get("languages").getAsString()
-//                );
-//            }
-//            return null;
-//        };
-//        gsonBuilder.registerTypeAdapter(IDE.class, deserializer);
-//
-//        Gson customGson = gsonBuilder.create();
-//        IDE[] IDEProducts = customGson.fromJson(jsonString, IDE[].class);
-//        List<Product> finalIDEProducts = new ArrayList<>(Arrays.asList(IDEProducts));
-//        finalIDEProducts.removeAll(Collections.singleton(null));
-//
-//        return finalIDEProducts;
-//    }
+    private List<Product> getJsonOfIDE(String jsonString) {
+        //Deserialize
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson customGson = gsonBuilder.create();
+
+
+        IDE[] IDEProducts = customGson.fromJson(jsonString, IDE[].class);
+        List<Product> finalIDEProducts = new ArrayList<>(Arrays.asList(IDEProducts));
+        finalIDEProducts.removeAll(Collections.singleton(null));
+
+        return finalIDEProducts.stream()
+                .filter(element -> element.getProductCategory().getName().equals("IDE"))
+                .collect(Collectors.toList());
+    }
 //
 //    private List<Product> getJsonOfWorkTool(String jsonString) {
 //        //Deserialize
