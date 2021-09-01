@@ -73,7 +73,7 @@ public class ProductDaoMem implements ProductDao {
 
         List<List<Product>> products = new ArrayList<>();
         products.add(getJsonOfCloud(jsonText));
-        products.add(getJsonOfOs(jsonText));g
+        products.add(getJsonOfOs(jsonText));
         products.add(getJsonOfIDE(jsonText));
         products.add(getJsonOfWorkTool(jsonText));
 
