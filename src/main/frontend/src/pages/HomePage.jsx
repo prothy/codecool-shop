@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import Product from '../components/Product/Product'
-import SidePanel from '../components/SidePanel/SidePanel'
+import SidePanel from '../components/Prototype/Prototype'
 import ShoppingCart from '../components/ShoppingCart/ShoppingCart'
 import Dropdown from '../components/Dropdown/Dropdown'
 
