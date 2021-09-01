@@ -9,6 +9,7 @@ function HomePage() {
   const fakesonData = [
     { name: 'basketball', price: '$500', url: '' },
     { name: 'fakeball', price: '$500', url: '' },
+    { name: 'fakeball', price: '$500', url: '' },
   ]
 
   // HOOKS
@@ -19,7 +20,7 @@ function HomePage() {
   //     fetch
   // }, [])
   return (
-    <div className="side-panel">
+    <div className="product-page">
       <SidePanel />
       <div>
         <div className="sort-cart-container">

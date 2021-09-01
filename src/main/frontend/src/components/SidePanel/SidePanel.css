@@ -1,0 +1,23 @@
+.side-panel {
+  display: flex;
+  flex-direction: column;
+
+  margin-right: 3rem;
+}
+
+.side-panel__option {
+  display: flex;
+  align-items: center;
+
+  padding: 0 0.6rem;
+
+  height: 3rem;
+  min-width: 14rem;
+
+  border: 1px solid #d7d7d7;
+  border-bottom: none;
+}
+
+.side-panel__option:last-of-type {
+  border-bottom: 1px solid #d7d7d7;
+}

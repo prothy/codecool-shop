@@ -1,9 +1,15 @@
 .product-card {
   display: flex;
+
   flex-direction: column;
   justify-content: space-between;
 
   overflow: hidden;
+
+  margin: 0 3rem 3rem 0;
+
+  height: 20rem;
+  width: 15rem;
 
   border: 1px solid #e5e5e5;
 }

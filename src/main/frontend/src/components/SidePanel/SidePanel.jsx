@@ -3,11 +3,12 @@ import './SidePanel.css'
 
 function SidePanel() {
   return (
-    <div>
-      <div>asdf</div>
-      <div>asdf</div>
-      <div>asf</div>
-      <div>adsf</div>
+    <div className="side-panel">
+      <div className="side-panel__option">All categories</div>
+      <div className="side-panel__option">asdf</div>
+      <div className="side-panel__option">asdf</div>
+      <div className="side-panel__option">asdf</div>
+      <div className="side-panel__option">asdf</div>
     </div>
   )
 }
