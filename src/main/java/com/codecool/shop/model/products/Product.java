@@ -20,10 +20,10 @@ public abstract class Product extends BaseModel {
         return productCategory;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
-        this.productCategory.addProduct(this);
-    }
+//    public void setProductCategory(ProductCategory productCategory) {
+//        this.productCategory = productCategory;
+//        this.productCategory.addProduct(this);
+//    }
 
     public Supplier getSupplier() {
         return supplier;
