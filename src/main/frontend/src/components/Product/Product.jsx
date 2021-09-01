@@ -10,6 +10,7 @@ function Product({ imageURL, name, price }) {
       <div className="product-card-info">
         <span>{name}</span>
         <span>{price}</span>
+        <button>Add to cart</button>
       </div>
     </div>
   )
