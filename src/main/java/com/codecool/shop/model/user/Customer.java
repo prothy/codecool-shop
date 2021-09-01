@@ -14,7 +14,7 @@ public class Customer extends User{
     private Currency defaultCurrency;
     private Payment payment;
 
-    public Customer(int id, String name, String email, String password, boolean isAdmin, HashSet<Order> orders, BigDecimal wallet, Currency defaultCurrency) {
+    public Customer(int id, String name, String email, String password, boolean isAdmin, HashSet<Order> orders, BigDecimal wallet, String defaultCurrency) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -23,7 +23,7 @@ public class Customer extends User{
         this.cart = new Cart();
         this.orders = orders;
         this.wallet = wallet;
-        this.defaultCurrency = defaultCurrency;
+        this.defaultCurrency = Currency.getInstance(defaultCurrency);
     }
 
     public Customer() {
