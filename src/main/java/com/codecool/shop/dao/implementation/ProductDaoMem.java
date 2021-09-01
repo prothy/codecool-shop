@@ -67,6 +67,7 @@ public class ProductDaoMem implements ProductDao {
 
     @Override
     public List<List<Product>> createObjectsFromJson() throws IOException {
+        //Todo create Utils for file reading
         String file ="src/main/java/com/codecool/shop/resources/products.json";
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -79,10 +80,11 @@ public class ProductDaoMem implements ProductDao {
         }
         reader.close();
         List<List<Product>> products = new ArrayList<>();
-        products.add(getJsonOfCloud(jsonText.toString()));
-        products.add(getJsonOfOs(jsonText.toString()));
-        products.add(getJsonOfIDE(jsonText.toString()));
-        products.add(getJsonOfWorkTool(jsonText.toString()));
+        System.out.println(getJsonOfCloud(jsonText.toString()));
+//        products.add(getJsonOfCloud(jsonText.toString()));
+//        products.add(getJsonOfOs(jsonText.toString()));
+//        products.add(getJsonOfIDE(jsonText.toString()));
+//        products.add(getJsonOfWorkTool(jsonText.toString()));
 
 
         return products;
