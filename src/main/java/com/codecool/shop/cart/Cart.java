@@ -4,88 +4,147 @@ import com.codecool.shop.model.products.Product;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Cart {
 
     private final Map<String, HashMap<Product, Integer>> content = new HashMap<>();
-    private BigDecimal sumPrice = new BigDecimal(0);
+    private Map<String, Integer> quantity = new HashMap<>();
+    private Map<String, BigDecimal> sumPrice = new HashMap<>();
 
-    public Cart() {}
+    public Cart() {
+    }
 
     public void addProduct(Product product) {
 
         if (content.containsKey(product.getName())) {
             HashMap<Product, Integer> innerMap = content.get(product.getName());
             Product firstKey = (Product) innerMap.keySet().toArray()[0];
-            innerMap.put(firstKey, innerMap.get(firstKey) + 1);
+
+            int getQuantity = innerMap.get(firstKey) + 1;
+            innerMap.put(firstKey, getQuantity);
+
             content.put(product.getName(), innerMap);
-        }
-        else {
+            this.quantity.put(product.getName(), getQuantity);
+            calculatePriceAfterAddItem(product, getQuantity);
+        } else {
             HashMap<Product, Integer> newContent = new HashMap<>();
             newContent.put(product, 1);
+
             content.put(product.getName(), newContent);
+            this.quantity.put(product.getName(), 1);
+            calculatePriceAfterAddItem(product, 1);
         }
-        System.out.println(content);
-//        System.out.println("Item has been added to the card");
+
+        System.out.println("Item has been added to the cart!");
     }
+
+//    public void addProduct(Product product) {
+//
+//        AtomicBoolean isKeyPresent = checkProductPresent(product);
+//        boolean checkPresent = checkPresent(product);
+//
+//        if (checkPresent) {
+//            content.put(product, getQuantity.get(product.getName()) + 1);
+//            calculatePriceAfterAddItem(product, getQuantity.get(product.getName()) + 1);
+//        } else {
+//            content.put(product, 1);
+//            calculatePriceAfterAddItem(product, 1);
+//        }
+
+    //System.out.println(product.getName()+ " " +getQuantity.get(product.getName()));
+//
+//        System.out.println("Item has been added to the card");
+//    }
+
 
 //    private AtomicBoolean checkProductPresent(Product product) {
 //
-//        AtomicBoolean isKeyPresent= new AtomicBoolean(false);
+//        AtomicBoolean isKeyPresent = new AtomicBoolean(false);
 //
 //        Optional<Map.Entry<Product, Integer>> matchedEntry =
 //                content.entrySet().stream().
-//                                filter(element -> element.getKey().getName().equals(product.getName())).findAny();
+//                        filter(element -> element.getKey().getName().equals(product.getName())).findAny();
 //
 //        matchedEntry.ifPresent(value -> {
-//            isKeyPresent.set(true);
+//
+//            for (Map.Entry<String, Integer> prices :
+//                    this.getQuantity.entrySet()) {
+//
+//                if (getQuantity.containsKey(value.getKey().getName())) {
+//                    getQuantity.put(value.getKey().getName(), value.getValue() + 1);
+//                    isKeyPresent.set(true);
+//                } else {
+//                    getQuantity.put(value.getKey().getName(), 1);
+//                    isKeyPresent.set(false);
+//                }
+//            }
+//
 //        });
 //
 //        return isKeyPresent;
 //
 //    }
-//
-//    public void removeProduct(Product product) {
-//
-//        AtomicBoolean isKeyPresent = checkProductPresent(product);
-//
-//        if (isKeyPresent.get()) {
-//            int getQuantity = 1;
-//            content.remove(product, getQuantity - 1);
-//            calculatePrice(product, false, getQuantity);
-//        } else {
-//            content.remove(product);
-//            calculatePrice(product, false, 0);
-//        }
-//
-//        System.out.println("Item has been removed successfully!");
-//    }
-//
-//    public void calculatePrice(Product product, boolean checkCart, int getQuantity) {
-//
-//        //TODO: save the previous item price
-//
-//        String[] splitPrice = product.getPrice().split(" ");
-//        BigDecimal getPrice = new BigDecimal(splitPrice[0]);
-//
-//        if (checkCart) {
-//            setCalculatedPrice(getPrice.multiply(BigDecimal.valueOf(getQuantity)));
-//        } else if (!checkCart && getQuantity > 1) {
-//            setCalculatedPrice(getPrice.multiply(BigDecimal.valueOf(getQuantity)).subtract(getPrice));
-//        } else if (!checkCart && getQuantity == 0){
-//            setCalculatedPrice(getPrice.subtract(getPrice));
-//        }
-//        else {
-//            setCalculatedPrice(getPrice);
-//        }
-//    }
-//
-//    public void setCalculatedPrice(BigDecimal price) {
-//        this.price = price;
-//    }
-//
-//    public BigDecimal getCalculatedPrice() {
-//        return this.price;
-//    }
+
+    public void removeProduct(Product product) {
+
+        if (content.containsKey(product.getName())) {
+
+            HashMap<Product, Integer> innerMap = content.get(product.getName());
+
+            Product firstKey = (Product) innerMap.keySet().toArray()[0];
+            int quantity = innerMap.get(firstKey) + 1;
+            innerMap.remove(firstKey, quantity);
+
+            content.remove(product.getName(), innerMap);
+            System.out.println(this.quantity.values());
+            this.quantity.put(product.getName(), this.quantity.get(product.getName()) - 1);
+            System.out.println(this.quantity.get(product.getName()));
+            calculatePriceAfterRemoveItem(product, this.quantity.get(product.getName()) - 1);
+
+        }
+
+        System.out.println("Item has been removed successfully!");
+    }
+
+    private void calculatePriceAfterAddItem(Product product, int getQuantity) {
+
+        String[] splitPrice = product.getPrice().split(" ");
+        BigDecimal getPrice = new BigDecimal(splitPrice[0]);
+
+        {
+            BigDecimal getNewPrice = getPrice.multiply(BigDecimal.valueOf(getQuantity));
+            setSumPrice(product.getName(), getNewPrice);
+        }
+    }
+
+    private void calculatePriceAfterRemoveItem(Product product, int getQuantity) {
+
+        String[] splitPrice = product.getPrice().split(" ");
+        BigDecimal getPrice = new BigDecimal(splitPrice[0]);
+        BigDecimal newPrice = getPrice.multiply(BigDecimal.valueOf(getQuantity));
+
+        BigDecimal getNewPrice = newPrice.subtract(getPrice);
+        sumPrice.remove(product.getName(), getPrice);
+        setSumPrice(product.getName(), getNewPrice);
+    }
+
+    private void setSumPrice(String productName, BigDecimal price) {
+        sumPrice.put(productName, price);
+    }
+
+    public BigDecimal getAllPrice() {
+
+        List<BigDecimal> addBigDecimal = new ArrayList<BigDecimal>();
+
+        for (Map.Entry<String, BigDecimal> prices :
+                this.sumPrice.entrySet()) {
+
+            BigDecimal totalPrice = new BigDecimal(String.valueOf(prices.getValue()));
+            addBigDecimal.add(totalPrice);
+
+        }
+
+        return addBigDecimal.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 }
+
