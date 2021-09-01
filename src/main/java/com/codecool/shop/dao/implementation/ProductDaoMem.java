@@ -81,7 +81,7 @@ public class ProductDaoMem implements ProductDao {
         reader.close();
         List<List<Product>> products = new ArrayList<>();
         products.add(getJsonOfCloud(jsonText.toString()));
-//        products.add(getJsonOfOs(jsonText.toString()));
+        products.add(getJsonOfOs(jsonText.toString()));
 //        products.add(getJsonOfIDE(jsonText.toString()));
 //        products.add(getJsonOfWorkTool(jsonText.toString()));
 
@@ -102,36 +102,19 @@ public class ProductDaoMem implements ProductDao {
                 .collect(Collectors.toList());
     }
 
-//    private List<Product> getJsonOfOs(String jsonString) {
-//        //Deserialize
-//        GsonBuilder gsonBuilder = new GsonBuilder();
-//
-//        JsonDeserializer<OS> deserializer = (json, typeOfT, context) -> {
-//            JsonObject jsonObject = json.getAsJsonObject();
-//
-//            if (jsonObject.get("category").getAsString().equals("OS")) {
-//                return new OS(
-//                    jsonObject.get("id").getAsInt(),
-//                    jsonObject.get("name").getAsString(),
-//                    jsonObject.get("description").getAsString(),
-//                    new ProductCategory(0, jsonObject.get("category").getAsString()),
-//                    new Supplier(2, jsonObject.get("supplier").getAsString()),
-//                    jsonObject.get("url-img").getAsString(),
-//                    jsonObject.get("price").getAsBigDecimal(),
-//                    jsonObject.get("bitversion").getAsInt()
-//                );
-//            }
-//            return null;
-//        };
-//        gsonBuilder.registerTypeAdapter(OS.class, deserializer);
-//
-//        Gson customGson = gsonBuilder.create();
-//        OS[] OSProducts = customGson.fromJson(jsonString, OS[].class);
-//        List<Product> finalOSProducts = new ArrayList<>(Arrays.asList(OSProducts));
-//        finalOSProducts.removeAll(Collections.singleton(null));
-//
-//        return finalOSProducts;
-//    }
+    private List<Product> getJsonOfOs(String jsonString) {
+        //Deserialize
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson customGson = gsonBuilder.create();
+
+        OS[] OSProducts = customGson.fromJson(jsonString, OS[].class);
+        List<Product> finalOSProducts = new ArrayList<>(Arrays.asList(OSProducts));
+        finalOSProducts.removeAll(Collections.singleton(null));
+
+        return finalOSProducts.stream()
+                .filter(element -> element.getProductCategory().getName().equals("OS"))
+                .collect(Collectors.toList());
+    }
 //
 //    private List<Product> getJsonOfIDE(String jsonString) {
 //        //Deserialize
