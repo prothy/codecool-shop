@@ -17,7 +17,11 @@ public class Customer extends User{
     private Payment payment;
 
     public Customer(int id, String name, String email, String password, boolean isAdmin, HashSet<Order> orders, BigDecimal wallet, Currency defaultCurrency) {
-        super(id, name, email, password, isAdmin);
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
         this.cart = new Cart();
         this.orders = orders;
         this.wallet = wallet;
@@ -25,7 +29,11 @@ public class Customer extends User{
     }
 
     public Customer() {
-        super(1, "guest", null, null, false);
+        this.id = 1;
+        this.name = "guest";
+        this.email = null;
+        this.password = null;
+        this.isAdmin = false;
         this.cart = new Cart();
         this.orders = new HashSet<>();
         this.wallet = new BigDecimal(42);
