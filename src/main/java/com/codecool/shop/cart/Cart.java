@@ -38,53 +38,6 @@ public class Cart {
         System.out.println("Item has been added to the cart!");
     }
 
-//    public void addProduct(Product product) {
-//
-//        AtomicBoolean isKeyPresent = checkProductPresent(product);
-//        boolean checkPresent = checkPresent(product);
-//
-//        if (checkPresent) {
-//            content.put(product, getQuantity.get(product.getName()) + 1);
-//            calculatePriceAfterAddItem(product, getQuantity.get(product.getName()) + 1);
-//        } else {
-//            content.put(product, 1);
-//            calculatePriceAfterAddItem(product, 1);
-//        }
-
-    //System.out.println(product.getName()+ " " +getQuantity.get(product.getName()));
-//
-//        System.out.println("Item has been added to the card");
-//    }
-
-
-//    private AtomicBoolean checkProductPresent(Product product) {
-//
-//        AtomicBoolean isKeyPresent = new AtomicBoolean(false);
-//
-//        Optional<Map.Entry<Product, Integer>> matchedEntry =
-//                content.entrySet().stream().
-//                        filter(element -> element.getKey().getName().equals(product.getName())).findAny();
-//
-//        matchedEntry.ifPresent(value -> {
-//
-//            for (Map.Entry<String, Integer> prices :
-//                    this.getQuantity.entrySet()) {
-//
-//                if (getQuantity.containsKey(value.getKey().getName())) {
-//                    getQuantity.put(value.getKey().getName(), value.getValue() + 1);
-//                    isKeyPresent.set(true);
-//                } else {
-//                    getQuantity.put(value.getKey().getName(), 1);
-//                    isKeyPresent.set(false);
-//                }
-//            }
-//
-//        });
-//
-//        return isKeyPresent;
-//
-//    }
-
     public void removeProduct(Product product) {
 
         if (content.containsKey(product.getName())) {
@@ -92,15 +45,21 @@ public class Cart {
             HashMap<Product, Integer> innerMap = content.get(product.getName());
 
             Product firstKey = (Product) innerMap.keySet().toArray()[0];
-            int quantity = innerMap.get(firstKey) + 1;
-            innerMap.remove(firstKey, quantity);
+            int quantity = innerMap.get(firstKey) - 1;
 
-            content.remove(product.getName(), innerMap);
-            System.out.println(this.quantity.values());
-            this.quantity.put(product.getName(), this.quantity.get(product.getName()) - 1);
-            System.out.println(this.quantity.get(product.getName()));
-            calculatePriceAfterRemoveItem(product, this.quantity.get(product.getName()) - 1);
+            if (quantity == 0) {
+                content.remove(product.getName());
+                this.quantity.remove(product.getName());
+            }
+            else {
 
+                innerMap.put(firstKey, quantity);
+                content.put(product.getName(), innerMap);
+                this.quantity.put(product.getName(), quantity);
+
+            }
+
+            calculatePriceAfterRemoveItem(product, quantity);
         }
 
         System.out.println("Item has been removed successfully!");
@@ -117,22 +76,20 @@ public class Cart {
         }
     }
 
-    private void calculatePriceAfterRemoveItem(Product product, int getQuantity) {
+    private void calculatePriceAfterRemoveItem(Product product, int quantity) {
 
         String[] splitPrice = product.getPrice().split(" ");
         BigDecimal getPrice = new BigDecimal(splitPrice[0]);
-        BigDecimal newPrice = getPrice.multiply(BigDecimal.valueOf(getQuantity));
 
-        BigDecimal getNewPrice = newPrice.subtract(getPrice);
-        sumPrice.remove(product.getName(), getPrice);
-        setSumPrice(product.getName(), getNewPrice);
+        BigDecimal getNewPrice = getPrice.multiply(BigDecimal.valueOf(quantity));
+        sumPrice.put(product.getName(), getNewPrice);
     }
 
     private void setSumPrice(String productName, BigDecimal price) {
         sumPrice.put(productName, price);
     }
 
-    public BigDecimal getAllPrice() {
+    public BigDecimal getSumPrice() {
 
         List<BigDecimal> addBigDecimal = new ArrayList<BigDecimal>();
 
