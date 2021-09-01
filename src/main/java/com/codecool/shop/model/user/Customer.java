@@ -1,8 +1,6 @@
 package com.codecool.shop.model.user;
 
-import com.codecool.shop.model.Cart;
-import com.codecool.shop.model.Order;
-import com.codecool.shop.model.Payment;
+import com.codecool.shop.model.*;
 
 import java.math.BigDecimal;
 import java.util.Currency;
@@ -57,9 +55,19 @@ public class Customer extends User{
         return true;
     }
 
-    private String choosePayment() {
-        // [TODO]: not implemented
-        return "";
+    private Payment choosePayment(String payment) {
+        Payment chosenPayment;
+        switch (payment){
+            case "credit-card":
+                chosenPayment  = new CreditCard();
+                break;
+            case "paypal":
+                chosenPayment = new PayPal();
+                break;
+            default:
+                throw new IllegalArgumentException("Wrong payment option");
+        }
+        return chosenPayment;
     }
 
     private void decreaseWallet() {
