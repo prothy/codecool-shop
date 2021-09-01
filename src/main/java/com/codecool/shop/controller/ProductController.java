@@ -2,11 +2,15 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.products.Product;
+import com.codecool.shop.model.user.User;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.service.UserService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.thymeleaf.TemplateEngine;
@@ -33,11 +37,14 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         ProductService productService = new ProductService(productDataStore,productCategoryDataStore);
+        UserDao userDataStore = UserDaoMem.getInstance();
+        UserService userService = new UserService(userDataStore);
 
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
         List<Product> productList = productService.createProductListFromJson().stream().flatMap(Collection::stream).collect(Collectors.toList());
+        User user = userService.getUserById(1);
 
         if (request.getParameter("category") != null) {
             productList = productService.getProductsForCategory(request.getParameter("category"), productList);
