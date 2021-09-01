@@ -13,7 +13,7 @@
     "password": "",
     "isAdmin": false,
     "orders": {},
-    "wallet": 0,
+    "wallet": 1000,
     "defaultCurrency": "EUR"
   },
   {
