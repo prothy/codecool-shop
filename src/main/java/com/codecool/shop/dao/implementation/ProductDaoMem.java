@@ -2,8 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.model.products.Cloud;
-import com.codecool.shop.model.products.Product;
+import com.codecool.shop.model.products.*;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import com.google.gson.*;
@@ -67,7 +66,7 @@ public class ProductDaoMem implements ProductDao {
     }
 
     @Override
-    public List<Product> createObjectsFromJson() throws IOException {
+    public List<List<Product>> createObjectsFromJson() throws IOException {
         String file ="src/main/java/com/codecool/shop/resources/products.json";
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -79,10 +78,14 @@ public class ProductDaoMem implements ProductDao {
             line = reader.readLine();
         }
         reader.close();
-        System.out.println(getJsonOfCloud(jsonText.toString()).get(1));
+        List<List<Product>> products = new ArrayList<>();
+        products.add(getJsonOfCloud(jsonText.toString()));
+        products.add(getJsonOfOs(jsonText.toString()));
+        products.add(getJsonOfIDE(jsonText.toString()));
+        products.add(getJsonOfWorkTool(jsonText.toString()));
 
 
-        return null;
+        return products;
     }
 
     private List<Product> getJsonOfCloud(String jsonString) {
@@ -103,7 +106,6 @@ public class ProductDaoMem implements ProductDao {
                     new BigDecimal(0),
                     jsonObject.get("yearPrice").getAsBigDecimal(),
                     jsonObject.get("monthPrice").getAsBigDecimal()
-
                 );
             }
             return null;
@@ -116,5 +118,101 @@ public class ProductDaoMem implements ProductDao {
         finalCloudProducts.removeAll(Collections.singleton(null));
 
         return finalCloudProducts;
+    }
+
+    private List<Product> getJsonOfOs(String jsonString) {
+        //Deserialize
+        GsonBuilder gsonBuilder = new GsonBuilder();
+
+        JsonDeserializer<OS> deserializer = (json, typeOfT, context) -> {
+            JsonObject jsonObject = json.getAsJsonObject();
+
+            if (jsonObject.get("category").getAsString().equals("OS")) {
+                return new OS(
+                    jsonObject.get("id").getAsInt(),
+                    jsonObject.get("name").getAsString(),
+                    jsonObject.get("description").getAsString(),
+                    new ProductCategory(0, jsonObject.get("category").getAsString()),
+                    new Supplier(2, jsonObject.get("supplier").getAsString()),
+                    jsonObject.get("url-img").getAsString(),
+                    jsonObject.get("price").getAsBigDecimal(),
+                    jsonObject.get("bitversion").getAsInt()
+                );
+            }
+            return null;
+        };
+        gsonBuilder.registerTypeAdapter(OS.class, deserializer);
+
+        Gson customGson = gsonBuilder.create();
+        OS[] OSProducts = customGson.fromJson(jsonString, OS[].class);
+        List<Product> finalOSProducts = new ArrayList<>(Arrays.asList(OSProducts));
+        finalOSProducts.removeAll(Collections.singleton(null));
+
+        return finalOSProducts;
+    }
+
+    private List<Product> getJsonOfIDE(String jsonString) {
+        //Deserialize
+        GsonBuilder gsonBuilder = new GsonBuilder();
+
+        JsonDeserializer<IDE> deserializer = (json, typeOfT, context) -> {
+            JsonObject jsonObject = json.getAsJsonObject();
+
+            if (jsonObject.get("category").getAsString().equals("IDE")) {
+                return new IDE(
+                    jsonObject.get("id").getAsInt(),
+                    jsonObject.get("name").getAsString(),
+                    jsonObject.get("description").getAsString(),
+                    new ProductCategory(0, jsonObject.get("category").getAsString()),
+                    new Supplier(2, jsonObject.get("supplier").getAsString()),
+                    jsonObject.get("url-img").getAsString(),
+                    new BigDecimal(0),
+                    jsonObject.get("yearPrice").getAsBigDecimal(),
+                    jsonObject.get("monthPrice").getAsBigDecimal(),
+                    jsonObject.get("languages").getAsString()
+                );
+            }
+            return null;
+        };
+        gsonBuilder.registerTypeAdapter(IDE.class, deserializer);
+
+        Gson customGson = gsonBuilder.create();
+        IDE[] IDEProducts = customGson.fromJson(jsonString, IDE[].class);
+        List<Product> finalIDEProducts = new ArrayList<>(Arrays.asList(IDEProducts));
+        finalIDEProducts.removeAll(Collections.singleton(null));
+
+        return finalIDEProducts;
+    }
+
+    private List<Product> getJsonOfWorkTool(String jsonString) {
+        //Deserialize
+        GsonBuilder gsonBuilder = new GsonBuilder();
+
+        JsonDeserializer<WorkTool> deserializer = (json, typeOfT, context) -> {
+            JsonObject jsonObject = json.getAsJsonObject();
+
+            if (jsonObject.get("category").getAsString().equals("WorkTool")) {
+                return new WorkTool (
+                    jsonObject.get("id").getAsInt(),
+                    jsonObject.get("name").getAsString(),
+                    jsonObject.get("description").getAsString(),
+                    new ProductCategory(3, jsonObject.get("category").getAsString()),
+                    new Supplier(2, jsonObject.get("supplier").getAsString()),
+                    jsonObject.get("url-img").getAsString(),
+                    new BigDecimal(0),
+                    jsonObject.get("yearPrice").getAsBigDecimal(),
+                    jsonObject.get("monthPrice").getAsBigDecimal()
+                );
+            }
+            return null;
+        };
+        gsonBuilder.registerTypeAdapter(WorkTool.class, deserializer);
+
+        Gson customGson = gsonBuilder.create();
+        WorkTool[] WorkToolProducts = customGson.fromJson(jsonString, WorkTool[].class);
+        List<Product> finalWorkToolProducts = new ArrayList<>(Arrays.asList(WorkToolProducts));
+        finalWorkToolProducts.removeAll(Collections.singleton(null));
+
+        return finalWorkToolProducts;
     }
 }

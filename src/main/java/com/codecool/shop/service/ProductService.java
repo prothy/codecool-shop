@@ -27,7 +27,7 @@ public class ProductService{
         return productDao.getBy(category);
     }
 
-    public List<Product> createProductListFromJson() throws IOException {
+    public List<List<Product>> createProductListFromJson() throws IOException {
         return productDao.createObjectsFromJson();
     }
 
