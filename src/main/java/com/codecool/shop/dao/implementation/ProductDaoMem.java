@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.model.Util;
 import com.codecool.shop.model.products.*;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -67,24 +68,14 @@ public class ProductDaoMem implements ProductDao {
 
     @Override
     public List<List<Product>> createObjectsFromJson() throws IOException {
-        //Todo create Utils for file reading
         String file ="src/main/java/com/codecool/shop/resources/products.json";
-
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-
-        StringBuilder jsonText = new StringBuilder();
-        String line = reader.readLine();
-        while (line != null){
-            jsonText.append(line);
-            line = reader.readLine();
-        }
-        reader.close();
+        String jsonText = Util.readDataFromFile(file);
 
         List<List<Product>> products = new ArrayList<>();
-        products.add(getJsonOfCloud(jsonText.toString()));
-        products.add(getJsonOfOs(jsonText.toString()));
-        products.add(getJsonOfIDE(jsonText.toString()));
-        products.add(getJsonOfWorkTool(jsonText.toString()));
+        products.add(getJsonOfCloud(jsonText));
+        products.add(getJsonOfOs(jsonText));g
+        products.add(getJsonOfIDE(jsonText));
+        products.add(getJsonOfWorkTool(jsonText));
 
         return products;
     }
