@@ -13,7 +13,8 @@
     "password": "",
     "isAdmin": false,
     "orders": {},
-    "wallet": 0
+    "wallet": 0,
+    "defaultCurrency": "EUR"
   },
   {
     "id": 2,
@@ -22,6 +23,7 @@
     "password": "test",
     "isAdmin": false,
     "orders": {},
-    "wallet": 100
+    "wallet": 100,
+    "defaultCurrency": "USD"
   }
 ]
