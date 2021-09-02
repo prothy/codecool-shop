@@ -41,7 +41,7 @@ public class Customer extends User{
 
 
     public void addOrder() {
-        orders.add(new Order(1));
+        orders.add(new Order(1, this.cart));
     }
 
     public void cancelOrder(int id) {
@@ -56,8 +56,8 @@ public class Customer extends User{
     }
 
     private boolean confirmOrder() {
-        // [TODO]: not implemented
-        return true;
+        OrderValidition valid = new OrderValidition(this.name, this.email);
+        return valid.everythingIsValid();
     }
 
     private Payment choosePayment(String payment) {

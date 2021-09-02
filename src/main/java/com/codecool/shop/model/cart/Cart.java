@@ -135,6 +135,8 @@ public class Cart {
         return productsDetails;
     }
 
-
+    public Map<String, HashMap<Product, Integer>> getContent() {
+        return content;
+    }
 }
 
