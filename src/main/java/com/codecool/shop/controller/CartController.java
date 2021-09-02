@@ -11,6 +11,8 @@ import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.Util;
 import com.codecool.shop.model.cart.Cart;
 import com.codecool.shop.model.products.OS;
+import com.codecool.shop.model.products.Product;
+import com.codecool.shop.model.products.SubscriptionProduct;
 import com.codecool.shop.model.user.Customer;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.service.UserService;
@@ -28,6 +30,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "cartServlet",urlPatterns = {"/api.cart", "/api.cart?action=*"})
 public class CartController extends HttpServlet {
@@ -45,9 +48,17 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("action").equals("add")) {
-            String jsonBody = Util.getJsonBodyOutOfFetch(request);
+            String jsonBody = "[" + Util.getJsonBodyOutOfFetch(request) + "]";
             System.out.println(jsonBody);
-            System.out.println("faszom");
+            Product jsonObject = productService.createCartObjectFromJson(jsonBody);
+            BigDecimal newPrice;
+            if (jsonObject instanceof SubscriptionProduct) {
+                newPrice = ((SubscriptionProduct) jsonObject).getYearlyPrice();
+                jsonObject.setPrice(newPrice, "USD");
+            }
+
+            jsonObject.setDefaultCurrency(Currency.getInstance("USD"));
+            userCart.addProduct(jsonObject);
         }
         doGet(request, response);
     }
