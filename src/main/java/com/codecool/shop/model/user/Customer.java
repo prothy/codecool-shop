@@ -4,6 +4,7 @@ import com.codecool.shop.model.*;
 
 import java.math.BigDecimal;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
@@ -59,10 +60,10 @@ public class Customer extends User{
         Payment chosenPayment;
         switch (payment){
             case "credit-card":
-                chosenPayment  = new CreditCard();
+                chosenPayment  = new CreditCard(new HashMap<String, String>());
                 break;
             case "paypal":
-                chosenPayment = new PayPal();
+                chosenPayment = new PayPal(new HashMap<String, String>());
                 break;
             default:
                 throw new IllegalArgumentException("Wrong payment option");
