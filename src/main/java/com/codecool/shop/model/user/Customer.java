@@ -1,6 +1,7 @@
 package com.codecool.shop.model.user;
 
 import com.codecool.shop.model.*;
+import com.codecool.shop.model.cart.Cart;
 
 import java.math.BigDecimal;
 import java.util.Currency;
@@ -34,7 +35,7 @@ public class Customer extends User{
         this.isAdmin = false;
         this.cart = new Cart();
         this.orders = new HashSet<>();
-        this.wallet = new BigDecimal(42);
+        this.wallet = new BigDecimal(420);
         this.defaultCurrency = Currency.getInstance("EUR");
     }
 
@@ -48,6 +49,10 @@ public class Customer extends User{
                 .parallel().filter(order -> order.getId() == id)
                 .findFirst().orElseThrow(NoSuchElementException::new);
         orders.remove(chosenOrder);
+    }
+
+    public Cart getCart() {
+        return cart;
     }
 
     private boolean confirmOrder() {

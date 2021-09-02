@@ -31,5 +31,4 @@ public class Admin extends User{
     public void addNewProductCategory(int id) {
         // [TODO]: not implemented
     }
-
 }
