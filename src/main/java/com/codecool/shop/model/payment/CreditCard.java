@@ -1,13 +1,14 @@
-package com.codecool.shop.model;
+package com.codecool.shop.model.payment;
+
+import com.codecool.shop.model.payment.Payment;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CreditCard extends Payment{
+public class CreditCard extends Payment {
     private static final String[] ACCEPTED_CARD_NETWORK = {"Visa", "Mastercard"};
 
 
@@ -15,25 +16,30 @@ public class CreditCard extends Payment{
         super(details);
     }
 
-    public void validateDetails() throws IllegalArgumentException{
-        for (Map.Entry<String, String> entry : this.getDetails().entrySet()){
-            switch (entry.getKey()) {
-                case "name":
-                    validateName(entry.getValue());
-                    break;
-                case "creditCardNumber":
-                    validateCardNumber(entry.getValue());
-                    break;
-                case "expirationDate":
-                    validateExpirationDate(entry.getValue());
-                    break;
-                case "cardNetwork":
-                    validateCardNetwork(entry.getValue());
-                    break;
-                case "CVV":
-                    validateCVV(entry.getValue());
-                    break;
+    public void validateDetails() {
+        try {
+            for (Map.Entry<String, String> entry : this.getDetails().entrySet()){
+                switch (entry.getKey()) {
+                    case "name":
+                        validateName(entry.getValue());
+                        break;
+                    case "creditCardNumber":
+                        validateCardNumber(entry.getValue());
+                        break;
+                    case "expirationDate":
+                        validateExpirationDate(entry.getValue());
+                        break;
+                    case "cardNetwork":
+                        validateCardNetwork(entry.getValue());
+                        break;
+                    case "CVV":
+                        validateCVV(entry.getValue());
+                        break;
+                }
             }
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception);
+            return;
         }
         this.setSuccess(true);
     }

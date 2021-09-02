@@ -3,12 +3,12 @@ package com.codecool.shop.model;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class OrderValidition {
+public  class OrderValidation {
 
     private String name;
     private String email;
 
-    public OrderValidition(String name, String email) {
+    public OrderValidation(String name, String email) {
         this.name = name;
         this.email = email;
     }
