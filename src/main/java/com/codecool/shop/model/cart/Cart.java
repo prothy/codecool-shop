@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Cart {
 
-    private final Map<String, HashMap<Product, Integer>> content = new HashMap<>();
+    private Map<String, HashMap<Product, Integer>> content = new HashMap<>();
     private Map<String, Integer> quantity = new HashMap<>();
     private Map<String, BigDecimal> sumEachItem = new HashMap<>();
     private Currency currency;

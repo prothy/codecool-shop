@@ -26,7 +26,7 @@ public class OrderValidition {
 
     public boolean isNameValid() {
 
-        if (this.name != null && this.name.matches("[A-Za-z]+")) {
+        if (this.name != null && this.name.matches("^[\\p{L} .'-]+$")) {
             return true;
         }
 
