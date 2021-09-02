@@ -66,4 +66,17 @@ public abstract class Product extends BaseModel {
 //    public abstract BigDecimal getMonthlyPrice();
 //
 //    public abstract void setMonthlyPrice(BigDecimal monthlyPrice);
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", defaultCurrency=" + defaultCurrency +
+                ", description='" + description + '\'' +
+                ", productCategory=" + productCategory +
+                ", supplier=" + supplier +
+                ", image='" + image + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
