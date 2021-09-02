@@ -9,34 +9,108 @@ import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import Badge from '@material-ui/core/Badge'
-import MenuIcon from '@material-ui/icons/Menu'
+// import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import useStyles from './styledDashboard'
 import {
+  Collapse,
   Container,
   ListItem,
   ListItemIcon,
   ListItemText,
 } from '@material-ui/core'
-import DashboardIcon from '@material-ui/icons/Dashboard'
-import { ShoppingCart } from '@material-ui/icons'
+import {
+  ExpandLess,
+  ExpandMore,
+  ShoppingCart,
+  Person,
+  Store,
+  Favorite,
+  Web,
+  RemoveFromQueue,
+  CloudCircle,
+  Home,
+} from '@material-ui/icons'
 import ShoppingCartPanel from '../ShoppingCart/ShoppingCartPanel'
 
-const mainListItems = (
-  <div>
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItem>
-  </div>
-)
-
-export default function Dashboard({ children, cart, setCart }) {
+export default function Dashboard({ children }) {
   const classes = useStyles()
   const [open, setOpen] = useState(true)
+  const [openProduct, setOpenProduct] = useState(true)
   const [show, showCart] = useState(false)
+
+  const handleClick = () => {
+    setOpenProduct(!openProduct)
+  }
+
+  const mainListItems = (
+    <div>
+      <List>
+        {/* HOME */}
+        {/* TODO: Add route to home */}
+        <ListItem button>
+          <ListItemIcon>
+            <Home />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
+        </ListItem>
+        <Divider />
+
+        {/* USER */}
+        {/* TODO: Add route to user information (2nd Sprint) */}
+        <ListItem button>
+          <ListItemIcon>
+            <Person />
+          </ListItemIcon>
+          <ListItemText primary="User Information" />
+        </ListItem>
+        <Divider />
+        {/* STORE */}
+        <ListItem button onClick={handleClick}>
+          <ListItemIcon>
+            <Store />
+          </ListItemIcon>
+          <ListItemText primary="Products" />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Divider />
+        <Collapse in={openProduct} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <Favorite />
+              </ListItemIcon>
+              <ListItemText primary="Favorite" />
+            </ListItem>
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <Web />
+              </ListItemIcon>
+              <ListItemText primary="OS" />
+            </ListItem>
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <RemoveFromQueue />
+              </ListItemIcon>
+              <ListItemText primary="IDE" />
+            </ListItem>
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <CloudCircle />
+              </ListItemIcon>
+              <ListItemText primary="Cloud" />
+            </ListItem>
+          </List>
+        </Collapse>
+      </List>
+    </div>
+  )
+
+  const fakesonData = [
+    { name: 'basketball', price: '$500', url: '' },
+    { name: 'fakeball', price: '$500', url: '' },
+    { name: 'fakeball', price: '$500', url: '' },
+  ]
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -64,7 +138,7 @@ export default function Dashboard({ children, cart, setCart }) {
               open && classes.menuButtonHidden
             )}
           >
-            <MenuIcon />
+            {/*<MenuIcon />*/}
           </IconButton>
           <Typography
             component="h1"
@@ -73,8 +147,6 @@ export default function Dashboard({ children, cart, setCart }) {
             noWrap
             className={classes.title}
           >
-            {/*TODO: Fix logo sizing*/}
-            {/*<img src={logo} alt="NoIDEa" className={classes.image}/>*/}
             <strong>NoIDEa - The Software Store</strong>
           </Typography>
           {/*TODO: Add badge content numbers according to the items in your cart*/}
@@ -82,12 +154,12 @@ export default function Dashboard({ children, cart, setCart }) {
           <IconButton
             color="inherit"
             className="shopping-cart__button"
-            onClick={() => showCart(show ? false : true)}
+            onClick={() => showCart(!show)}
           >
             <Badge badgeContent={4} color="secondary">
               <ShoppingCart />
             </Badge>
-            {show && <ShoppingCartPanel cart={cart} setCart={setCart} />}
+            {show && <ShoppingCartPanel data={fakesonData} />}
           </IconButton>
         </Toolbar>
       </AppBar>
