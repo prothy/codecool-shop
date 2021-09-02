@@ -42,12 +42,13 @@ public class CartController extends HttpServlet {
     Gson gson = gsonBuilder.create();
     Customer user = new Customer();
     Cart userCart = user.getCart();
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("action").equals("add")) {
             String jsonBody = Util.getJsonBodyOutOfFetch(request);
             System.out.println(jsonBody);
+            System.out.println("faszom");
         }
         doGet(request, response);
     }

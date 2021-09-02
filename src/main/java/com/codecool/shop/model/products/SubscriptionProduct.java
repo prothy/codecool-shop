@@ -10,8 +10,8 @@ public abstract class SubscriptionProduct extends Product {
     private BigDecimal yearlyPrice;
     private BigDecimal monthlyPrice;
 
-    public SubscriptionProduct(Currency defaultCurrency, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price, BigDecimal yearlyPrice, BigDecimal monthlyPrice) {
-        super(defaultCurrency, description, productCategory, supplier, image, price);
+    public SubscriptionProduct(int id, String name, Currency defaultCurrency, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price, BigDecimal yearlyPrice, BigDecimal monthlyPrice) {
+        super(id, name, defaultCurrency, description, productCategory, supplier, image, price);
         this.yearlyPrice = yearlyPrice;
         this.monthlyPrice = monthlyPrice;
     }
