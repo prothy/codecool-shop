@@ -23,7 +23,7 @@ const Product = ({ product }) => {
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={product['url-img']}
+        image={product.image}
         title={product.name}
       />
       <CardContent>
@@ -32,7 +32,8 @@ const Product = ({ product }) => {
             {product.name}
           </Typography>
           <Typography variant="body1">
-            {product.price} {product.defaultCurrency}
+            ${product.price}
+            {product.yearlyPrice}
           </Typography>
         </div>
         {/*TODO: Product description*/}
