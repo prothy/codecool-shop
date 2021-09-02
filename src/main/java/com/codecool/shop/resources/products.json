@@ -2,8 +2,14 @@
   {
     "id": 0,
     "name": "Visual Studio Project",
-    "category": "IDE",
-    "supplier": "Microsoft",
+    "productCategory": {
+        "name": "IDE",
+        "id": "1"
+    },
+    "supplier": {
+      "name": "Microsoft",
+      "id": "0"
+    },
     "description": "",
     "languages": "C, C++, C#, Javascript, Visual Basic",
     "yearPrice": "149.50",
@@ -13,8 +19,14 @@
   {
     "id": 1,
     "name": "Pycharm",
-    "category": "IDE",
-    "supplier": "JetBrains",
+    "productCategory": {
+        "name": "IDE",
+        "id": "1"
+    },
+    "supplier": {
+      "name": "JetBrains",
+      "id": "1"
+    },
     "description": "",
     "languages": "Python, Javascript",
     "yearPrice": "89.00",
@@ -24,8 +36,14 @@
   {
     "id": 2,
     "name": "IntelliJ IDEA",
-    "category": "IDE",
-    "supplier": "JetBrains",
+    "productCategory": {
+      "name": "IDE",
+      "id": "1"
+    },
+    "supplier": {
+      "name": "JetBrains",
+      "id": "1"
+    },
     "description": "",
     "languages": "Java, Kotlin, Scala, Groovy",
     "yearPrice": "149.00",
@@ -35,8 +53,14 @@
   {
     "id": 3,
     "name": "Google Cloud Platform",
-    "category": "Cloud",
-    "supplier": "Google",
+    "productCategory": {
+      "name": "Cloud",
+      "id": "2"
+    },
+    "supplier": {
+      "name": "Google",
+      "id": "2"
+    },
     "description": "",
     "yearPrice": "200.00",
     "monthPrice": "21.00",
@@ -45,8 +69,14 @@
   {
     "id": 4,
     "name": "Amazon Web Services",
-    "category": "Cloud",
-    "supplier": "Amazon",
+    "productCategory": {
+      "name": "Cloud",
+      "id": "2"
+    },
+    "supplier": {
+      "name": "Amazon",
+      "id": "3"
+    },
     "description": "",
     "yearPrice": "200.00",
     "monthPrice": "20.00",
@@ -55,8 +85,14 @@
   {
     "id": 5,
     "name": "Windows 10 Pro",
-    "category": "OS",
-    "supplier": "Microsoft",
+    "productCategory": {
+      "name": "OS",
+      "id": "0"
+    },
+    "supplier": {
+      "name": "Microsoft",
+      "id": "0"
+    },
     "description": "",
     "price": "122.99",
     "bitversion": "64",
@@ -65,8 +101,14 @@
   {
     "id": 6,
     "name": "Windows 10 Home",
-    "category": "OS",
-    "supplier": "Microsoft",
+    "productCategory": {
+      "name": "OS",
+      "id": "0"
+    },
+    "supplier": {
+      "name": "Microsoft",
+      "id": "0"
+    },
     "description": "",
     "price": "90.00",
     "bitversion": "64",
@@ -75,8 +117,14 @@
   {
     "id": 7,
     "name": "Slack Pro",
-    "category": "WorkTool",
-    "supplier": "Slack",
+    "productCategory": {
+      "name": "WorkTool",
+      "id": "3"
+    },
+    "supplier": {
+      "name": "Slack",
+      "id": "4"
+    },
     "description": "",
     "yearPrice": "72.67",
     "monthPrice": "6.67",
@@ -85,8 +133,14 @@
   {
     "id": 8,
     "name": "Jira Standard",
-    "category": "WorkTool",
-    "supplier": "Atlassian",
+    "productCategory": {
+      "name": "WorkTool",
+      "id": "3"
+    },
+    "supplier": {
+      "name": "Atlassian",
+      "id": "5"
+    },
     "description": "",
     "yearPrice": "84.00",
     "monthPrice": "7.00",

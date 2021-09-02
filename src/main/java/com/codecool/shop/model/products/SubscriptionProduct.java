@@ -1,24 +1,18 @@
 package com.codecool.shop.model.products;
 
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
+
 import java.math.BigDecimal;
+import java.util.Currency;
 
 public abstract class SubscriptionProduct extends Product {
-    protected BigDecimal yearlyPrice;
-    protected BigDecimal monthlyPrice;
+    private BigDecimal yearlyPrice;
+    private BigDecimal monthlyPrice;
 
-    public BigDecimal getYearlyPrice() {
-        return yearlyPrice;
-    }
-
-    public void setYearlyPrice(BigDecimal yearlyPrice) {
+    public SubscriptionProduct(Currency defaultCurrency, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price, BigDecimal yearlyPrice, BigDecimal monthlyPrice) {
+        super(defaultCurrency, description, productCategory, supplier, image, price);
         this.yearlyPrice = yearlyPrice;
-    }
-
-    public BigDecimal getMonthlyPrice() {
-        return monthlyPrice;
-    }
-
-    public void setMonthlyPrice(BigDecimal monthlyPrice) {
         this.monthlyPrice = monthlyPrice;
     }
 }
