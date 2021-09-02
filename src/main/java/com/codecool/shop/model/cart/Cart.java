@@ -10,11 +10,13 @@ public class Cart {
     private final Map<String, HashMap<Product, Integer>> content = new HashMap<>();
     private Map<String, Integer> quantity = new HashMap<>();
     private Map<String, BigDecimal> sumEachItem = new HashMap<>();
+    private Currency currency;
 
     public Cart() {
     }
 
     public void addProduct(Product product) {
+        currency = product.getDefaultCurrency();
 
         if (content.containsKey(product.getName())) {
             HashMap<Product, Integer> innerMap = content.get(product.getName());
@@ -92,7 +94,7 @@ public class Cart {
         return quantity;
     }
 
-    public BigDecimal getSumPrice() {
+    public String getSumPrice() {
 
         List<BigDecimal> addBigDecimal = new ArrayList<BigDecimal>();
 
@@ -104,7 +106,7 @@ public class Cart {
 
         }
 
-        return addBigDecimal.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+        return addBigDecimal.stream().reduce(BigDecimal.ZERO, BigDecimal::add) + " " + currency;
     }
 
     public Map<String, BigDecimal> getSumEachItem() {
@@ -124,7 +126,7 @@ public class Cart {
                 String getName = details.getKey().getName();
                 String getPrice = details.getKey().getPrice();
                 Integer quantity = this.quantity.get(getName);
-                String sumPrice= this.sumEachItem.get(getName).toString() + " " + details.getKey().getDefaultCurrency();
+                String sumPrice= this.sumEachItem.get(getName).toString() + " " + currency;
 
                 productsDetails.add(new ProductDetail(getName, getPrice, quantity, sumPrice));
             }
