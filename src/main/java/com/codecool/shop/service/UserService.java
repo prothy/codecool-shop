@@ -1,6 +1,8 @@
 package com.codecool.shop.service;
 
 import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.model.user.Admin;
+import com.codecool.shop.model.user.Customer;
 import com.codecool.shop.model.user.User;
 
 import java.io.IOException;
@@ -24,5 +26,9 @@ public class UserService {
                 .flatMap(Collection::parallelStream)
                 .filter(user -> user.getId() == id)
                 .findFirst().orElse(null);
+    }
+
+    public <T extends User> T convertUserObject(User user, Class<T> type) {
+        return type.cast(user);
     }
 }

@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "cartServlet",urlPatterns = {"/api.noIDEaSHop", "/api.noIDEaSHop?category=*", "/api.noIDEaSHop?supplier=*"})
+@WebServlet(name = "productServlet",urlPatterns = {"/api.noIDEaSHop", "/api.noIDEaSHop?category=*", "/api.noIDEaSHop?supplier=*"})
 public class ProductController extends HttpServlet {
 
     @Override
@@ -32,8 +32,6 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         ProductService productService = new ProductService(productDataStore,productCategoryDataStore);
-        UserDao userDataStore = UserDaoMem.getInstance();
-        UserService userService = new UserService(userDataStore);
 
 
         GsonBuilder gsonBuilder = new GsonBuilder();

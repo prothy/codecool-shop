@@ -50,6 +50,10 @@ public class Customer extends User{
         orders.remove(chosenOrder);
     }
 
+    public Cart getCart() {
+        return cart;
+    }
+
     private boolean confirmOrder() {
         // [TODO]: not implemented
         return true;

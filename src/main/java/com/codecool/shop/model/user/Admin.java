@@ -3,6 +3,7 @@ package com.codecool.shop.model.user;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Cart;
 
 public class Admin extends User{
     private ProductCategoryDaoMem productCategoryDaoMem;
@@ -32,4 +33,8 @@ public class Admin extends User{
         // [TODO]: not implemented
     }
 
+    @Override
+    public Cart getCart() {
+        return null;
+    }
 }
