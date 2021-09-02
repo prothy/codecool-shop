@@ -9,8 +9,7 @@ public class ProductCategory extends BaseModel {
 //    private List<Product> products;
 
     public ProductCategory(int id, String name) {
-        this.id = id;
-        this.name = name;
+        super(id, name);
     }
 
 

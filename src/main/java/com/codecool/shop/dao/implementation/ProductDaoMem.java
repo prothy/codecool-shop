@@ -88,6 +88,7 @@ public class ProductDaoMem implements ProductDao {
         Cloud[] cloudProducts = customGson.fromJson(jsonString, Cloud[].class);
         List<Product> finalCloudProducts = new ArrayList<>(Arrays.asList(cloudProducts));
 
+        System.out.println(finalCloudProducts.get(0));
         return finalCloudProducts.stream()
                 .filter(element -> element.getProductCategory().getName().equals("Cloud"))
                 .collect(Collectors.toList());

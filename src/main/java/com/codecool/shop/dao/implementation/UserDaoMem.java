@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.Util;
 import com.codecool.shop.model.products.Product;
 import com.codecool.shop.model.user.Admin;
 import com.codecool.shop.model.user.Customer;
@@ -15,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class UserDaoMem implements UserDao {
     private List<User> data = new ArrayList<>();
@@ -49,76 +51,35 @@ public class UserDaoMem implements UserDao {
     @Override
     public List<List<User>> createObjectsFromJson() throws IOException {
         String file = "src/main/java/com/codecool/shop/resources/users.json";
+        String jsonText = Util.readDataFromFile(file);
 
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-
-        StringBuilder jsonText = new StringBuilder();
-        String line = reader.readLine();
-        while (line != null) {
-            jsonText.append(line);
-            line = reader.readLine();
-        }
-        reader.close();
         List<List<User>> users = new ArrayList<>();
-        users.add(getJsonOfCustomer(jsonText.toString()));
-        users.add(getJsonOfAdmin(jsonText.toString()));
+        users.add(getJsonOfCustomer(jsonText));
+        users.add(getJsonOfAdmin(jsonText));
         return users;
     }
 
     private List<User> getJsonOfCustomer(String jsonString) {
         GsonBuilder gsonBuilder = new GsonBuilder();
 
-        JsonDeserializer<Customer> deserializer = (json, typeOfT, context) -> {
-            JsonObject jsonObject = json.getAsJsonObject();
-
-            if (!jsonObject.get("isAdmin").getAsBoolean()) {
-                return new Customer(
-                        jsonObject.get("id").getAsInt(),
-                        jsonObject.get("name").getAsString(),
-                        jsonObject.get("email").getAsString(),
-                        jsonObject.get("password").getAsString(),
-                        jsonObject.get("isAdmin").getAsBoolean(),
-                        new HashSet<Order>(),
-                        jsonObject.get("wallet").getAsBigDecimal(),
-                        jsonObject.get("defaultCurrency").getAsString()
-                );
-            }
-            return null;
-        };
-        gsonBuilder.registerTypeAdapter(Customer.class, deserializer);
-
         Gson customGson = gsonBuilder.create();
         Customer[] customers = customGson.fromJson(jsonString, Customer[].class);
         List<User> finalCustomers = new ArrayList<>(Arrays.asList(customers));
-        finalCustomers.removeAll(Collections.singleton(null));
 
-        return finalCustomers;
+        return finalCustomers.stream()
+                .filter(element -> !element.isAdmin())
+                .collect(Collectors.toList());
     }
 
     private List<User> getJsonOfAdmin(String jsonString) {
         GsonBuilder gsonBuilder = new GsonBuilder();
 
-        JsonDeserializer<Admin> deserializer = (json, typeOfT, context) -> {
-            JsonObject jsonObject = json.getAsJsonObject();
-
-            if (jsonObject.get("isAdmin").getAsBoolean()) {
-                return new Admin(
-                        jsonObject.get("id").getAsInt(),
-                        jsonObject.get("name").getAsString(),
-                        jsonObject.get("email").getAsString(),
-                        jsonObject.get("password").getAsString(),
-                        jsonObject.get("isAdmin").getAsBoolean()
-                );
-            }
-            return null;
-        };
-        gsonBuilder.registerTypeAdapter(Admin.class, deserializer);
-
         Gson customGson = gsonBuilder.create();
         Admin[] admins = customGson.fromJson(jsonString, Admin[].class);
         List<User> finalAdmins = new ArrayList<>(Arrays.asList(admins));
-        finalAdmins.removeAll(Collections.singleton(null));
 
-        return finalAdmins;
+        return finalAdmins.stream()
+                .filter(User::isAdmin)
+                .collect(Collectors.toList());
     }
 }

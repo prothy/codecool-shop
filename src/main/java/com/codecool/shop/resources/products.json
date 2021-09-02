@@ -12,9 +12,9 @@
     },
     "description": "",
     "languages": "C, C++, C#, Javascript, Visual Basic",
-    "yearPrice": "149.50",
-    "monthPrice": "14.95",
-    "url-img": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdevblogs.microsoft.com%2Fvisualstudio%2Fwp-content%2Fuploads%2Fsites%2F4%2F2019%2F01%2Fvisualstudio-1.png&f=1&nofb=1"
+    "yearlyPrice": "149.50",
+    "monthlyPrice": "14.95",
+    "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdevblogs.microsoft.com%2Fvisualstudio%2Fwp-content%2Fuploads%2Fsites%2F4%2F2019%2F01%2Fvisualstudio-1.png&f=1&nofb=1"
   },
   {
     "id": 1,
@@ -29,9 +29,9 @@
     },
     "description": "",
     "languages": "Python, Javascript",
-    "yearPrice": "89.00",
-    "monthPrice": "8.90",
-    "url-img": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.theindianwire.com%2Fwp-content%2Fuploads%2F2018%2F06%2FPyCharm_Logo.png&f=1&nofb=1"
+    "yearlyPrice": "89.00",
+    "monthlyPrice": "8.90",
+    "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.theindianwire.com%2Fwp-content%2Fuploads%2F2018%2F06%2FPyCharm_Logo.png&f=1&nofb=1"
   },
   {
     "id": 2,
@@ -46,9 +46,9 @@
     },
     "description": "",
     "languages": "Java, Kotlin, Scala, Groovy",
-    "yearPrice": "149.00",
-    "monthPrice": "14.90",
-    "url-img": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fhdlicense.com%2Fwp-content%2Fuploads%2F2019%2F11%2FIntelliJ-IDEA-crack.png&f=1&nofb=1"
+    "yearlyPrice": "149.00",
+    "monthlyPrice": "14.90",
+    "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fhdlicense.com%2Fwp-content%2Fuploads%2F2019%2F11%2FIntelliJ-IDEA-crack.png&f=1&nofb=1"
   },
   {
     "id": 3,
@@ -62,9 +62,9 @@
       "id": "2"
     },
     "description": "",
-    "yearPrice": "200.00",
-    "monthPrice": "21.00",
-    "url-img": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpluspng.com%2Fimg-png%2Fgoogle-cloud-logo-png-library-of-google-cloud-logo-picture-royalty-free-stock-png-files-960x960.png&f=1&nofb=1"
+    "yearlyPrice": "200.00",
+    "monthlyPrice": "21.00",
+    "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpluspng.com%2Fimg-png%2Fgoogle-cloud-logo-png-library-of-google-cloud-logo-picture-royalty-free-stock-png-files-960x960.png&f=1&nofb=1"
   },
   {
     "id": 4,
@@ -78,9 +78,9 @@
       "id": "3"
     },
     "description": "",
-    "yearPrice": "200.00",
-    "monthPrice": "20.00",
-    "url-img": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Flogos-download.com%2Fwp-content%2Fuploads%2F2016%2F12%2FAmazon_Web_Services_logo_AWS.png&f=1&nofb=1"
+    "yearlyPrice": "200.00",
+    "monthlyPrice": "20.00",
+    "image": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Flogos-download.com%2Fwp-content%2Fuploads%2F2016%2F12%2FAmazon_Web_Services_logo_AWS.png&f=1&nofb=1"
   },
   {
     "id": 5,
@@ -95,8 +95,8 @@
     },
     "description": "",
     "price": "122.99",
-    "bitversion": "64",
-    "url-img": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn-reichelt.de%2Fbilder%2Fweb%2Fxxl_ws%2FE500%2FWINDOWS10_PRO_02.png&f=1&nofb=1"
+    "bitVersion": "64",
+    "image": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn-reichelt.de%2Fbilder%2Fweb%2Fxxl_ws%2FE500%2FWINDOWS10_PRO_02.png&f=1&nofb=1"
   },
   {
     "id": 6,
@@ -111,8 +111,8 @@
     },
     "description": "",
     "price": "90.00",
-    "bitversion": "64",
-    "url-img": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn-reichelt.de%2Fbilder%2Fweb%2Fxxl_ws%2FE500%2FWINDOWS10_HOME_02.png&f=1&nofb=1"
+    "bitVersion": "64",
+    "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn-reichelt.de%2Fbilder%2Fweb%2Fxxl_ws%2FE500%2FWINDOWS10_HOME_02.png&f=1&nofb=1"
   },
   {
     "id": 7,
@@ -126,9 +126,9 @@
       "id": "4"
     },
     "description": "",
-    "yearPrice": "72.67",
-    "monthPrice": "6.67",
-    "url-img": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Fsocial-media-2285%2F512%2F1_Slack_colored_svg-512.png&f=1&nofb=1"
+    "yearlyPrice": "72.67",
+    "monthlyPrice": "6.67",
+    "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Fsocial-media-2285%2F512%2F1_Slack_colored_svg-512.png&f=1&nofb=1"
   },
   {
     "id": 8,
@@ -142,8 +142,8 @@
       "id": "5"
     },
     "description": "",
-    "yearPrice": "84.00",
-    "monthPrice": "7.00",
-    "url-img": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdoversus.com%2Fwp-content%2Fuploads%2F2020%2F01%2Fjira-standard.png&f=1&nofb=1"
+    "yearlyPrice": "84.00",
+    "monthlyPrice": "7.00",
+    "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdoversus.com%2Fwp-content%2Fuploads%2F2020%2F01%2Fjira-standard.png&f=1&nofb=1"
   }
 ]

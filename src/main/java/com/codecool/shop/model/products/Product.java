@@ -16,7 +16,8 @@ public abstract class Product extends BaseModel {
     private String image;
     private BigDecimal price;
 
-    public Product(Currency defaultCurrency, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price) {
+    public Product(int id, String name, Currency defaultCurrency, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price) {
+        super(id, name);
         this.defaultCurrency = defaultCurrency;
         this.description = description;
         this.productCategory = productCategory;

@@ -19,21 +19,17 @@ public class Customer extends User{
     private Currency defaultCurrency;
     private HashMap<String, String> paymentDetail;
 
-    public Customer(int id, String name, String email, String password, boolean isAdmin, HashSet<Order> orders, BigDecimal wallet, String defaultCurrency) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.isAdmin = isAdmin;
-        this.cart = new Cart();
+    public Customer(int id, String name, Cart cart, HashSet<Order> orders, BigDecimal wallet, Currency defaultCurrency, Payment payment) {
+        super(id, name);
+        this.cart = cart;
         this.orders = orders;
         this.wallet = wallet;
-        this.defaultCurrency = Currency.getInstance(defaultCurrency);
+        this.defaultCurrency = defaultCurrency;
+        this.payment = payment;
     }
 
     public Customer() {
-        this.id = 1;
-        this.name = "guest";
+        super(1, "guest");
         this.email = null;
         this.password = null;
         this.isAdmin = false;

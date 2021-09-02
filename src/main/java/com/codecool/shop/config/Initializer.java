@@ -7,13 +7,18 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
-import com.codecool.shop.model.OrderValidation;
 import com.codecool.shop.model.cart.Cart;
+import com.codecool.shop.model.products.OS;
+import com.codecool.shop.model.products.Product;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Currency;
 
 @WebListener
 public class Initializer implements ServletContextListener {
@@ -27,17 +32,11 @@ public class Initializer implements ServletContextListener {
         //setting up a new supplier
         Supplier amazon = new Supplier(1, "me");
         supplierDataStore.add(amazon);
-
-
         Cart cart = new Cart();
-        // cart.addProduct(b);
+        Product a = new OS(1, "TEra", Currency.getInstance("USD"), "", new ProductCategory(1, "test"),
+                new Supplier(1, "a"), "", new BigDecimal(64.4), 64);
 
-        Order order = new Order(1, cart);
-        System.out.println("date: " + order.getCurrentDate());
-        System.out.println("content: " + order.getContent());
-        System.out.println("id: " + order.getId());
-        System.out.println("totalPrice: " + order.totalPrice());
-        System.out.println("order: " + order.getOrderStatus());
-
+        cart.addProduct(a);
+        System.out.println(cart);
     }
 }
