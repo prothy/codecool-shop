@@ -56,7 +56,6 @@ public abstract class Product extends BaseModel {
     }
 
     public String getPrice() {
-        System.out.println(price);
         return price.toString() + " " + defaultCurrency.toString();
     };
 }

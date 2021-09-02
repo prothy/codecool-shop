@@ -47,10 +47,9 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String jsonBody = "[" + Util.getJsonBodyOutOfFetch(request) + "]";
+        Product jsonObject = productService.createCartObjectFromJson(jsonBody);
         if (request.getParameter("action").equals("add")) {
-            String jsonBody = "[" + Util.getJsonBodyOutOfFetch(request) + "]";
-            System.out.println(jsonBody);
-            Product jsonObject = productService.createCartObjectFromJson(jsonBody);
             BigDecimal newPrice;
             if (jsonObject instanceof SubscriptionProduct) {
                 newPrice = ((SubscriptionProduct) jsonObject).getYearlyPrice();
@@ -59,6 +58,15 @@ public class CartController extends HttpServlet {
 
             jsonObject.setDefaultCurrency(Currency.getInstance("USD"));
             userCart.addProduct(jsonObject);
+        } else if (request.getParameter("action").equals("remove")) {
+            BigDecimal newPrice;
+            if (jsonObject instanceof SubscriptionProduct) {
+                newPrice = ((SubscriptionProduct) jsonObject).getYearlyPrice();
+                jsonObject.setPrice(newPrice, "USD");
+            }
+
+            jsonObject.setDefaultCurrency(Currency.getInstance("USD"));
+            userCart.removeProduct(jsonObject);
         }
         doGet(request, response);
     }
