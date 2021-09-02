@@ -26,6 +26,7 @@ function ShoppingCartPanel() {
         <Button variant="contained" onClick={() => setOpen(true)}>
           Checkout
         </Button>
+        {cart.totalPrice}
         <Modal open={open} onClose={() => setOpen(false)}>
           <div>
             <p>asdf</p>

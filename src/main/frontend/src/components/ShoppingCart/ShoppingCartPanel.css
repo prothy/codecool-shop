@@ -11,7 +11,7 @@
   top: 3.5rem;
   right: 20rem;
 
-  width: 20rem;
+  width: 30rem;
   height: auto;
 
   margin-right: -20rem;
@@ -21,6 +21,17 @@
   border: 1px solid #d7d7d7;
 }
 
+.shopping-cart > div:first-of-type {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.shopping-cart > div:nth-of-type(2) {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+}
+
 .shopping-cart__empty-notice {
   font-weight: lighter;
   font-style: italic;
@@ -28,6 +39,7 @@
 
 .shopping-cart__product {
   padding: 0.2rem 0.5rem;
+  margin: 1em;
 
   width: 100%;
 }
