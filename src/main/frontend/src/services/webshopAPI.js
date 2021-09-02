@@ -14,6 +14,7 @@ export const fetchCart = async () => {
       'Content-Type': 'application/json',
     },
   })
+  console.log('its happening!')
   return response.json()
 }
 
@@ -23,9 +24,7 @@ export const addProductToCart = async (product) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: {
-      product: JSON.stringify(product),
-    },
+    body: JSON.stringify(product),
   })
 }
 
@@ -35,8 +34,6 @@ export const removeProductFromCart = async (product) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: {
-      product: JSON.stringify(product),
-    },
+    body: JSON.stringify(product),
   })
 }

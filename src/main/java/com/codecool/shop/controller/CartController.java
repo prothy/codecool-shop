@@ -37,7 +37,6 @@ public class CartController extends HttpServlet {
     UserDao userDataStore = UserDaoMem.getInstance();
     UserService userService = new UserService(userDataStore);
 
-
     GsonBuilder gsonBuilder = new GsonBuilder();
     Gson gson = gsonBuilder.create();
     Customer user = new Customer();
