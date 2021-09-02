@@ -1,14 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {Grid} from '@material-ui/core'
 import Product from '../Product/Product'
-import {getAllProducts} from '../../services/webshopAPI'
 
-const Products = () => {
-    const [products, setProducts] = useState([])
-
-    useEffect(() => {
-        getAllProducts().then(products => setProducts(products))
-    }, [])
+const Products = ({products}) => {
 
     return (
         <Grid container justifyContent="center" spacing={4}>
