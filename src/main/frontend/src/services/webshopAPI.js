@@ -13,9 +13,8 @@ export const fetchCart = async () => {
     headers: {
       'Content-Type': 'application/json',
     },
-  }).then((res) => res.json)
-
-  return response
+  })
+  return response.json()
 }
 
 export const addProductToCart = async (product) => {

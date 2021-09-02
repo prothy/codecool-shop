@@ -15,7 +15,7 @@ function ShoppingCartItem({ data }) {
 
   return (
     <div className="shopping-cart__product">
-      <span className="shopping-cart__product-title">{data.product.name}</span>
+      <span className="shopping-cart__product-title">{data.productName}</span>
       <span>
         <span className="shopping-cart__product-quantity">
           <Button variant="contained" onClick={() => setQuantity(quantity - 1)}>
@@ -26,7 +26,7 @@ function ShoppingCartItem({ data }) {
             +
           </Button>
         </span>
-        <span className="shopping-cart__product-price">${quantity * 500}</span>
+        <span className="shopping-cart__product-price">{data.price}</span>
       </span>
     </div>
   )

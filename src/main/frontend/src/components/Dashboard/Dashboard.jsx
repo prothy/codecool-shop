@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Drawer from '@material-ui/core/Drawer'
@@ -32,8 +32,13 @@ import {
   Home,
 } from '@material-ui/icons'
 import ShoppingCartPanel from '../ShoppingCart/ShoppingCartPanel'
+import { fetchCart } from '../../services/webshopAPI.js'
 
 export default function Dashboard({ children }) {
+  const [cart, setCart] = useState([])
+
+  useEffect(() => fetchCart((cartResponse) => setCart(cartResponse)))
+
   const classes = useStyles()
   const [open, setOpen] = useState(true)
   const [openProduct, setOpenProduct] = useState(true)
@@ -150,7 +155,7 @@ export default function Dashboard({ children }) {
             className="shopping-cart__button"
             onClick={() => showCart(!show)}
           >
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={cart.length} color="secondary">
               <ShoppingCart />
             </Badge>
             {show && <ShoppingCartPanel />}

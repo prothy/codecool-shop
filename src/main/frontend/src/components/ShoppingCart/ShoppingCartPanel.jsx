@@ -7,20 +7,19 @@ import { fetchCart } from '../../services/webshopAPI.js'
 function ShoppingCartPanel() {
   const [cart, setCart] = useState([])
 
-  useEffect(() => fetchCart((cartResponse) => setCart(cartResponse)))
+  useEffect(() => {
+    fetchCart().then((cartItems) => setCart(cartItems))
+  }, [])
 
   return (
     <div className="shopping-cart">
       <div>
-        {(!cart || cart.length == 0) && (
+        {(!cart.products || cart.products.length === 0) && (
           <span className="shopping-cart__empty-notice">Nothing in here.</span>
         )}
-        {cart &&
-          cart.length > 0 &&
-          cart.map((el, i) => {
-            console.log(el)
-            return <ShoppingCartItem key={i} data={el} />
-          })}
+        {cart.products != undefined &&
+          cart.products.length > 0 &&
+          cart.products.map((el, i) => <ShoppingCartItem key={i} data={el} />)}
       </div>
       <div>
         <Button variant="contained">Checkout</Button>
