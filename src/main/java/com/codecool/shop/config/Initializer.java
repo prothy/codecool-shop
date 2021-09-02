@@ -55,5 +55,8 @@ public class Initializer implements ServletContextListener {
         test.addProduct(c);
         test.addProduct(d);
         test.addProduct(e);
+        System.out.println(test.getSumPrice());
+        System.out.println(test.convertProductDetail());
+
     }
 }

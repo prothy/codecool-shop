@@ -9,7 +9,7 @@ public class Cart {
 
     private final Map<String, HashMap<Product, Integer>> content = new HashMap<>();
     private Map<String, Integer> quantity = new HashMap<>();
-    private Map<String, BigDecimal> sumPrice = new HashMap<>();
+    private Map<String, BigDecimal> sumEachItem = new HashMap<>();
 
     public Cart() {
     }
@@ -25,6 +25,7 @@ public class Cart {
 
             content.put(product.getName(), innerMap);
             this.quantity.put(product.getName(), getQuantity);
+            setQuantity(this.quantity);
             calculatePriceAfterAddItem(product, getQuantity);
         } else {
             HashMap<Product, Integer> newContent = new HashMap<>();
@@ -32,9 +33,9 @@ public class Cart {
 
             content.put(product.getName(), newContent);
             this.quantity.put(product.getName(), 1);
+            setQuantity(this.quantity);
             calculatePriceAfterAddItem(product, 1);
         }
-
         System.out.println("Item has been added to the cart!");
     }
 
@@ -50,18 +51,16 @@ public class Cart {
             if (quantity == 0) {
                 content.remove(product.getName());
                 this.quantity.remove(product.getName());
-            }
-            else {
-
+                setQuantity(this.quantity);
+            } else {
                 innerMap.put(firstKey, quantity);
                 content.put(product.getName(), innerMap);
                 this.quantity.put(product.getName(), quantity);
-
+                setQuantity(this.quantity);
             }
 
             calculatePriceAfterRemoveItem(product, quantity);
         }
-
         System.out.println("Item has been removed successfully!");
     }
 
@@ -82,11 +81,15 @@ public class Cart {
         BigDecimal getPrice = new BigDecimal(splitPrice[0]);
 
         BigDecimal getNewPrice = getPrice.multiply(BigDecimal.valueOf(quantity));
-        sumPrice.put(product.getName(), getNewPrice);
+        sumEachItem.put(product.getName(), getNewPrice);
     }
 
     private void setSumPrice(String productName, BigDecimal price) {
-        sumPrice.put(productName, price);
+        sumEachItem.put(productName, price);
+    }
+
+    public Map<String, Integer> getQuantity() {
+        return quantity;
     }
 
     public BigDecimal getSumPrice() {
@@ -94,7 +97,7 @@ public class Cart {
         List<BigDecimal> addBigDecimal = new ArrayList<BigDecimal>();
 
         for (Map.Entry<String, BigDecimal> prices :
-                this.sumPrice.entrySet()) {
+                this.sumEachItem.entrySet()) {
 
             BigDecimal totalPrice = new BigDecimal(String.valueOf(prices.getValue()));
             addBigDecimal.add(totalPrice);
@@ -103,5 +106,33 @@ public class Cart {
 
         return addBigDecimal.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
+    public Map<String, BigDecimal> getSumEachItem() {
+        return sumEachItem;
+    }
+
+    public void setQuantity(Map<String, Integer> quantity) {
+        this.quantity = quantity;
+    }
+
+    public List<ProductDetail> convertProductDetail() {
+
+        List<ProductDetail> productsDetails = new LinkedList<>();
+        content.forEach((name, product) -> {
+            for (Map.Entry<Product, Integer> details: product.entrySet()) {
+
+                String getName = details.getKey().getName();
+                String getPrice = details.getKey().getPrice();
+                Integer quantity = this.quantity.get(getName);
+                BigDecimal sumPrice= this.sumEachItem.get(getName);
+
+                productsDetails.add(new ProductDetail(getName, getPrice, quantity, sumPrice));
+            }
+        });
+
+        return productsDetails;
+    }
+
+
 }
 
