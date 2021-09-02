@@ -7,6 +7,4 @@ public abstract class User extends BaseModel {
     protected String email;
     protected String password;
     protected boolean isAdmin;
-
-    public abstract Cart getCart();
 }

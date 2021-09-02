@@ -7,6 +7,9 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.Cart;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.products.OS;
 import com.codecool.shop.model.products.Product;
 import com.codecool.shop.model.user.Customer;
 import com.codecool.shop.model.user.User;
@@ -22,9 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "cartServlet",urlPatterns = {"/api.cart", "/api.cart?action=*"})
@@ -35,28 +37,33 @@ public class CartController extends HttpServlet {
     }
 
     @Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            ProductDao productDataStore = ProductDaoMem.getInstance();
-            ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-            ProductService productService = new ProductService(productDataStore,productCategoryDataStore);
-            UserDao userDataStore = UserDaoMem.getInstance();
-            UserService userService = new UserService(userDataStore);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ProductService productService = new ProductService(productDataStore,productCategoryDataStore);
+        UserDao userDataStore = UserDaoMem.getInstance();
+        UserService userService = new UserService(userDataStore);
 
 
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            Gson gson = gsonBuilder.create();
-            List<Cart> productsInCart = new LinkedList<>();
-            User user = userService.getUserById(1);
-            
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.create();
+        Customer user = new Customer();
+        Cart userCart = new Cart();
+        Product a = new OS(1, "test", "des", new ProductCategory(1, "tablet"), new Supplier(1, "me"), "https://res.cloudinary.com/teepublic/image/private/s--RGjbI5F---/t_Resized%20Artwork/c_fit,g_north_west,h_954,w_954/co_ffffff,e_outline:48/co_ffffff,e_outline:inner_fill:48/co_ffffff,e_outline:48/co_ffffff,e_outline:inner_fill:48/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1565703885/production/designs/5596155_2.jpg", BigDecimal.valueOf(64.4), 64);
+        userCart.addProduct(a);
+        Map<String, HashMap<Integer, BigDecimal>> map = new HashMap<>();
+        HashMap<Integer, BigDecimal> dsa = new HashMap<>();
+        dsa.put(2, new BigDecimal("64.5"));
+        map.put("test", dsa);
+        HashMap<Integer, BigDecimal> asd = new HashMap<>();
+        asd.put(23, new BigDecimal("6413.5"));
+        map.put("test2", asd);
 
-            if (request.getParameter("action") != null) {
-            }
-
-            PrintWriter out = response.getWriter();
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            out.print(gson.toJson(productsInCart));
-            out.flush();
+        PrintWriter out = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        out.print(gson.toJson(map));
+        out.flush();
         }
 
 }

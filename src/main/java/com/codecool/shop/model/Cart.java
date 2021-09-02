@@ -36,6 +36,12 @@ public class Cart {
         }
 
         System.out.println("Item has been added to the cart!");
+        content.forEach((s, productIntegerHashMap) -> {
+            for (Map.Entry<Product, Integer> e : productIntegerHashMap.entrySet()) {
+                System.out.println(e.getKey() + " = " + e.getValue());
+                System.out.println(e.getKey().getProductCategory());
+            }
+        });
     }
 
     public void removeProduct(Product product) {

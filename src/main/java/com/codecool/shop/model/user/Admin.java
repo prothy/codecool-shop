@@ -32,9 +32,4 @@ public class Admin extends User{
     public void addNewProductCategory(int id) {
         // [TODO]: not implemented
     }
-
-    @Override
-    public Cart getCart() {
-        return null;
-    }
 }

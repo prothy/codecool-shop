@@ -34,7 +34,7 @@ public class Customer extends User{
         this.isAdmin = false;
         this.cart = new Cart();
         this.orders = new HashSet<>();
-        this.wallet = new BigDecimal(42);
+        this.wallet = new BigDecimal(420);
         this.defaultCurrency = Currency.getInstance("EUR");
     }
 
