@@ -33,14 +33,12 @@ public class Initializer implements ServletContextListener {
         Supplier amazon = new Supplier(1, "me");
         supplierDataStore.add(amazon);
 
-
-        OrderValidition valid = new OrderValidition("Kiss-Sándor", "aa@a.cc");
+        OrderValidition valid = new OrderValidition("Kiss-Sándor", "aaa.cc");
         System.out.println("validName: " + valid.isNameValid());
         System.out.println("validEmail: " + valid.isEmailValid());
         System.out.println("everythingValid: " + valid.everythingIsValid());
 
         Cart cart = new Cart();
-        cart.addProduct(b);
 
         Order order = new Order(1, cart);
         System.out.println("date: " + order.getCurrentDate());
