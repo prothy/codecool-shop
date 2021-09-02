@@ -16,13 +16,12 @@ public class Customer extends User{
     private Currency defaultCurrency;
     private Payment payment;
 
-    public Customer(int id, String name, Cart cart, HashSet<Order> orders, BigDecimal wallet, Currency defaultCurrency, Payment payment) {
+    public Customer(int id, String name, Cart cart, HashSet<Order> orders, BigDecimal wallet, Currency defaultCurrency) {
         super(id, name);
         this.cart = cart;
         this.orders = orders;
         this.wallet = wallet;
         this.defaultCurrency = defaultCurrency;
-        this.payment = payment;
     }
 
     public Customer() {
