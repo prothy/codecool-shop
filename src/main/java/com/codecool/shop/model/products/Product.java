@@ -38,4 +38,7 @@ public abstract class Product extends BaseModel {
         return defaultCurrency;
     }
 
+    public String getPrice() {
+        return price.toString();
+    };
 }
