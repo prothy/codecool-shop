@@ -20,7 +20,7 @@ import {
 } from '@material-ui/core'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 import { ShoppingCart } from '@material-ui/icons'
-// import logo from '../../assets/pngidea.png'
+import ShoppingCartPanel from '../ShoppingCart/ShoppingCartPanel'
 
 const mainListItems = (
   <div>
@@ -36,6 +36,14 @@ const mainListItems = (
 export default function Dashboard({ children }) {
   const classes = useStyles()
   const [open, setOpen] = useState(true)
+  const [show, showCart] = useState(false)
+
+  const fakesonData = [
+    { name: 'basketball', price: '$500', url: '' },
+    { name: 'fakeball', price: '$500', url: '' },
+    { name: 'fakeball', price: '$500', url: '' },
+  ]
+
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -75,11 +83,17 @@ export default function Dashboard({ children }) {
             {/*<img src={logo} alt="NoIDEa" className={classes.image}/>*/}
             <strong>NoIDEa - The Software Store</strong>
           </Typography>
-          <IconButton color="inherit">
-            {/*TODO: Add badge content numbers according to the items in your cart*/}
+          {/*TODO: Add badge content numbers according to the items in your cart*/}
+
+          <IconButton
+            color="inherit"
+            className="shopping-cart__button"
+            onClick={() => showCart(show ? false : true)}
+          >
             <Badge badgeContent={4} color="secondary">
               <ShoppingCart />
             </Badge>
+            {show && <ShoppingCartPanel data={fakesonData} />}
           </IconButton>
         </Toolbar>
       </AppBar>

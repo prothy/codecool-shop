@@ -1,8 +1,8 @@
 import React from 'react'
 import ShoppingCartItem from '../ShoppingCartItem/ShoppingCartItem'
-import './ShoppingCart.css'
+import './ShoppingCartPanel.css'
 
-function ShoppingCart(props) {
+function ShoppingCartPanel(props) {
   return (
     <div className="shopping-cart">
       <div>
@@ -16,4 +16,4 @@ function ShoppingCart(props) {
   )
 }
 
-export default ShoppingCart
+export default ShoppingCartPanel
