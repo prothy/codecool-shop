@@ -3,8 +3,13 @@ package com.codecool.shop.model;
 import java.util.HashMap;
 
 public class Payment {
-    protected boolean success = false;
-    protected HashMap<String, String> details = new HashMap<>();
+    private boolean success = false;
+    private HashMap<String, String> details = new HashMap<>();
+
+    public Payment(HashMap<String, String> details) {
+        this.success = false;
+        this.details = details;
+    }
 
     public boolean isSuccess() {
         return success;
