@@ -2,6 +2,9 @@ package com.codecool.shop.model.user;
 
 import com.codecool.shop.model.*;
 import com.codecool.shop.model.cart.Cart;
+import com.codecool.shop.model.payment.CreditCard;
+import com.codecool.shop.model.payment.PayPal;
+import com.codecool.shop.model.payment.Payment;
 
 import java.math.BigDecimal;
 import java.util.Currency;
@@ -14,7 +17,7 @@ public class Customer extends User{
     private HashSet<Order> orders;
     private BigDecimal wallet;
     private Currency defaultCurrency;
-    private Payment payment;
+    private HashMap<String, String> paymentDetail;
 
     public Customer(int id, String name, Cart cart, HashSet<Order> orders, BigDecimal wallet, Currency defaultCurrency) {
         super(id, name);
@@ -37,7 +40,11 @@ public class Customer extends User{
 
 
     public void addOrder() {
-        orders.add(new Order(1));
+        if (confirmOrder()){
+            if (isPaymentSuccess(paymentDetail.get("paymentType"))) {
+                orders.add(new Order(1, this.cart));
+            }
+        }
     }
 
     public void cancelOrder(int id) {
@@ -52,34 +59,43 @@ public class Customer extends User{
     }
 
     private boolean confirmOrder() {
-        // [TODO]: not implemented
-        return true;
+        OrderValidation valid = new OrderValidation(this.name, this.email);
+        return valid.everythingIsValid();
     }
 
-    private Payment choosePayment(String payment) {
-        Payment chosenPayment;
+    private boolean isPaymentSuccess(String payment) {
         switch (payment){
-            case "credit-card":
-                chosenPayment  = new CreditCard(new HashMap<String, String>());
-                break;
-            case "paypal":
-                chosenPayment = new PayPal(new HashMap<String, String>());
-                break;
+            case "creditCard":
+                CreditCard creditCard  = new CreditCard(new HashMap<String, String>());
+                creditCard.validateDetails();
+                return creditCard.isSuccess();
+            case "paypal": // [TODO]: not implemented
+                PayPal payPal = new PayPal(new HashMap<String, String>());
+                return payPal.isSuccess();
+            case "wallet":
+                return decreaseWallet();
             default:
-                throw new IllegalArgumentException("Wrong payment option");
+                return false;
         }
-        return chosenPayment;
     }
 
-    private void decreaseWallet() {
-        // [TODO]: not implemented
+    private boolean decreaseWallet() {
+        String sumPriceString = cart.getSumPrice().split(" ")[0];
+        BigDecimal sumPrice = BigDecimal.valueOf(Long.parseLong(sumPriceString));
+        if (sumPrice.compareTo(wallet) > 0) {
+            return false;
+        }
+        wallet = wallet.subtract(sumPrice);
+        return true;
+
     }
 
-    private void checkPaymentType(String payment) {
-        // [TODO]: not implemented
-    }
 
     public HashSet<Order> getOrders() {
         return orders;
+    }
+
+    public void setPaymentDetail(HashMap<String, String> paymentDetail) {
+        this.paymentDetail = paymentDetail;
     }
 }

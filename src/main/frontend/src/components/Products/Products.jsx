@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Grid } from '@material-ui/core'
 import Product from '../Product/Product'
-import { getAllProducts } from '../../services/webshopAPI'
 
-const Products = ({ cart, setCart }) => {
-  const [products, setProducts] = useState([])
-
-  useEffect(() => {
-    getAllProducts().then((products) => setProducts(products))
-  }, [])
+const Products = ({ cart, setCart, products }) => {
 
   return (
     <Grid container justifyContent="center" spacing={4}>
       {products.map((product) => (
         <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-          <Product product={product} cart={cart} setCart={setCart} />
+          <Product
+            product={product}
+            cart={cart}
+            setCart={setCart}
+          />
         </Grid>
       ))}
     </Grid>

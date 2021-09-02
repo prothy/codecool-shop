@@ -1,10 +1,10 @@
-package com.codecool.shop.model;
+package com.codecool.shop.model.payment;
 
 import java.util.HashMap;
 
 public class Payment {
-    private boolean success = false;
-    private HashMap<String, String> details = new HashMap<>();
+    private boolean success;
+    private HashMap<String, String> details;
 
     public Payment(HashMap<String, String> details) {
         this.success = false;

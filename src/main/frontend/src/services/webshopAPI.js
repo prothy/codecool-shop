@@ -1,13 +1,30 @@
 export const getAllProducts = async () => {
-  const response = await fetch('/api.noIDEaSHop', {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  return await response.json()
+    const response = await fetch('/api.noIDEaSHop', {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    return await response.json()
 }
 
-// TODO: Implement fetch cart call:
+export const getProductByCategory = async (productCategory) => {
+    const response = await fetch(`/api.noIDEaSHop?category=${productCategory}`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    return await response.json()
+}
+
+export const getSuppliers = async (supplier) => {
+    const response = await fetch(`/api.noIDEaSHop?supplier=${supplier}`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    return await response.json()
+}
+
 export const fetchCart = async () => {
   const response = await fetch('/api.cart', {
     headers: {
