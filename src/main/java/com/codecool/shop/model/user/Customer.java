@@ -1,6 +1,7 @@
 package com.codecool.shop.model.user;
 
 import com.codecool.shop.model.*;
+import com.codecool.shop.model.cart.Cart;
 
 import java.math.BigDecimal;
 import java.util.Currency;
