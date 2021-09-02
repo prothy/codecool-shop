@@ -9,30 +9,21 @@ import java.util.Currency;
 
 public abstract class Product extends BaseModel {
 
-    protected Currency defaultCurrency;
-    protected String description;
-    protected ProductCategory productCategory;
-    protected Supplier supplier;
-    protected String image;
-    protected BigDecimal price;
+    private Currency defaultCurrency;
+    private String description;
+    private ProductCategory productCategory;
+    private Supplier supplier;
+    private String image;
+    private BigDecimal price;
 
     public ProductCategory getProductCategory() {
         return productCategory;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
-        this.productCategory.addProduct(this);
-    }
-
-    public String getPrice() {
-        return price + " " + defaultCurrency.toString();
-    }
-
-    public void setPrice(BigDecimal price, String currency) {
-        this.price = price;
-        this.defaultCurrency = Currency.getInstance(currency);
-    }
+//    public void setProductCategory(ProductCategory productCategory) {
+//        this.productCategory = productCategory;
+//        this.productCategory.addProduct(this);
+//    }
 
     public Supplier getSupplier() {
         return supplier;
@@ -47,24 +38,7 @@ public abstract class Product extends BaseModel {
         return defaultCurrency;
     }
 
-//    public abstract BigDecimal getYearlyPrice();
-//
-//    public abstract void setYearlyPrice(BigDecimal yearlyPrice);
-//
-//    public abstract BigDecimal getMonthlyPrice();
-//
-//    public abstract void setMonthlyPrice(BigDecimal monthlyPrice);
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", defaultCurrency=" + defaultCurrency +
-                ", description='" + description + '\'' +
-                ", productCategory=" + productCategory +
-                ", supplier=" + supplier +
-                ", image='" + image + '\'' +
-                ", price=" + price +
-                '}';
-    }
+    public String getPrice() {
+        return price.toString();
+    };
 }
