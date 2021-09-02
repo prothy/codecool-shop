@@ -8,7 +8,7 @@ const App = () => {
 
   useEffect(() => {
     fetchCart().then((c) => setCart(c))
-  })
+  }, [])
 
   return (
     <>

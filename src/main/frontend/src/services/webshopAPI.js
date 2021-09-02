@@ -14,7 +14,6 @@ export const fetchCart = async () => {
       'Content-Type': 'application/json',
     },
   })
-  console.log('its happening!')
   return response.json()
 }
 

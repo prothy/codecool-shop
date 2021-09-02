@@ -153,7 +153,7 @@ export default function Dashboard({ children, cart, setCart }) {
             className="shopping-cart__button"
             onClick={() => showCart(!show)}
           >
-            <Badge badgeContent={cart.length} color="secondary">
+            <Badge badgeContent={cart.itemNumber} color="secondary">
               <ShoppingCart />
             </Badge>
             {show && <ShoppingCartPanel />}
