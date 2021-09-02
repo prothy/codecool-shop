@@ -11,12 +11,14 @@ public class Cart {
     private Map<String, Integer> quantity = new HashMap<>();
     private Map<String, BigDecimal> sumEachItem = new HashMap<>();
     private Currency currency;
+    private int totalNumberOfProducts = 0;
 
     public Cart() {
     }
 
     public void addProduct(Product product) {
         currency = product.getDefaultCurrency();
+        totalNumberOfProducts++;
 
         if (content.containsKey(product.getName())) {
             HashMap<Product, Integer> innerMap = content.get(product.getName());
@@ -42,6 +44,7 @@ public class Cart {
     }
 
     public void removeProduct(Product product) {
+        totalNumberOfProducts--;
 
         if (content.containsKey(product.getName())) {
 
@@ -137,6 +140,10 @@ public class Cart {
 
     public Map<String, HashMap<Product, Integer>> getContent() {
         return content;
+    }
+
+    public int getTotalNumberOfProducts() {
+        return totalNumberOfProducts;
     }
 }
 

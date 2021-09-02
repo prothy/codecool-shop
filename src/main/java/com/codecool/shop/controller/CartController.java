@@ -78,6 +78,7 @@ public class CartController extends HttpServlet {
         JsonObject productOfCart = new JsonObject();
         productOfCart.add("products", gson.toJsonTree(userCart.convertProductDetail()));
         productOfCart.add("totalPrice", gson.toJsonTree(userCart.getSumPrice()));
+        productOfCart.add("itemNumber", gson.toJsonTree(userCart.getTotalNumberOfProducts()));
 
 
         PrintWriter out = response.getWriter();
