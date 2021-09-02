@@ -9,11 +9,13 @@ export const getAllProducts = async () => {
 
 // TODO: Implement fetch cart call:
 export const fetchCart = async () => {
-  return await fetch('/api.cart', {
+  const response = await fetch('/api.cart', {
     headers: {
       'Content-Type': 'application/json',
     },
-  })
+  }).then((res) => res.json)
+
+  return response
 }
 
 export const addProductToCart = async (product) => {
@@ -23,7 +25,7 @@ export const addProductToCart = async (product) => {
       'Content-Type': 'application/json',
     },
     body: {
-      product: product,
+      product: JSON.stringify(product),
     },
   })
 }
@@ -35,7 +37,7 @@ export const removeProductToCart = async (product) => {
       'Content-Type': 'application/json',
     },
     body: {
-      product: product,
+      product: JSON.stringify(product),
     },
   })
 }
