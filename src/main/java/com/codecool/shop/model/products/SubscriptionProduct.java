@@ -14,5 +14,8 @@ public abstract class SubscriptionProduct extends Product {
         super(id, name, defaultCurrency, description, productCategory, supplier, image, price);
         this.yearlyPrice = yearlyPrice;
         this.monthlyPrice = monthlyPrice;
+
+        //Todo remove on Second Sprint
+        price = this.yearlyPrice.multiply(new BigDecimal(3));
     }
 }
