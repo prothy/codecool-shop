@@ -1,18 +1,29 @@
+:root {
+  --outer-padding: 1em;
+}
+
 .shopping-cart {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   position: relative;
-  top: 8em;
-  right: 18rem;
+  top: calc(8em - 4 * var(--outer-padding));
+  right: 18.5rem;
 
   width: 20rem;
-  height: 20rem;
+  height: auto;
 
   margin-right: -20rem;
+  padding: var(--outer-padding);
 
   background: white;
   border: 1px solid #d7d7d7;
+}
+
+.shopping-cart__empty-notice {
+  font-weight: lighter;
+  font-style: italic;
 }
 
 .shopping-cart__product {

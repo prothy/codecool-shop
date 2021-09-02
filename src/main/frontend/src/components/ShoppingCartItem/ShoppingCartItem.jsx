@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { Button } from '@material-ui/core'
 
-function ShoppingCartItem(props) {
-  const [quantity, setQuantity] = useState(1)
+function ShoppingCartItem({ data }) {
+  const [quantity, setQuantity] = useState(data.quantity)
 
   function validateInput(ev) {
     const value = parseInt(ev.target.value)
@@ -14,12 +15,16 @@ function ShoppingCartItem(props) {
 
   return (
     <div className="shopping-cart__product">
-      <span className="shopping-cart__product-title">{props.data.name}</span>
+      <span className="shopping-cart__product-title">{data.product.name}</span>
       <span>
         <span className="shopping-cart__product-quantity">
-          <button onClick={() => setQuantity(quantity - 1)}>-</button>
-          <input onKeyPress={(ev) => validateInput(ev)} />
-          <button onClick={() => setQuantity(quantity + 1)}>+</button>
+          <Button variant="contained" onClick={() => setQuantity(quantity - 1)}>
+            -
+          </Button>
+          <input onKeyPress={(ev) => validateInput(ev)} value={quantity} />
+          <Button variant="contained" onClick={() => setQuantity(quantity + 1)}>
+            +
+          </Button>
         </span>
         <span className="shopping-cart__product-price">${quantity * 500}</span>
       </span>

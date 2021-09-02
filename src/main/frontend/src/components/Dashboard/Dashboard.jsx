@@ -33,16 +33,10 @@ const mainListItems = (
   </div>
 )
 
-export default function Dashboard({ children }) {
+export default function Dashboard({ children, cart, setCart }) {
   const classes = useStyles()
   const [open, setOpen] = useState(true)
   const [show, showCart] = useState(false)
-
-  const fakesonData = [
-    { name: 'basketball', price: '$500', url: '' },
-    { name: 'fakeball', price: '$500', url: '' },
-    { name: 'fakeball', price: '$500', url: '' },
-  ]
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -93,7 +87,7 @@ export default function Dashboard({ children }) {
             <Badge badgeContent={4} color="secondary">
               <ShoppingCart />
             </Badge>
-            {show && <ShoppingCartPanel data={fakesonData} />}
+            {show && <ShoppingCartPanel cart={cart} setCart={setCart} />}
           </IconButton>
         </Toolbar>
       </AppBar>
