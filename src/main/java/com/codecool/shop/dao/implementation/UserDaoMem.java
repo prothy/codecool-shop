@@ -65,7 +65,7 @@ public class UserDaoMem implements UserDao {
         return users;
     }
 
-    private List<User> getJsonOfCustomer(String jsonString) {
+    private List<Customer> getJsonOfCustomer(String jsonString) {
         GsonBuilder gsonBuilder = new GsonBuilder();
 
         JsonDeserializer<Customer> deserializer = (json, typeOfT, context) -> {
@@ -89,7 +89,7 @@ public class UserDaoMem implements UserDao {
 
         Gson customGson = gsonBuilder.create();
         Customer[] customers = customGson.fromJson(jsonString, Customer[].class);
-        List<User> finalCustomers = new ArrayList<>(Arrays.asList(customers));
+        List<Customer> finalCustomers = new ArrayList<>(Arrays.asList(customers));
         finalCustomers.removeAll(Collections.singleton(null));
 
         return finalCustomers;

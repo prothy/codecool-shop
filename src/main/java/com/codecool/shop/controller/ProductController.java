@@ -46,6 +46,7 @@ public class ProductController extends HttpServlet {
         List<Product> productList = productService.createProductListFromJson().stream().flatMap(Collection::stream).collect(Collectors.toList());
         User user = userService.getUserById(1);
 
+
         if (request.getParameter("category") != null) {
             productList = productService.getProductsForCategory(request.getParameter("category"), productList);
         } else if (request.getParameter("supplier") != null) {
