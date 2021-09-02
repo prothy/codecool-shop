@@ -34,9 +34,7 @@ import {
 import ShoppingCartPanel from '../ShoppingCart/ShoppingCartPanel'
 import { fetchCart } from '../../services/webshopAPI.js'
 
-export default function Dashboard({ children }) {
-  const [cart, setCart] = useState([])
-
+export default function Dashboard({ children, cart, setCart }) {
   useEffect(() => fetchCart((cartResponse) => setCart(cartResponse)))
 
   const classes = useStyles()

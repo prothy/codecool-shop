@@ -10,13 +10,14 @@ import {
 import { AddShoppingCart, Favorite } from '@material-ui/icons'
 
 import useStyles from './styledProduct'
-import { addProductToCart } from '../../services/webshopAPI'
+import { addProductToCart, fetchCart } from '../../services/webshopAPI'
 
-const Product = ({ product }) => {
+const Product = ({ product, setCart }) => {
   const classes = useStyles()
 
   const addToCart = () => {
     addProductToCart(product)
+    fetchCart().then((products) => setCart(products))
   }
 
   return (

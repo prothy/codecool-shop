@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core'
 import Product from '../Product/Product'
 import { getAllProducts } from '../../services/webshopAPI'
 
-const Products = (props) => {
+const Products = ({ cart, setCart }) => {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
@@ -14,11 +14,7 @@ const Products = (props) => {
     <Grid container justifyContent="center" spacing={4}>
       {products.map((product) => (
         <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-          <Product
-            product={product}
-            cart={props.cart}
-            setCart={props.setCart}
-          />
+          <Product product={product} cart={cart} setCart={setCart} />
         </Grid>
       ))}
     </Grid>
