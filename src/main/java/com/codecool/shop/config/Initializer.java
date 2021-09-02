@@ -33,10 +33,6 @@ public class Initializer implements ServletContextListener {
         Supplier amazon = new Supplier(1, "me");
         supplierDataStore.add(amazon);
         Cart cart = new Cart();
-        Product a = new OS(1, "TEra", Currency.getInstance("USD"), "", new ProductCategory(1, "test"),
-                new Supplier(1, "a"), "", new BigDecimal(64.4), 64);
 
-        cart.addProduct(a);
-        System.out.println(cart);
     }
 }

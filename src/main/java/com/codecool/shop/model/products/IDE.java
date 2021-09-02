@@ -10,8 +10,8 @@ import java.util.List;
 public class IDE extends SubscriptionProduct{
     private String languages;
 
-    public IDE(int id, String name, Currency defaultCurrency, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price, BigDecimal yearlyPrice, BigDecimal monthlyPrice, String languages) {
-        super(id, name, defaultCurrency, description, productCategory, supplier, image, price, yearlyPrice, monthlyPrice);
+    public IDE(int id, String name, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price, BigDecimal yearlyPrice, BigDecimal monthlyPrice, String languages) {
+        super(id, name, description, productCategory, supplier, image, yearlyPrice, yearlyPrice, monthlyPrice);
         this.languages = languages;
     }
 }

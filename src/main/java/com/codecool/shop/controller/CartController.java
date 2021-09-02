@@ -12,6 +12,7 @@ import com.codecool.shop.model.Util;
 import com.codecool.shop.model.cart.Cart;
 import com.codecool.shop.model.products.OS;
 import com.codecool.shop.model.products.Product;
+import com.codecool.shop.model.products.SubscriptionProduct;
 import com.codecool.shop.model.user.Customer;
 import com.codecool.shop.service.ProductService;
 import com.codecool.shop.service.UserService;
@@ -49,9 +50,15 @@ public class CartController extends HttpServlet {
         if (request.getParameter("action").equals("add")) {
             String jsonBody = "[" + Util.getJsonBodyOutOfFetch(request) + "]";
             System.out.println(jsonBody);
-            Product newCartElement = productService.createCartObjectFromJson(jsonBody);
-            System.out.println(newCartElement.getName());
-//            userCart.addProduct(newCartElement);
+            Product jsonObject = productService.createCartObjectFromJson(jsonBody);
+            BigDecimal newPrice;
+            if (jsonObject instanceof SubscriptionProduct) {
+                newPrice = ((SubscriptionProduct) jsonObject).getYearlyPrice();
+                jsonObject.setPrice(newPrice, "USD");
+            }
+
+            jsonObject.setDefaultCurrency(Currency.getInstance("USD"));
+            userCart.addProduct(jsonObject);
         }
         doGet(request, response);
     }
