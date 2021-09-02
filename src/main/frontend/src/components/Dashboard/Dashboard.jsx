@@ -28,27 +28,35 @@ import {
 	Favorite,
 	Web,
 	RemoveFromQueue,
-	CloudCircle, Home
+	CloudCircle, Home, Build
 } from '@material-ui/icons'
 import ShoppingCartPanel from '../ShoppingCart/ShoppingCartPanel'
 
+export default function Dashboard({children, handleSetProducts}) {
 
-export default function Dashboard({children}) {
 	const classes = useStyles()
 	const [open, setOpen] = useState(true)
 	const [openProduct, setOpenProduct] = useState(true)
 	const [show, showCart] = useState(false)
 
+	// Click functions
 	const handleClick = () => {
 		setOpenProduct(!openProduct)
 	}
+	const handleDrawerOpen = () => {
+		setOpen(true)
+	}
+	const handleDrawerClose = () => {
+		setOpen(false)
+	}
+
 
 	const mainListItems = (
 		<div>
 			<List>
 				{/* HOME */}
 				{/* TODO: Add route to home */}
-				<ListItem button>
+				<ListItem button onClick={() => handleSetProducts('all')}>
 					<ListItemIcon>
 						<Home/>
 					</ListItemIcon>
@@ -65,7 +73,7 @@ export default function Dashboard({children}) {
 					<ListItemText primary="User Information"/>
 				</ListItem>
 				<Divider/>
-				{/* STORE */}
+				{/* PRODUCTS */}
 				<ListItem button onClick={handleClick}>
 					<ListItemIcon>
 						<Store/>
@@ -74,31 +82,43 @@ export default function Dashboard({children}) {
 					{open ? <ExpandLess/> : <ExpandMore/>}
 				</ListItem>
 				<Divider/>
+				{/* COLLAPSE BAR*/}
 				<Collapse in={openProduct} timeout="auto" unmountOnExit>
 					<List component="div" disablePadding>
+						{/* FAVORITE */}
 						<ListItem button className={classes.nested}>
 							<ListItemIcon>
 								<Favorite/>
 							</ListItemIcon>
 							<ListItemText primary="Favorite"/>
 						</ListItem>
-						<ListItem button className={classes.nested}>
+						{/* OS */}
+						<ListItem button className={classes.nested} onClick={() => handleSetProducts('OS')}>
 							<ListItemIcon>
 								<Web/>
 							</ListItemIcon>
 							<ListItemText primary="OS"/>
 						</ListItem>
+						{/* IDE */}
 						<ListItem button className={classes.nested}>
 							<ListItemIcon>
 								<RemoveFromQueue/>
 							</ListItemIcon>
 							<ListItemText primary="IDE"/>
 						</ListItem>
+						{/* CLOUD */}
 						<ListItem button className={classes.nested}>
 							<ListItemIcon>
 								<CloudCircle/>
 							</ListItemIcon>
 							<ListItemText primary="Cloud"/>
+						</ListItem>
+						{/* COLLABORATION TOOL */}
+						<ListItem button className={classes.nested}>
+							<ListItemIcon>
+								<Build/>
+							</ListItemIcon>
+							<ListItemText primary="Collaboration Tool"/>
 						</ListItem>
 					</List>
 				</Collapse>
@@ -112,12 +132,6 @@ export default function Dashboard({children}) {
 		{name: 'fakeball', price: '$500', url: ''},
 	]
 
-	const handleDrawerOpen = () => {
-		setOpen(true)
-	}
-	const handleDrawerClose = () => {
-		setOpen(false)
-	}
 
 	return (
 		<div className={classes.root}>
