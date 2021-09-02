@@ -7,4 +7,12 @@ export const getAllProducts = async () => {
     return await response.json()
 }
 
-// TODO: Implement fetch cart call:
+export const getProductByCategory = async (productCategory) => {
+    console.log(productCategory)
+    const response = await fetch(`/api.noIDEaSHop?category=${productCategory}`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    return await response.json()
+}
