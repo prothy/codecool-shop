@@ -37,6 +37,6 @@ public class Initializer implements ServletContextListener {
                 new Supplier(1, "a"), "", new BigDecimal(64.4), 64);
 
         cart.addProduct(a);
-        System.out.println(a.getName());
+        System.out.println(cart);
     }
 }

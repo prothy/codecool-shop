@@ -1,6 +1,7 @@
 package com.codecool.shop.model.user;
 
 import com.codecool.shop.model.BaseModel;
+import com.codecool.shop.model.ProductCategory;
 
 public abstract class User extends BaseModel {
     protected String email;
@@ -9,5 +10,9 @@ public abstract class User extends BaseModel {
 
     public User(int id, String name) {
         super(id, name);
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 }
