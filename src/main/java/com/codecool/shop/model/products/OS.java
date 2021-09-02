@@ -4,8 +4,14 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
 import java.math.BigDecimal;
+import java.util.Currency;
 
 public class OS extends Product {
     private int bitVersion;
-    
+
+    public OS(Currency defaultCurrency, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price, int bitVersion) {
+        super(defaultCurrency, description, productCategory, supplier, image, price);
+        this.bitVersion = bitVersion;
+        this.setPrice(price, "USD");
+    }
 }

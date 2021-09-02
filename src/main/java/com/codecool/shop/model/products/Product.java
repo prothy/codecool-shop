@@ -16,6 +16,15 @@ public abstract class Product extends BaseModel {
     private String image;
     private BigDecimal price;
 
+    public Product(Currency defaultCurrency, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price) {
+        this.defaultCurrency = defaultCurrency;
+        this.description = description;
+        this.productCategory = productCategory;
+        this.supplier = supplier;
+        this.image = image;
+        this.price = price;
+    }
+
     public ProductCategory getProductCategory() {
         return productCategory;
     }
@@ -24,6 +33,12 @@ public abstract class Product extends BaseModel {
 //        this.productCategory = productCategory;
 //        this.productCategory.addProduct(this);
 //    }
+
+
+    public void setPrice(BigDecimal price, String currency) {
+        this.price = price;
+        this.defaultCurrency = Currency.getInstance(currency);
+    }
 
     public Supplier getSupplier() {
         return supplier;
@@ -39,6 +54,6 @@ public abstract class Product extends BaseModel {
     }
 
     public String getPrice() {
-        return price.toString();
+        return price.toString() + " " + defaultCurrency.toString();
     };
 }

@@ -5,8 +5,15 @@ import com.codecool.shop.model.products.Product;
 import java.util.List;
 
 public class ProductCategory extends BaseModel {
+
 //    private List<Product> products;
-//
+
+    public ProductCategory(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
 //    public List<Product> getProducts() {
 //        return products;
 //    }
