@@ -12,6 +12,5 @@ public class OS extends Product {
     public OS(int id, String name, Currency defaultCurrency, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price, int bitVersion) {
         super(id, name, defaultCurrency, description, productCategory, supplier, image, price);
         this.bitVersion = bitVersion;
-        this.setPrice(price, "USD");
     }
 }

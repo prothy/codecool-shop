@@ -24,6 +24,7 @@ public abstract class Product extends BaseModel {
         this.supplier = supplier;
         this.image = image;
         this.price = price;
+        this.setPrice(price, "USD");
     }
 
     public ProductCategory getProductCategory() {
@@ -55,6 +56,7 @@ public abstract class Product extends BaseModel {
     }
 
     public String getPrice() {
+        System.out.println(price);
         return price.toString() + " " + defaultCurrency.toString();
     };
 }

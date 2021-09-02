@@ -80,6 +80,19 @@ public class ProductDaoMem implements ProductDao {
         return products;
     }
 
+    public Product createObjectFromJson(String jsonText) {
+        List<List<Product>> products = new ArrayList<>();
+        products.add(getJsonOfCloud(jsonText));
+        products.add(getJsonOfOs(jsonText));
+        products.add(getJsonOfIDE(jsonText));
+        products.add(getJsonOfWorkTool(jsonText));
+
+        for (List<Product> productList : products) {
+            if (productList.size() > 0) return productList.get(0);
+        }
+        return null;
+    }
+
     private List<Product> getJsonOfCloud(String jsonString) {
         //Deserialize
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -88,7 +101,6 @@ public class ProductDaoMem implements ProductDao {
         Cloud[] cloudProducts = customGson.fromJson(jsonString, Cloud[].class);
         List<Product> finalCloudProducts = new ArrayList<>(Arrays.asList(cloudProducts));
 
-        System.out.println(finalCloudProducts.get(0));
         return finalCloudProducts.stream()
                 .filter(element -> element.getProductCategory().getName().equals("Cloud"))
                 .collect(Collectors.toList());
