@@ -100,21 +100,21 @@ export default function Dashboard({children, handleSetProducts}) {
 							<ListItemText primary="OS"/>
 						</ListItem>
 						{/* IDE */}
-						<ListItem button className={classes.nested}>
+						<ListItem button className={classes.nested} onClick={() => handleSetProducts('IDE')}>
 							<ListItemIcon>
 								<RemoveFromQueue/>
 							</ListItemIcon>
 							<ListItemText primary="IDE"/>
 						</ListItem>
 						{/* CLOUD */}
-						<ListItem button className={classes.nested}>
+						<ListItem button className={classes.nested} onClick={() => handleSetProducts('Cloud')}>
 							<ListItemIcon>
 								<CloudCircle/>
 							</ListItemIcon>
 							<ListItemText primary="Cloud"/>
 						</ListItem>
 						{/* COLLABORATION TOOL */}
-						<ListItem button className={classes.nested}>
+						<ListItem button className={classes.nested} onClick={() => handleSetProducts('WorkTool')}>
 							<ListItemIcon>
 								<Build/>
 							</ListItemIcon>
