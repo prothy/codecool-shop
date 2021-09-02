@@ -1,38 +1,43 @@
 import React from 'react'
 import {
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  IconButton,
-  Typography,
+    Card,
+    CardActions,
+    CardContent,
+    CardMedia,
+    IconButton,
+    Typography,
 } from '@material-ui/core'
-import { AddShoppingCart, Favorite } from '@material-ui/icons'
+import {AddShoppingCart, Favorite} from '@material-ui/icons'
+import {Link} from 'react-router-dom'
 
 import useStyles from './styledProduct'
+import { addProductToCart, fetchCart } from '../../services/webshopAPI'
 
-const Product = ({ product, cart, setCart }) => {
+const Product = ({ product, setCart }) => {
   const classes = useStyles()
 
   const addToCart = () => {
-    setCart([...cart, product])
-    console.log(cart)
+    addProductToCart(product)
+    fetchCart().then((products) => setCart(products))
   }
 
   return (
     <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        image={product.image}
-        title={product.name}
-      />
+        <Link to={`/products/${product.id}`}>
+            < CardMedia
+                className={classes.media}
+                image={product.image}
+                title={product.name}
+            />
+        </Link>
       <CardContent>
         <div className={classes.cardContent}>
           <Typography variant="body1" gutterBottom>
             {product.name}
           </Typography>
           <Typography variant="body1">
-            {product.price} {product.defaultCurrency}
+            ${product.price}
+            {product.yearlyPrice}
           </Typography>
         </div>
         {/*TODO: Product description*/}

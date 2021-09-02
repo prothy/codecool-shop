@@ -10,12 +10,16 @@ public abstract class SubscriptionProduct extends Product {
     private BigDecimal yearlyPrice;
     private BigDecimal monthlyPrice;
 
-    public SubscriptionProduct(int id, String name, Currency defaultCurrency, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price, BigDecimal yearlyPrice, BigDecimal monthlyPrice) {
-        super(id, name, defaultCurrency, description, productCategory, supplier, image, price);
+    public SubscriptionProduct(int id, String name, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price, BigDecimal yearlyPrice, BigDecimal monthlyPrice) {
+        //Todo remove on Second Sprint
+        super(id, name, description, productCategory, supplier, image, yearlyPrice);
+//        super(id, name, defaultCurrency, description, productCategory, supplier, image, price);
         this.yearlyPrice = yearlyPrice;
         this.monthlyPrice = monthlyPrice;
 
-        //Todo remove on Second Sprint
-        price = this.yearlyPrice.multiply(new BigDecimal(3));
+    }
+
+    public BigDecimal getYearlyPrice() {
+        return yearlyPrice;
     }
 }

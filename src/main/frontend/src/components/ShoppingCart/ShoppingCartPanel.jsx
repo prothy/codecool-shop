@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import ShoppingCartItem from '../ShoppingCartItem/ShoppingCartItem'
 import './ShoppingCartPanel.css'
-import { Button } from '@material-ui/core'
+import { Button, Modal } from '@material-ui/core'
 import { fetchCart } from '../../services/webshopAPI.js'
 
 function ShoppingCartPanel() {
   const [cart, setCart] = useState([])
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     fetchCart().then((cartItems) => setCart(cartItems))
@@ -22,7 +23,15 @@ function ShoppingCartPanel() {
           cart.products.map((el, i) => <ShoppingCartItem key={i} data={el} />)}
       </div>
       <div>
-        <Button variant="contained">Checkout</Button>
+        <Button variant="contained" onClick={() => setOpen(true)}>
+          Checkout
+        </Button>
+        {cart.totalPrice}
+        <Modal open={open} onClose={() => setOpen(false)}>
+          <div>
+            <p>asdf</p>
+          </div>
+        </Modal>
       </div>
     </div>
   )

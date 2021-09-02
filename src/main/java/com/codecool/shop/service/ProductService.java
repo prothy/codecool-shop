@@ -54,14 +54,8 @@ public class ProductService{
         return productDao.createObjectsFromJson();
     }
 
-    public List<ProductCategory> createCategoryListFromJson() {
-        return null;
+    public Product createCartObjectFromJson(String jsonElement) throws IOException {
+        return productDao.createObjectFromJson(jsonElement);
     }
-
-    public List<Supplier> createSupplierListFromJson() {
-        return null;
-    }
-
-
 
 }

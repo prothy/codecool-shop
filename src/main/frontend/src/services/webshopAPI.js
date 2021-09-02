@@ -8,7 +8,6 @@ export const getAllProducts = async () => {
 }
 
 export const getProductByCategory = async (productCategory) => {
-    console.log(productCategory)
     const response = await fetch(`/api.noIDEaSHop?category=${productCategory}`, {
         headers: {
             'Content-Type': 'application/json',
@@ -16,7 +15,16 @@ export const getProductByCategory = async (productCategory) => {
     })
     return await response.json()
 }
-// TODO: Implement fetch cart call:
+
+export const getSuppliers = async (supplier) => {
+    const response = await fetch(`/api.noIDEaSHop?supplier=${supplier}`, {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    return await response.json()
+}
+
 export const fetchCart = async () => {
   const response = await fetch('/api.cart', {
     headers: {
@@ -32,20 +40,16 @@ export const addProductToCart = async (product) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: {
-      product: JSON.stringify(product),
-    },
+    body: JSON.stringify(product),
   })
 }
 
-export const removeProductToCart = async (product) => {
+export const removeProductFromCart = async (product) => {
   await fetch('/api.cart?action=remove', {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: {
-      product: JSON.stringify(product),
-    },
+    body: JSON.stringify(product),
   })
 }

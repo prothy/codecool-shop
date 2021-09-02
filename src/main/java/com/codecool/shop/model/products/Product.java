@@ -9,16 +9,15 @@ import java.util.Currency;
 
 public abstract class Product extends BaseModel {
 
-    private Currency defaultCurrency;
+    private Currency defaultCurrency = Currency.getInstance("USD");
     private String description;
     private ProductCategory productCategory;
     private Supplier supplier;
     private String image;
     private BigDecimal price;
 
-    public Product(int id, String name, Currency defaultCurrency, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price) {
+    public Product(int id, String name, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price) {
         super(id, name);
-        this.defaultCurrency = defaultCurrency;
         this.description = description;
         this.productCategory = productCategory;
         this.supplier = supplier;
@@ -35,10 +34,12 @@ public abstract class Product extends BaseModel {
 //        this.productCategory.addProduct(this);
 //    }
 
-
     public void setPrice(BigDecimal price, String currency) {
         this.price = price;
-        this.defaultCurrency = Currency.getInstance(currency);
+    }
+
+    public void setDefaultCurrency(Currency defaultCurrency) {
+        this.defaultCurrency = defaultCurrency;
     }
 
     public Supplier getSupplier() {
