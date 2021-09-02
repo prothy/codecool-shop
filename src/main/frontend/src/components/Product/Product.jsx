@@ -10,20 +10,20 @@ import {
 import { AddShoppingCart, Favorite } from '@material-ui/icons'
 
 import useStyles from './styledProduct'
+import { addProductToCart } from '../../services/webshopAPI'
 
-const Product = ({ product, cart, setCart }) => {
+const Product = ({ product }) => {
   const classes = useStyles()
 
   const addToCart = () => {
-    setCart([...cart, product])
-    console.log(cart)
+    addProductToCart(product)
   }
 
   return (
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={product.image}
+        image={product['url-img']}
         title={product.name}
       />
       <CardContent>

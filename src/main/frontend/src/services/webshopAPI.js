@@ -29,7 +29,7 @@ export const addProductToCart = async (product) => {
   })
 }
 
-export const removeProductToCart = async (product) => {
+export const removeProductFromCart = async (product) => {
   await fetch('/api.cart?action=remove', {
     method: 'post',
     headers: {
