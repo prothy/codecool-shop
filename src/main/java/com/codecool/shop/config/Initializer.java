@@ -7,18 +7,13 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Order;
-import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
-import com.codecool.shop.model.OrderValidition;
+import com.codecool.shop.model.OrderValidation;
 import com.codecool.shop.model.cart.Cart;
-import com.codecool.shop.model.products.OS;
-import com.codecool.shop.model.products.Product;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.io.IOException;
-import java.math.BigDecimal;
 
 @WebListener
 public class Initializer implements ServletContextListener {
@@ -34,13 +29,8 @@ public class Initializer implements ServletContextListener {
         supplierDataStore.add(amazon);
 
 
-        OrderValidition valid = new OrderValidition("Kiss-Sándor", "aa@a.cc");
-        System.out.println("validName: " + valid.isNameValid());
-        System.out.println("validEmail: " + valid.isEmailValid());
-        System.out.println("everythingValid: " + valid.everythingIsValid());
-
         Cart cart = new Cart();
-        cart.addProduct(b);
+        // cart.addProduct(b);
 
         Order order = new Order(1, cart);
         System.out.println("date: " + order.getCurrentDate());
