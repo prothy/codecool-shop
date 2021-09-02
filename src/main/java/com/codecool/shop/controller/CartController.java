@@ -1,0 +1,61 @@
+package com.codecool.shop.controller;
+
+import com.codecool.shop.dao.ProductCategoryDao;
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.UserDaoMem;
+import com.codecool.shop.model.products.Product;
+import com.codecool.shop.model.user.User;
+import com.codecool.shop.service.ProductService;
+import com.codecool.shop.service.UserService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@WebServlet(name = "productServlet",urlPatterns = {"/api.cart", "/api.cart?action=*"})
+public class CartController extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            ProductDao productDataStore = ProductDaoMem.getInstance();
+            ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+            ProductService productService = new ProductService(productDataStore,productCategoryDataStore);
+            UserDao userDataStore = UserDaoMem.getInstance();
+            UserService userService = new UserService(userDataStore);
+
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
+            List<Product> productList = productService.createProductListFromJson().stream().flatMap(Collection::stream).collect(Collectors.toList());
+            User user = userService.getUserById(1);
+
+            if (request.getParameter("category") != null) {
+                productList = productService.getProductsForCategory(request.getParameter("category"), productList);
+            } else if (request.getParameter("supplier") != null) {
+                productList = productService.getProductsForSupplier(request.getParameter("supplier"), productList);
+            }
+
+            PrintWriter out = response.getWriter();
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            out.print(gson.toJson(productList));
+            out.flush();
+        }
+
+}

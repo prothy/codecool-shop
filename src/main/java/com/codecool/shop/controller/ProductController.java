@@ -9,12 +9,9 @@ import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.products.Product;
 import com.codecool.shop.model.user.User;
 import com.codecool.shop.service.ProductService;
-import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.service.UserService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,12 +21,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "productServlet",urlPatterns = {"/api.noIDEaSHop", "/api.noIDEaSHop?category=*", "/api.noIDEaSHop?supplier=*"})
+@WebServlet(name = "cartServlet",urlPatterns = {"/api.noIDEaSHop", "/api.noIDEaSHop?category=*", "/api.noIDEaSHop?supplier=*"})
 public class ProductController extends HttpServlet {
 
     @Override
@@ -44,7 +39,6 @@ public class ProductController extends HttpServlet {
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
         List<Product> productList = productService.createProductListFromJson().stream().flatMap(Collection::stream).collect(Collectors.toList());
-        User user = userService.getUserById(1);
 
         if (request.getParameter("category") != null) {
             productList = productService.getProductsForCategory(request.getParameter("category"), productList);
