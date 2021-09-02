@@ -34,4 +34,5 @@ public abstract class Product extends BaseModel {
         this.supplier.addProduct(this);
     }
 
+
 }
