@@ -106,12 +106,6 @@ export default function Dashboard({ children }) {
     </div>
   )
 
-  const fakesonData = [
-    { name: 'basketball', price: '$500', url: '' },
-    { name: 'fakeball', price: '$500', url: '' },
-    { name: 'fakeball', price: '$500', url: '' },
-  ]
-
   const handleDrawerOpen = () => {
     setOpen(true)
   }
@@ -159,7 +153,7 @@ export default function Dashboard({ children }) {
             <Badge badgeContent={4} color="secondary">
               <ShoppingCart />
             </Badge>
-            {show && <ShoppingCartPanel data={fakesonData} />}
+            {show && <ShoppingCartPanel />}
           </IconButton>
         </Toolbar>
       </AppBar>
