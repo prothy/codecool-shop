@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '@material-ui/core'
 import {
   addProductToCart,
+  getAllProducts,
   removeProductFromCart,
 } from '../../services/webshopAPI.js'
 
 function ShoppingCartItem({ data }) {
   const [quantity, setQuantity] = useState(data.quantity)
+  const [product, setProduct] = useState({})
 
   function validateInput(ev) {
     const value = parseInt(ev.target.value)
@@ -17,12 +19,18 @@ function ShoppingCartItem({ data }) {
     }
   }
 
+  useEffect(() => {
+    getAllProducts().then((products) =>
+      setProduct(products.filter((prod) => prod.name === data.productName)[0])
+    )
+  })
+
   function addProduct() {
-    addProductToCart(data)
+    addProductToCart(product)
   }
 
   function removeProduct() {
-    removeProductFromCart(data)
+    removeProductFromCart(product)
   }
 
   return (
@@ -38,7 +46,7 @@ function ShoppingCartItem({ data }) {
             +
           </Button>
         </span>
-        <span className="shopping-cart__product-price">{data.price}</span>
+        <span className="shopping-cart__product-price">{data.sumPrice}</span>
       </span>
     </div>
   )
