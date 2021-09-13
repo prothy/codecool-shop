@@ -10,14 +10,14 @@ function Header() {
                 <Container>
                     {/* Route to the home page */}
                     <LinkContainer to="/">
-                        <Navbar.Brand>eCommerce Site</Navbar.Brand>
+                        <Navbar.Brand>NoIDEA Store</Navbar.Brand>
                     </LinkContainer>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             {/* Route for the shopping cart */}
                             <LinkContainer to="/cart">
-                                <Nav.Link><FontAwesomeIcon icon="shopping-cart"/> Shopping Cart</Nav.Link>
+                                <Nav.Link><FontAwesomeIcon icon="shopping-cart"/> Cart</Nav.Link>
                             </LinkContainer>
                             {/* Route for login */}
                             <LinkContainer to="/login">
