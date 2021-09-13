@@ -27,7 +27,7 @@ function Product({product}) {
 
                 {/* Product price */}
                 <Card.Text as="h3">
-                    {product.yearlyPrice}$
+                    {product.price || product.yearlyPrice}$
                 </Card.Text>
             </Card.Body>
         </Card>
