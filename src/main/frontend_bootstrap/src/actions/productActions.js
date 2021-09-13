@@ -35,11 +35,14 @@ export const listProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({type: PRODUCT_DETAILS_REQUEST})
 
-        const {data} = await axios.get(`/api/products/${id}`)
+        // TODO: Fix it from the api
+        // const {data} = await axios.get(`/api/products/${id}`)
+        const {data} = await axios.get('/api/products')
+        const datum = data.filter(item => item.id === Number(id))[0]
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
-            payload: data
+            payload: datum
         })
     } catch (e) {
         dispatch({
