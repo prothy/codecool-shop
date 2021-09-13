@@ -32,7 +32,7 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "cartServlet",urlPatterns = {"/api.cart", "/api.cart?action=*"})
+@WebServlet(name = "cartServlet",urlPatterns = {"/api/cart", "/api/cart?action=*"})
 public class CartController extends HttpServlet {
     ProductDao productDataStore = ProductDaoMem.getInstance();
     ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();

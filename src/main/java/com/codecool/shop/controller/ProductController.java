@@ -23,7 +23,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "productServlet",urlPatterns = {"/api.noIDEaSHop", "/api.noIDEaSHop?category=*", "/api.noIDEaSHop?supplier=*"})
+@WebServlet(name = "productServlet",urlPatterns = {"/api/products", "/api/products?category=*", "/api/products?supplier=*"})
 public class ProductController extends HttpServlet {
 
     @Override
