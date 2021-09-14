@@ -3,6 +3,7 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.dao.DatabaseManager;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.products.*;
@@ -15,10 +16,12 @@ import java.util.List;
 public class ProductsDaoJDBC implements ProductDao {
     private final DataSource dataSource;
     private final ProductCategoryDao productCategoryDao;
+    private final SupplierDao supplierDao;
 
     public ProductsDaoJDBC(DataSource dataSource) {
         this.dataSource = dataSource;
         productCategoryDao = new ProductCategoryDaoJDBC(dataSource);
+        supplierDao = new SupplierDaoJDBC(dataSource);
     }
 
     @Override
@@ -44,8 +47,9 @@ public class ProductsDaoJDBC implements ProductDao {
             if (!rs.next()) return null; // first row was not found == no data was returned by the query
 
             ProductCategory productCategory = productCategoryDao.find(rs.getInt(3));
+            Supplier supplier = supplierDao.find(rs.getInt(4));
 
-            return createFoundObject(productCategory, rs);
+            return createFoundObject(productCategory, supplier, rs);
 
 
         }catch (SQLException e){
@@ -152,10 +156,12 @@ public class ProductsDaoJDBC implements ProductDao {
         statement.executeUpdate();
     }
 
-    private Product createFoundObject(ProductCategory productCategory, ResultSet result) throws SQLException {
+    private Product createFoundObject(ProductCategory productCategory, Supplier supplier, ResultSet result) throws SQLException {
         switch (productCategory.getId()) {
             case 0:
-                return new OS(result.getInt(1), result.getString(2), result.getString(3), productCategory, )
+                return new OS(result.getInt(1), result.getString(2), result.getString(5), productCategory, supplier, result.getString(12), result.getBigDecimal(7), result.getInt(10));
+            case 1:
+                return new IDE
         }
 
     }

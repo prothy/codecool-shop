@@ -27,13 +27,13 @@ public class SupplierDaoJDBC implements SupplierDao {
     @Override
     public Supplier find(int id) {
         try (Connection conn = dataSource.getConnection()){
-            String sql = "SELECT * FROM product_categories WHERE category_id = ?";
+            String sql = "SELECT * FROM suppliers WHERE supplier_id = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if (!rs.next()) return null; // first row was not found == no data was returned by the query
 
-            return new ProductCategory(rs.getInt(1), rs.getString(2));
+            return new Supplier(rs.getInt(1), rs.getString(2));
 
         } catch (SQLException e){
             throw new RuntimeException(e);
