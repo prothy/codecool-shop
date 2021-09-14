@@ -2,11 +2,9 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.model.cart.Cart;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.List;
 
 public class OrderDaoJdbc implements OrderDao {
@@ -40,8 +38,38 @@ public class OrderDaoJdbc implements OrderDao {
 
     @Override
     public Order find(Order order) {
+        Order orderResult = null;
 
-        return null;
+        int orderId = order.getOrderId();
+        int userId = order.getUserId();
+        Timestamp orderDate = order.getOrderDate();
+        String orderStatus = order.getOrderStatus();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("""
+                    SELECT *
+                    FROM orders
+                    WHERE order_id = ? OR user_id = ? OR order_date = ? OR order_status = ?
+                    """);
+
+            statement.setInt(1, orderId);
+            statement.setInt(2, userId);
+            statement.setTimestamp(3, orderDate);
+            statement.setString(4, orderStatus);
+
+            ResultSet results = statement.executeQuery();
+            results.next();
+
+            orderResult = new Order(
+                    results.getInt(0),
+                    results.getInt(1),
+                    results.getTimestamp(2),
+                    results.getString(3));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return orderResult;
     }
 
     @Override
