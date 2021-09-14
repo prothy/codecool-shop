@@ -48,7 +48,6 @@ public class UserDaoMem implements UserDao {
         data.remove(find(id));
     }
 
-    @Override
     public List<List<User>> createObjectsFromJson() throws IOException {
         String file = "src/main/java/com/codecool/shop/resources/users.json";
         String jsonText = Util.readDataFromFile(file);
