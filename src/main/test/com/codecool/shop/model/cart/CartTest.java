@@ -36,7 +36,7 @@ class CartTest {
 
         Product product = mock(Product.class);
         Cart cart = new Cart();
-        cart.addProduct(cloud);
+        cart.addProduct(product);
         when(product.getName()).thenReturn(cloud.getName());
 
         assertFalse(cart.getContent().isEmpty());
@@ -48,7 +48,7 @@ class CartTest {
 
         Product product = mock(Product.class);
         Cart cart = new Cart();
-        cart.removeProduct(cloud);
+        cart.removeProduct(product);
         when(product.getProductCategory()).thenReturn(cloud.getProductCategory());
 
         assertTrue(cart.getContent().isEmpty());
