@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {CART_ADD_ITEM} from '../constants/cartConstants'
+import {CART_ADD_ITEM, CART_REMOVE_ITEM} from '../constants/cartConstants'
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
     // TODO: Fix it from the api 2.
@@ -10,12 +10,21 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
     dispatch({
         type: CART_ADD_ITEM,
         payload: {
-            product:datum.id,
+            product: datum.id,
             name: datum.name,
             image: datum.image,
-            price: datum.price || datum.yearlyPrice,
+            price: datum.price,
             qty
         }
+    })
+
+    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+}
+
+export const removeFromCart = (id) => (dispatch, getState) => {
+    dispatch({
+        type: CART_REMOVE_ITEM,
+        payload: id,
     })
 
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
