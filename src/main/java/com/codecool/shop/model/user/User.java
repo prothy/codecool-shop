@@ -4,12 +4,15 @@ import com.codecool.shop.model.BaseModel;
 import com.codecool.shop.model.ProductCategory;
 
 public abstract class User extends BaseModel {
-    protected String email;
-    protected String password;
-    protected boolean isAdmin;
+    private String email;
+    private String password;
+    private boolean isAdmin;
 
-    public User(int id, String name) {
+    public User(int id, String name, String email, String password, boolean isAdmin) {
         super(id, name);
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
     }
 
     public boolean isAdmin() {
