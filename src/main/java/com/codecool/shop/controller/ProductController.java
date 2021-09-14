@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet(name = "productServlet",urlPatterns = {"/api.noIDEaSHop", "/api.noIDEaSHop?category=*", "/api.noIDEaSHop?supplier=*"})
+@WebServlet(name = "productServlet",urlPatterns = {"/api/products", "/api/products?category=*", "/api/products?supplier=*"})
 public class ProductController extends HttpServlet {
 
     @Override

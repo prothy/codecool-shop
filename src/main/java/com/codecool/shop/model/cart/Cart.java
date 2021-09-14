@@ -56,13 +56,12 @@ public class Cart {
             if (quantity == 0) {
                 content.remove(product.getName());
                 this.quantity.remove(product.getName());
-                setQuantity(this.quantity);
             } else {
                 innerMap.put(firstKey, quantity);
                 content.put(product.getName(), innerMap);
                 this.quantity.put(product.getName(), quantity);
-                setQuantity(this.quantity);
             }
+            setQuantity(this.quantity);
 
             calculatePriceAfterRemoveItem(product, quantity);
         }
