@@ -2,8 +2,10 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoJDBC;
 import com.codecool.shop.dao.implementation.ProductDaoJDBC;
+import com.codecool.shop.dao.implementation.SupplierDaoJDBC;
 import com.codecool.shop.model.Util;
 import com.codecool.shop.model.products.Product;
 import com.codecool.shop.service.ProductService;
@@ -28,7 +30,8 @@ public class ProductController extends HttpServlet {
         DataSource dataSource = Util.getDataSource();
         ProductDao productDataStore = new ProductDaoJDBC(dataSource);
         ProductCategoryDao productCategoryDataStore = new ProductCategoryDaoJDBC(dataSource);
-        ProductService productService = new ProductService(productDataStore, productCategoryDataStore);
+        SupplierDao supplierDao = new SupplierDaoJDBC(dataSource);
+        ProductService productService = new ProductService(productDataStore, productCategoryDataStore, supplierDao);
 
 
         GsonBuilder gsonBuilder = new GsonBuilder();

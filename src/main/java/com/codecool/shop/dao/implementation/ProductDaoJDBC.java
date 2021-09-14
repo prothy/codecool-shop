@@ -89,7 +89,9 @@ public class ProductDaoJDBC implements ProductDao {
 
     @Override
     public List<Product> getBy(Supplier supplier) {
-        return null;
+        return getAll().stream()
+                .filter(product -> product.getSupplier().getId() == supplier.getId())
+                .collect(Collectors.toList());
     }
 
     @Override
