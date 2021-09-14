@@ -9,8 +9,12 @@ import java.util.Currency;
 public class OS extends Product {
     private int bitVersion;
 
-    public OS(int id, String name,String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price, int bitVersion) {
+    public OS(int id, String name, String description, ProductCategory productCategory, Supplier supplier, String image, BigDecimal price, int bitVersion) {
         super(id, name, description, productCategory, supplier, image, price);
         this.bitVersion = bitVersion;
+    }
+
+    public int getBitVersion() {
+        return bitVersion;
     }
 }

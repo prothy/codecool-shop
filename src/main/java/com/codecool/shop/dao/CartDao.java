@@ -1,7 +1,7 @@
 package com.codecool.shop.dao;
 
+import com.codecool.shop.model.cart.Cart;
 import com.codecool.shop.model.cart.CartModel;
-
 import java.util.List;
 
 public interface CartDao {
@@ -11,4 +11,5 @@ public interface CartDao {
     void remove(int userId);
     void clearCart(int userId);
     List<CartModel> getAll();
+
 }

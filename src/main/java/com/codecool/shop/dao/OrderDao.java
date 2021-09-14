@@ -1,7 +1,7 @@
 package com.codecool.shop.dao;
 
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.OrderModel;
-
 import java.util.List;
 
 public interface OrderDao {
@@ -9,4 +9,5 @@ public interface OrderDao {
     OrderModel find(OrderModel order);
     void remove(int id);
     List<OrderModel> getAll();
+
 }
