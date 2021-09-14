@@ -2,9 +2,9 @@ package com.codecool.shop.model.user;
 
 import com.codecool.shop.model.*;
 import com.codecool.shop.model.cart.Cart;
+import com.codecool.shop.model.cart.CartModel;
 import com.codecool.shop.model.payment.CreditCard;
 import com.codecool.shop.model.payment.PayPal;
-import com.codecool.shop.model.payment.Payment;
 
 import java.math.BigDecimal;
 import java.util.Currency;

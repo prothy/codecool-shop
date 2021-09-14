@@ -1,3 +1,4 @@
+
 package com.codecool.shop.model.cart;
 
 import com.codecool.shop.model.products.Product;
@@ -146,4 +147,3 @@ public class Cart {
         return totalNumberOfProducts;
     }
 }
-
