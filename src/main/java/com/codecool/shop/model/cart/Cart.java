@@ -14,6 +14,9 @@ public class Cart {
         this.productId = productId;
     }
 
+    public Cart() {
+    }
+
     public int getUserId() {
         return userId;
     }
