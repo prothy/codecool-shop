@@ -9,20 +9,10 @@ public class BaseModel {
 
     private int id;
     private String name;
-    protected DatabaseManager databaseManager;
 
     public BaseModel(int id, String name) {
         this.id = id;
         this.name = name;
-        this.databaseManager = new DatabaseManager();
-        setupDatabaseManager(databaseManager);
-    }
-
-    public BaseModel(int id, String name, DatabaseManager databaseManager) {
-        this.id = id;
-        this.name = name;
-        this.databaseManager = databaseManager;
-        setupDatabaseManager(databaseManager);
     }
 
     public int getId() {
@@ -58,13 +48,4 @@ public class BaseModel {
         }
         return sb.toString();
     }
-
-    private void setupDatabaseManager(DatabaseManager databaseManager) {
-        try {
-            databaseManager.setup();
-        } catch (SQLException ex) {
-            System.out.println("Cannot connect to database.");
-        }
-    }
-
 }

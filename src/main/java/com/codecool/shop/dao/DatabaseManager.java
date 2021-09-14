@@ -10,7 +10,7 @@ import org.postgresql.ds.PGSimpleDataSource;
 
 public class DatabaseManager {
 
-    public void setup() throws SQLException {
+    public DataSource setup() throws SQLException {
         Properties prop = new Properties();
         String filename = "src/main/java/com/codecool/shop/resources/connection.properties";
 
@@ -23,8 +23,7 @@ public class DatabaseManager {
             e.printStackTrace();
         }
 
-        DataSource dataSource = connect(prop);
-
+        return connect(prop);
     }
 
     private DataSource connect(Properties prop) throws SQLException {
