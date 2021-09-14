@@ -102,6 +102,21 @@ public class CartDaoJdbc implements CartDao {
 
     @Override
     public List<Cart> getAll() {
-        return null;
+        List<Cart> cartContent = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("""
+                    SELECT *
+                    FROM carts
+                    """);
+
+            ResultSet results = statement.executeQuery();
+            while (results.next()) {
+                cartContent.add(new Cart(results.getInt(0), results.getInt(1)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return cartContent;
     }
 }
