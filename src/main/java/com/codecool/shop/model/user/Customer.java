@@ -20,8 +20,8 @@ public class Customer extends User{
     private HashMap<String, String> paymentDetail;
     private String address;
 
-    public Customer(int id, String name, Cart cart, HashSet<Order> orders, BigDecimal wallet, Currency defaultCurrency, String address) {
-        super(id, name);
+    public Customer(int id, String name, String email, String password, boolean isAdmin, Cart cart, HashSet<Order> orders, BigDecimal wallet, Currency defaultCurrency, String address) {
+        super(id, name, email, password, isAdmin);
         this.cart = cart;
         this.orders = orders;
         this.wallet = wallet;
@@ -30,16 +30,15 @@ public class Customer extends User{
     }
 
     public Customer() {
-        super(1, "guest");
-        this.email = null;
-        this.password = null;
-        this.isAdmin = false;
+        super(1, "guest", null, null, false);
         this.cart = new Cart();
         this.orders = new HashSet<>();
         this.wallet = new BigDecimal(420);
         this.defaultCurrency = Currency.getInstance("EUR");
         this.address = null;
     }
+
+
 
 
     public void addOrder() {
@@ -62,7 +61,7 @@ public class Customer extends User{
     }
 
     private boolean confirmOrder() {
-        OrderValidation valid = new OrderValidation(this.name, this.email);
+        OrderValidation valid = new OrderValidation(getName(), getEmail());
         return valid.everythingIsValid();
     }
 
