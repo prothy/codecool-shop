@@ -9,8 +9,8 @@ public class Admin extends User{
     private SupplierDaoMem supplierDaoMem;
     private ProductDaoMem productDaoMem;
 
-    public Admin(int id, String name, ProductCategoryDaoMem productCategoryDaoMem, SupplierDaoMem supplierDaoMem, ProductDaoMem productDaoMem) {
-        super(id, name);
+    public Admin(int id, String name, String email, String password, boolean isAdmin) {
+        super(id, name, email, password, isAdmin);
         this.productCategoryDaoMem = productCategoryDaoMem;
         this.supplierDaoMem = supplierDaoMem;
         this.productDaoMem = productDaoMem;
