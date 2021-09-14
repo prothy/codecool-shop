@@ -2,9 +2,9 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Order;
-import com.codecool.shop.model.cart.Cart;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoJdbc implements OrderDao {
@@ -94,6 +94,21 @@ public class OrderDaoJdbc implements OrderDao {
 
     @Override
     public List<Order> getAll() {
-        return null;
+        List<Order> orders = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("""
+                    SELECT *
+                    FROM carts
+                    """);
+
+            ResultSet results = statement.executeQuery();
+            while (results.next()) {
+                orders.add(new Order(results.getInt(0), results.getInt(1), results.getTimestamp(2), results.getString(3)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return orders;
     }
 }
