@@ -4,12 +4,12 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.UserDao;
+
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.Util;
 import com.codecool.shop.model.cart.Cart;
-import com.codecool.shop.model.products.OS;
 import com.codecool.shop.model.products.Product;
 import com.codecool.shop.model.products.SubscriptionProduct;
 import com.codecool.shop.model.user.Customer;
@@ -24,6 +24,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
