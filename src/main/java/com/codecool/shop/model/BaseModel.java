@@ -9,20 +9,10 @@ public class BaseModel {
 
     protected int id;
     protected String name;
-    protected DatabaseManager databaseManager;
 
     public BaseModel(int id, String name) {
         this.id = id;
         this.name = name;
-        this.databaseManager = new DatabaseManager();
-        setupDatabaseManager(databaseManager);
-    }
-
-    public BaseModel(int id, String name, DatabaseManager databaseManager) {
-        this.id = id;
-        this.name = name;
-        this.databaseManager = databaseManager;
-        setupDatabaseManager(databaseManager);
     }
 
     public int getId() {
