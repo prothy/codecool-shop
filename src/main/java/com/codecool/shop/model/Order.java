@@ -5,6 +5,7 @@ import com.codecool.shop.model.products.Product;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,13 @@ public class Order {
     public Order(int orderId, int userId, Timestamp orderDate, String orderStatus) {
         this.orderId = orderId;
         this.userId = userId;
-        this.orderDate = orderDate;
+        this.orderDate = Timestamp.from(Instant.now());
+        this.orderStatus = orderStatus;
+    }
+
+    public Order(int orderId, int userId, String orderStatus) {
+        this.orderId = orderId;
+        this.userId = userId;
         this.orderStatus = orderStatus;
     }
 
