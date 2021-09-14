@@ -14,4 +14,8 @@ public class IDE extends SubscriptionProduct{
         super(id, name, description, productCategory, supplier, image, yearlyPrice, yearlyPrice, monthlyPrice);
         this.languages = languages;
     }
+
+    public String getLanguages() {
+        return languages;
+    }
 }

@@ -13,4 +13,8 @@ public class OS extends Product {
         super(id, name, description, productCategory, supplier, image, price);
         this.bitVersion = bitVersion;
     }
+
+    public int getBitVersion() {
+        return bitVersion;
+    }
 }
