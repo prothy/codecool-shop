@@ -9,6 +9,7 @@ public interface CartDao {
     void add(Cart cart);
     List<Cart> findAll(int userId);
     void remove(int userId, int productId);
+    void remove(int userId);
     void clearCart(int userId);
     List<Cart> getAll();
 }
