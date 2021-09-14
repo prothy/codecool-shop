@@ -11,6 +11,7 @@ import com.codecool.shop.model.products.*;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsDaoJDBC implements ProductDao {
@@ -51,7 +52,6 @@ public class ProductsDaoJDBC implements ProductDao {
 
             return createFoundObject(productCategory, supplier, rs);
 
-
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
@@ -64,7 +64,20 @@ public class ProductsDaoJDBC implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        return null;
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "SELECT * FROM products";
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+            List<Product> result = new ArrayList<>();
+            while (rs.next()) { // while result set pointer is positioned before or on last row read authors
+                ProductCategory productCategory = productCategoryDao.find(rs.getInt(3));
+                Supplier supplier = supplierDao.find(rs.getInt(4));
+                Product product = createFoundObject(productCategory, supplier, rs);
+                result.add(product);
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error while reading all authors", e);
+        }
     }
 
     @Override
@@ -161,7 +174,13 @@ public class ProductsDaoJDBC implements ProductDao {
             case 0:
                 return new OS(result.getInt(1), result.getString(2), result.getString(5), productCategory, supplier, result.getString(12), result.getBigDecimal(7), result.getInt(10));
             case 1:
-                return new IDE
+                return new IDE(result.getInt(1), result.getString(2), result.getString(5), productCategory, supplier, result.getString(12), result.getBigDecimal(7), result.getBigDecimal(8), result.getBigDecimal(9), result.getString(6));
+            case 2:
+                return new Cloud(result.getInt(1), result.getString(2), result.getString(5), productCategory, supplier, result.getString(12), result.getBigDecimal(7), result.getBigDecimal(8), result.getBigDecimal(9));
+            case 3:
+                return new WorkTool(result.getInt(1), result.getString(2), result.getString(5), productCategory, supplier, result.getString(12), result.getBigDecimal(7), result.getBigDecimal(8), result.getBigDecimal(9));
+            default:
+                return null;
         }
 
     }
