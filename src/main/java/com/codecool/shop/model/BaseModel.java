@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public class BaseModel {
 
-    protected int id;
-    protected String name;
+    private int id;
+    private String name;
     protected DatabaseManager databaseManager;
 
     public BaseModel(int id, String name) {
