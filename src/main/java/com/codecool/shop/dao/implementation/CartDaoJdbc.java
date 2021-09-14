@@ -1,7 +1,10 @@
 package com.codecool.shop.dao.implementation;
 
+import com.codecool.shop.controller.CartController;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.model.cart.CartModel;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -13,12 +16,13 @@ import java.util.List;
 
 public class CartDaoJdbc implements CartDao {
     private Connection connection;
+    private static final Logger logger = LogManager.getLogger(CartDaoJdbc.class);
 
     public CartDaoJdbc(DataSource ds) {
         try {
             connection = ds.getConnection();
         } catch (SQLException e) {
-            System.out.println("CartDao unable to connect to db. " + e.getMessage());
+            logger.error(e.getMessage());
         }
     }
 
