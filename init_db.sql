@@ -48,6 +48,7 @@ DROP TABLE IF EXISTS public.users;
 CREATE TABLE users
 (
     user_id  serial PRIMARY KEY NOT NULL,
+    user_name text              NOT NULL,
     email    varchar(50)        NOT NULL,
     password varchar(50)        NOT NULL,
     isAdmin  boolean            NOT NULL,
