@@ -12,14 +12,16 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ProductsDaoJDBC implements ProductDao {
+public class ProductDaoJDBC implements ProductDao {
     private final DataSource dataSource;
     private final ProductCategoryDao productCategoryDao;
     private final SupplierDao supplierDao;
 
-    public ProductsDaoJDBC(DataSource dataSource) {
+    public ProductDaoJDBC(DataSource dataSource) {
         this.dataSource = dataSource;
         productCategoryDao = new ProductCategoryDaoJDBC(dataSource);
         supplierDao = new SupplierDaoJDBC(dataSource);
@@ -92,7 +94,9 @@ public class ProductsDaoJDBC implements ProductDao {
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
-        return null;
+        return getAll().stream()
+                .filter(product -> product.getProductCategory().getId() == productCategory.getId())
+                .collect(Collectors.toList());
     }
 
     @Override
