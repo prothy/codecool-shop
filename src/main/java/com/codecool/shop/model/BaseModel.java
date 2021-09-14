@@ -1,6 +1,5 @@
 package com.codecool.shop.model;
 
-
 import com.codecool.shop.dao.DatabaseManager;
 
 import java.lang.reflect.Field;
