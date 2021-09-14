@@ -1,6 +1,7 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.DatabaseManager;
+import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -13,9 +14,11 @@ import java.util.List;
 
 public class ProductsDaoJDBC implements ProductDao {
     private final DataSource dataSource;
+    private final ProductCategoryDao productCategoryDao;
 
     public ProductsDaoJDBC(DataSource dataSource) {
         this.dataSource = dataSource;
+        productCategoryDao = new ProductCategoryDaoJDBC(dataSource);
     }
 
     @Override
@@ -33,7 +36,21 @@ public class ProductsDaoJDBC implements ProductDao {
 
     @Override
     public Product find(int id) {
-        return null;
+        try (Connection conn = dataSource.getConnection()){
+            String sql = "SELECT * FROM products WHERE product_id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (!rs.next()) return null; // first row was not found == no data was returned by the query
+
+            ProductCategory productCategory = productCategoryDao.find(rs.getInt(3));
+
+            return createFoundObject(productCategory, rs);
+
+
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -133,5 +150,13 @@ public class ProductsDaoJDBC implements ProductDao {
         statement.setString(7, product.getDefaultCurrencyString());
         statement.setString(8, product.getImage());
         statement.executeUpdate();
+    }
+
+    private Product createFoundObject(ProductCategory productCategory, ResultSet result) throws SQLException {
+        switch (productCategory.getId()) {
+            case 0:
+                return new OS(result.getInt(1), result.getString(2), result.getString(3), productCategory, )
+        }
+
     }
 }
