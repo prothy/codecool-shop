@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 public class CartController extends HttpServlet {
     ProductDao productDataStore = ProductDaoMem.getInstance();
     ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-    ProductService productService = new ProductService(productDataStore,productCategoryDataStore);
+    ProductService productService = new ProductService(productDataStore,productCategoryDataStore,);
     UserDao userDataStore = UserDaoMem.getInstance();
     UserService userService = new UserService(userDataStore);
 

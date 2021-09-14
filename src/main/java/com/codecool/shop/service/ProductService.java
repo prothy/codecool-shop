@@ -16,9 +16,10 @@ public class ProductService{
     private ProductCategoryDao productCategoryDao;
     private SupplierDao supplierDao;
 
-    public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao) {
+    public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao, SupplierDao supplierDao) {
         this.productDao = productDao;
         this.productCategoryDao = productCategoryDao;
+        this.supplierDao = supplierDao;
     }
 
     public List<Product> getProducts() {
@@ -42,7 +43,8 @@ public class ProductService{
 //    }
 
     public List<Product> getProductsForSupplier(int supplierId) {
-        return null;
+        var supplier = supplierDao.find(supplierId);
+        return productDao.getBy(supplier);
     }
 
 //    public List<Product> getProductsForSupplier(String supplierName, List<Product> products) {

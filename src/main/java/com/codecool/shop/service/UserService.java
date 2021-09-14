@@ -19,14 +19,14 @@ public class UserService {
         return userDao.find(id);
     }*/
 
-    public User getUserById(int id) throws IOException {
-        var userList = userDao.createObjectsFromJson();
-        User sad = userList.get(0).get(0);
-        return userList.stream()
-                .flatMap(Collection::parallelStream)
-                .filter(user -> user.getId() == id)
-                .findFirst().orElse(null);
-    }
+//    public User getUserById(int id) throws IOException {
+//        var userList = userDao.createObjectsFromJson();
+//        User sad = userList.get(0).get(0);
+//        return userList.stream()
+//                .flatMap(Collection::parallelStream)
+//                .filter(user -> user.getId() == id)
+//                .findFirst().orElse(null);
+//    }
 
     public <T extends User> T convertUserObject(User user, Class<T> type) {
         return type.cast(user);
