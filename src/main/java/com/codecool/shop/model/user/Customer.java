@@ -18,13 +18,15 @@ public class Customer extends User{
     private BigDecimal wallet;
     private Currency defaultCurrency;
     private HashMap<String, String> paymentDetail;
+    private String address;
 
-    public Customer(int id, String name, Cart cart, HashSet<Order> orders, BigDecimal wallet, Currency defaultCurrency) {
+    public Customer(int id, String name, Cart cart, HashSet<Order> orders, BigDecimal wallet, Currency defaultCurrency, String address) {
         super(id, name);
         this.cart = cart;
         this.orders = orders;
         this.wallet = wallet;
         this.defaultCurrency = defaultCurrency;
+        this.address = address;
     }
 
     public Customer() {
@@ -36,6 +38,7 @@ public class Customer extends User{
         this.orders = new HashSet<>();
         this.wallet = new BigDecimal(420);
         this.defaultCurrency = Currency.getInstance("EUR");
+        this.address = null;
     }
 
 
