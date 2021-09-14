@@ -4,9 +4,12 @@ import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.model.cart.Cart;
 
 import javax.sql.DataSource;
+import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartDaoJdbc implements CartDao {
@@ -27,9 +30,9 @@ public class CartDaoJdbc implements CartDao {
 
         try {
             PreparedStatement statement = connection.prepareStatement("""
-                        INSERT INTO carts (user_id, product_id) 
-                        VALUES(?, ?)
-                        """);
+                    INSERT INTO carts (user_id, product_id)
+                    VALUES(?, ?)
+                    """);
 
             statement.setInt(1, userId);
             statement.setInt(2, productId);
@@ -42,12 +45,30 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public Cart find() {
-        return null;
+    public List<Cart> findAll(int userId) {
+        List<Cart> cartContent = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("""
+                    SELECT *
+                    FROM carts
+                    WHERE user_id = ?
+                    """);
+
+            statement.setInt(1, userId);
+
+            ResultSet results = statement.executeQuery();
+            while (results.next()) {
+                cartContent.add(new Cart(results.getInt(0), results.getInt(1)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return cartContent;
     }
 
     @Override
-    public void remove(Cart cart) {
+    public void remove(int id) {
 
     }
 
