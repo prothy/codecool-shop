@@ -1,19 +1,13 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.UserDao;
-import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Util;
-import com.codecool.shop.model.products.Product;
 import com.codecool.shop.model.user.Admin;
 import com.codecool.shop.model.user.Customer;
 import com.codecool.shop.model.user.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonObject;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -48,7 +42,6 @@ public class UserDaoMem implements UserDao {
         data.remove(find(id));
     }
 
-    @Override
     public List<List<User>> createObjectsFromJson() throws IOException {
         String file = "src/main/java/com/codecool/shop/resources/users.json";
         String jsonText = Util.readDataFromFile(file);

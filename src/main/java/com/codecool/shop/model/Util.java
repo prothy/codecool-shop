@@ -1,9 +1,13 @@
 package com.codecool.shop.model;
 
+import com.codecool.shop.dao.DatabaseManager;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Util {
     public static String readDataFromFile(String filePath) throws IOException {
@@ -33,6 +37,16 @@ public class Util {
         }
 
         return jsonString;
+    }
+
+    public static DataSource getDataSource() {
+        DataSource dataSource = null;
+        try {
+            dataSource = new DatabaseManager().setup();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return dataSource;
     }
 
 }

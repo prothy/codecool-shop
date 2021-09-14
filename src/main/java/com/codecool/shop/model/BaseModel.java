@@ -1,12 +1,14 @@
 package com.codecool.shop.model;
 
+import com.codecool.shop.dao.DatabaseManager;
 
 import java.lang.reflect.Field;
+import java.sql.SQLException;
 
 public class BaseModel {
 
-    protected int id;
-    protected String name;
+    private int id;
+    private String name;
 
     public BaseModel(int id, String name) {
         this.id = id;
@@ -46,5 +48,4 @@ public class BaseModel {
         }
         return sb.toString();
     }
-
 }
