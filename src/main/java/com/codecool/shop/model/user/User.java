@@ -15,4 +15,12 @@ public abstract class User extends BaseModel {
     public boolean isAdmin() {
         return isAdmin;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }
