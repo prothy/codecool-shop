@@ -72,9 +72,24 @@ public class OrderDaoJdbc implements OrderDao {
         return orderResult;
     }
 
-    @Override
-    public void remove(int id) {
+    public void remove(Order order) {
+        this.remove(order.getOrderId());
+    }
 
+    @Override
+    public void remove(int orderId) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("""
+                    DELETE FROM orders
+                    WHERE order_id = ?
+                    """);
+
+            statement.setInt(1, orderId);
+
+            statement.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
