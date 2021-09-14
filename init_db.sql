@@ -133,10 +133,10 @@ ALTER TABLE ONLY products
     ADD CONSTRAINT fk_supplier_id FOREIGN KEY (supplier_id) REFERENCES suppliers (supplier_id);
 
 INSERT INTO users
-VALUES (1, 'admin@admin.com', 'admin', false, 'none', 999.99, '$');
+VALUES (1, 'guest' ,'guest@guest.com', '12345', false, 'none', 999.99, 'USD');
 
 INSERT INTO orders
-VALUES (1, 1, '2021-09-13 12:00:54', 'INPROGRESS');
+VALUES (1, 1, '2021-09-13 12:00:54', 'IN_PROGRESS');
 
 INSERT INTO product_categories
 VALUES (0, 'OS');
