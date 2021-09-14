@@ -6,7 +6,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import {Row, Col, Image, ListGroup, Button, Card, Form} from 'react-bootstrap'
 
-function ProductPage({match}) {
+function ProductPage({match, history}) {
     const [qty, setQty] = useState(1)
 
     const style = {
@@ -23,6 +23,10 @@ function ProductPage({match}) {
         dispatch(listProductDetails(match.params.id))
     }, [dispatch, match])
 
+    const addToCartHandler = () => {
+        // Route for cart item:
+        history.push(`/cart/${match.params.id}?qty=${qty}`)
+    }
 
     return (
         <div>
@@ -72,7 +76,6 @@ function ProductPage({match}) {
                                                         min="1"
                                                         value={qty}
                                                         onChange={(e) => setQty(e.target.value)}
-                                                        {/*  TODO: Finish add to cart  */}
                                                     >
                                                     </Form.Control>
                                                 </Col>
@@ -80,7 +83,11 @@ function ProductPage({match}) {
                                         </ListGroup.Item>
 
                                         <ListGroup.Item className="d-grid">
-                                            <Button className="btn-dark" type="button">Add to cart</Button>
+                                            <Button
+                                                onClick={addToCartHandler}
+                                                className="btn-dark"
+                                                type="button"
+                                            >Add to Cart</Button>
                                         </ListGroup.Item>
                                     </ListGroup>
                                 </Card>
