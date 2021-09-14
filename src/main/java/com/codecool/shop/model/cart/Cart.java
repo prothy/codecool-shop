@@ -13,8 +13,6 @@ public class Cart {
     private Currency currency;
     private int totalNumberOfProducts = 0;
 
-    public Cart() {
-    }
 
     public void addProduct(Product product) {
         currency = product.getDefaultCurrency();
@@ -71,10 +69,10 @@ public class Cart {
 
     private void calculatePriceAfterAddItem(Product product, int getQuantity) {
 
-        String[] splitPrice = product.getPrice().split(" ");
-        BigDecimal getPrice = new BigDecimal(splitPrice[0]);
+        if ( product.getPrice() != null)  {
+            String[] splitPrice = product.getPrice().split(" ");
+            BigDecimal getPrice = new BigDecimal(splitPrice[0]);
 
-        {
             BigDecimal getNewPrice = getPrice.multiply(BigDecimal.valueOf(getQuantity));
             setSumPrice(product.getName(), getNewPrice);
         }
