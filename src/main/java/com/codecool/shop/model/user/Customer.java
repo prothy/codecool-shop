@@ -1,6 +1,7 @@
 package com.codecool.shop.model.user;
 
 import com.codecool.shop.model.*;
+import com.codecool.shop.model.cart.Cart;
 import com.codecool.shop.model.cart.CartModel;
 import com.codecool.shop.model.payment.CreditCard;
 import com.codecool.shop.model.payment.PayPal;
@@ -12,13 +13,13 @@ import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 public class Customer extends User{
-    private CartModel cart;
-    private HashSet<OrderModel> orders;
+    private Cart cart;
+    private HashSet<Order> orders;
     private BigDecimal wallet;
     private Currency defaultCurrency;
     private HashMap<String, String> paymentDetail;
 
-    public Customer(int id, String name, CartModel cart, HashSet<OrderModel> orders, BigDecimal wallet, Currency defaultCurrency) {
+    public Customer(int id, String name, Cart cart, HashSet<Order> orders, BigDecimal wallet, Currency defaultCurrency) {
         super(id, name);
         this.cart = cart;
         this.orders = orders;
@@ -31,7 +32,7 @@ public class Customer extends User{
         this.email = null;
         this.password = null;
         this.isAdmin = false;
-        this.cart = new CartModel();
+        this.cart = new Cart();
         this.orders = new HashSet<>();
         this.wallet = new BigDecimal(420);
         this.defaultCurrency = Currency.getInstance("EUR");
@@ -41,19 +42,19 @@ public class Customer extends User{
     public void addOrder() {
         if (confirmOrder()){
             if (isPaymentSuccess(paymentDetail.get("paymentType"))) {
-                orders.add(new OrderModel(1, this.cart));
+                orders.add(new Order(1, this.cart));
             }
         }
     }
 
     public void cancelOrder(int id) {
-        OrderModel chosenOrder = orders.stream()
+        Order chosenOrder = orders.stream()
                 .parallel().filter(order -> order.getId() == id)
                 .findFirst().orElseThrow(NoSuchElementException::new);
         orders.remove(chosenOrder);
     }
 
-    public CartModel getCart() {
+    public Cart getCart() {
         return cart;
     }
 
@@ -90,7 +91,7 @@ public class Customer extends User{
     }
 
 
-    public HashSet<OrderModel> getOrders() {
+    public HashSet<Order> getOrders() {
         return orders;
     }
 
