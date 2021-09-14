@@ -3,44 +3,57 @@ package com.codecool.shop.model;
 import com.codecool.shop.model.cart.Cart;
 import com.codecool.shop.model.products.Product;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Order {
+    private int orderId;
+    private int userId;
+    private Timestamp orderDate;
+    private String orderStatus;
 
-    private int id;
-    private Cart cart;
-
-    private OrderStatus orderStatus;
-
-    public Order(int id, Cart cart) {
-        this.id = id;
-        this.cart = cart;
-        this.orderStatus = OrderStatus.NEW;
+    public Order(int orderId, int userId, Timestamp orderDate, String orderStatus) {
+        this.orderId = orderId;
+        this.userId = userId;
+        this.orderDate = orderDate;
+        this.orderStatus = orderStatus;
     }
 
-    public int getId() {
-        return id;
+    public Order(int i, Cart cart) {
     }
 
-    public String totalPrice() {
-        return cart.getSumPrice();
+    public int getOrderId() {
+        return orderId;
     }
 
-    public Map<String, HashMap<Product, Integer>> getContent() {
-        return cart.getContent();
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
-    public String getCurrentDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-
-        return formatter.format(date);
+    public int getUserId() {
+        return userId;
     }
 
-    public OrderStatus getOrderStatus() {
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Timestamp getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Timestamp orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public String getOrderStatus() {
         return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

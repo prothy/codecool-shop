@@ -41,7 +41,6 @@ public class CartDaoJdbc implements CartDao {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     @Override
