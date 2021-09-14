@@ -101,4 +101,15 @@ public class Customer extends User{
     public void setPaymentDetail(HashMap<String, String> paymentDetail) {
         this.paymentDetail = paymentDetail;
     }
+
+    public BigDecimal getWallet() {
+        return wallet;
+    }
+
+    public String getDefaultCurrencyString() {
+        return defaultCurrency.getCurrencyCode();
+    }
+    public String getAddress() {
+        return address;
+    }
 }
