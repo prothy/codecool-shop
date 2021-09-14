@@ -1,10 +1,9 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.model.cart.Cart;
+import com.codecool.shop.model.cart.CartModel;
 
 import javax.sql.DataSource;
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +23,7 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public void add(Cart cart) {
+    public void add(CartModel cart) {
         int userId = cart.getUserId();
         int productId = cart.getProductId();
 
@@ -44,8 +43,8 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public List<Cart> findAll(int userId) {
-        List<Cart> cartContent = new ArrayList<>();
+    public List<CartModel> findAll(int userId) {
+        List<CartModel> cartContent = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("""
                     SELECT *
@@ -57,7 +56,7 @@ public class CartDaoJdbc implements CartDao {
 
             ResultSet results = statement.executeQuery();
             while (results.next()) {
-                cartContent.add(new Cart(results.getInt(0), results.getInt(1)));
+                cartContent.add(new CartModel(results.getInt(0), results.getInt(1)));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -116,8 +115,8 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public List<Cart> getAll() {
-        List<Cart> cartContent = new ArrayList<>();
+    public List<CartModel> getAll() {
+        List<CartModel> cartContent = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("""
                     SELECT *
@@ -126,7 +125,7 @@ public class CartDaoJdbc implements CartDao {
 
             ResultSet results = statement.executeQuery();
             while (results.next()) {
-                cartContent.add(new Cart(results.getInt(0), results.getInt(1)));
+                cartContent.add(new CartModel(results.getInt(0), results.getInt(1)));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

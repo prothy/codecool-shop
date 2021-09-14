@@ -1,35 +1,30 @@
 package com.codecool.shop.model;
 
-import com.codecool.shop.model.cart.Cart;
-import com.codecool.shop.model.products.Product;
+import com.codecool.shop.model.cart.CartModel;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-public class Order {
+public class OrderModel {
     private int orderId;
     private int userId;
     private Timestamp orderDate;
     private String orderStatus;
 
-    public Order(int orderId, int userId, Timestamp orderDate, String orderStatus) {
+    public OrderModel(int orderId, int userId, Timestamp orderDate, String orderStatus) {
         this.orderId = orderId;
         this.userId = userId;
         this.orderDate = Timestamp.from(Instant.now());
         this.orderStatus = orderStatus;
     }
 
-    public Order(int orderId, int userId, String orderStatus) {
+    public OrderModel(int orderId, int userId, String orderStatus) {
         this.orderId = orderId;
         this.userId = userId;
         this.orderStatus = orderStatus;
     }
 
-    public Order(int i, Cart cart) {
+    public OrderModel(int i, CartModel cart) {
     }
 
     public int getOrderId() {

@@ -1,7 +1,7 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.model.Order;
+import com.codecool.shop.model.OrderModel;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class OrderDaoJdbc implements OrderDao {
     }
 
     @Override
-    public void add(Order order) {
+    public void add(OrderModel order) {
         int orderId = order.getOrderId();
         int userId = order.getUserId();
         Timestamp timestamp = order.getOrderDate();
@@ -39,8 +39,8 @@ public class OrderDaoJdbc implements OrderDao {
     }
 
     @Override
-    public Order find(Order order) {
-        Order orderResult = null;
+    public OrderModel find(OrderModel order) {
+        OrderModel orderResult = null;
 
         int orderId = order.getOrderId();
         int userId = order.getUserId();
@@ -62,7 +62,7 @@ public class OrderDaoJdbc implements OrderDao {
             ResultSet results = statement.executeQuery();
             results.next();
 
-            orderResult = new Order(
+            orderResult = new OrderModel(
                     results.getInt(0),
                     results.getInt(1),
                     results.getTimestamp(2),
@@ -74,7 +74,7 @@ public class OrderDaoJdbc implements OrderDao {
         return orderResult;
     }
 
-    public void remove(Order order) {
+    public void remove(OrderModel order) {
         this.remove(order.getOrderId());
     }
 
@@ -95,8 +95,8 @@ public class OrderDaoJdbc implements OrderDao {
     }
 
     @Override
-    public List<Order> getAll() {
-        List<Order> orders = new ArrayList<>();
+    public List<OrderModel> getAll() {
+        List<OrderModel> orders = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("""
                     SELECT *
@@ -105,7 +105,7 @@ public class OrderDaoJdbc implements OrderDao {
 
             ResultSet results = statement.executeQuery();
             while (results.next()) {
-                orders.add(new Order(results.getInt(0), results.getInt(1), results.getTimestamp(2), results.getString(3)));
+                orders.add(new OrderModel(results.getInt(0), results.getInt(1), results.getTimestamp(2), results.getString(3)));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

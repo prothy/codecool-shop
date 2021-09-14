@@ -5,16 +5,16 @@ import com.codecool.shop.model.products.Product;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class Cart {
+public class CartModel {
     private int userId;
     private int productId;
 
-    public Cart(int userId, int productId) {
+    public CartModel(int userId, int productId) {
         this.userId = userId;
         this.productId = productId;
     }
 
-    public Cart() {
+    public CartModel() {
     }
 
     public int getUserId() {
