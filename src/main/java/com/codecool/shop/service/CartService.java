@@ -1,21 +1,33 @@
-package com.codecool.shop.model.cart;
+package com.codecool.shop.service;
 
+import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.dao.DatabaseManager;
+import com.codecool.shop.dao.implementation.CartDaoJdbc;
+import com.codecool.shop.model.Util;
+import com.codecool.shop.model.cart.CartItem;
 import com.codecool.shop.model.products.Product;
 
+import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class CartModel {
+public class CartService {
     private int userId;
     private int productId;
     private List<CartItem> cart;
 
-    public CartModel(int userId, int productId) {
-        this.userId = userId;
+    public CartService(int userId, int productId) {
+        this(userId);
         this.productId = productId;
     }
 
-    public CartModel() {
+    public CartService(int userId) {
+        this();
+        this.userId = userId;
+    }
+
+    public CartService() {
+        cart = new ArrayList<>();
     }
 
     public int getUserId() {
@@ -55,7 +67,12 @@ public class CartModel {
     }
 
     public void removeAllFromCart(Product product) {
-
+        for (int i = 0; i < cart.size(); i++) {
+            if (cart.get(i).getProduct() == product) {
+                cart.remove(i);
+                break;
+            }
+        }
     }
 
     public void removeFromCart(Product product, int quantity) {

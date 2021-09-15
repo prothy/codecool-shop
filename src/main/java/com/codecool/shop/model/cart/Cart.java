@@ -1,8 +1,12 @@
 
 package com.codecool.shop.model.cart;
 
+import com.codecool.shop.dao.implementation.CartDaoJdbc;
+import com.codecool.shop.model.Util;
 import com.codecool.shop.model.products.Product;
+import com.codecool.shop.service.CartService;
 
+import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -14,12 +18,21 @@ public class Cart {
     private Currency currency;
     private int totalNumberOfProducts = 0;
 
+    // block of initializations for database
+    private final CartService cartService = new CartService();
+    private final DataSource dataSource = Util.getDataSource();
+    private final CartDaoJdbc cartDao = new CartDaoJdbc(dataSource);
+
     public Cart() {
     }
 
     public void addProduct(Product product) {
         currency = product.getDefaultCurrency();
         totalNumberOfProducts++;
+
+        // add product to cart, then update sql (it'll remove related entries, then add them all again)
+        cartService.addToCart(product);
+        cartDao.updateCart(cartService);
 
         if (content.containsKey(product.getName())) {
             HashMap<Product, Integer> innerMap = content.get(product.getName());
@@ -71,10 +84,10 @@ public class Cart {
 
     private void calculatePriceAfterAddItem(Product product, int getQuantity) {
 
-        String[] splitPrice = product.getPrice().split(" ");
-        BigDecimal getPrice = new BigDecimal(splitPrice[0]);
+        if (product.getPrice() != null) {
+            String[] splitPrice = product.getPrice().split(" ");
+            BigDecimal getPrice = new BigDecimal(splitPrice[0]);
 
-        {
             BigDecimal getNewPrice = getPrice.multiply(BigDecimal.valueOf(getQuantity));
             setSumPrice(product.getName(), getNewPrice);
         }
@@ -82,11 +95,13 @@ public class Cart {
 
     private void calculatePriceAfterRemoveItem(Product product, int quantity) {
 
-        String[] splitPrice = product.getPrice().split(" ");
-        BigDecimal getPrice = new BigDecimal(splitPrice[0]);
+        if (product.getPrice() != null) {
+            String[] splitPrice = product.getPrice().split(" ");
+            BigDecimal getPrice = new BigDecimal(splitPrice[0]);
 
-        BigDecimal getNewPrice = getPrice.multiply(BigDecimal.valueOf(quantity));
-        sumEachItem.put(product.getName(), getNewPrice);
+            BigDecimal getNewPrice = getPrice.multiply(BigDecimal.valueOf(quantity));
+            sumEachItem.put(product.getName(), getNewPrice);
+        }
     }
 
     private void setSumPrice(String productName, BigDecimal price) {
@@ -124,12 +139,12 @@ public class Cart {
 
         List<ProductDetail> productsDetails = new LinkedList<>();
         content.forEach((name, product) -> {
-            for (Map.Entry<Product, Integer> details: product.entrySet()) {
+            for (Map.Entry<Product, Integer> details : product.entrySet()) {
 
                 String getName = details.getKey().getName();
                 String getPrice = details.getKey().getPrice();
                 Integer quantity = this.quantity.get(getName);
-                String sumPrice= this.sumEachItem.get(getName).toString() + " " + currency;
+                String sumPrice = this.sumEachItem.get(getName).toString() + " " + currency;
 
                 productsDetails.add(new ProductDetail(getName, getPrice, quantity, sumPrice));
             }

@@ -1,15 +1,16 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.model.cart.Cart;
-import com.codecool.shop.model.cart.CartModel;
+import com.codecool.shop.service.CartService;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public interface CartDao {
-    void add(CartModel cart);
-    List<CartModel> findAll(int userId);
-    void remove(int userId, int productId);
-    void remove(int userId);
-    void clearCart(int userId);
-    List<CartModel> getAll();
+    void updateCart(CartService cart);
+    List<CartService> findAll(int userId) throws SQLException;
+    void remove(int userId, int productId) throws SQLException;
+    void remove(int userId) throws SQLException;
+    void clearCart(int userId) throws SQLException;
+    List<CartService> getAll();
 
 }
