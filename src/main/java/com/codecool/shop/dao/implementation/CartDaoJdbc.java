@@ -2,7 +2,9 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.controller.CartController;
 import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.model.cart.CartItem;
 import com.codecool.shop.model.cart.CartModel;
+import com.codecool.shop.model.products.Product;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -27,23 +29,35 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public void add(CartModel cart) {
+    public void updateCart(CartModel cart) {
         int userId = cart.getUserId();
-        int productId = cart.getProductId();
-
         try {
-            PreparedStatement statement = connection.prepareStatement("""
-                    INSERT INTO carts (user_id, product_id)
-                    VALUES(?, ?)
-                    """);
-
-            statement.setInt(1, userId);
-            statement.setInt(2, productId);
-
-            statement.executeQuery();
+            this.remove(userId);
+            this.add(cart);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         }
+    }
+
+    private void add(CartModel cart) throws SQLException {
+        int userId = cart.getUserId();
+        List<CartItem> cartItems = cart.getCart();
+
+        StringBuilder query = new StringBuilder();
+
+        for (CartItem cartItem : cartItems) {
+            int quantity = cartItem.getQuantity();
+            int productId = cartItem.getProduct().getId();
+
+            String queryString = String.format("""
+                    INSERT INTO carts
+                    VALUES  (%o, %o, %o);
+                    """, userId, productId, quantity);
+            query.append(queryString);
+        }
+
+        PreparedStatement statement = connection.prepareStatement(query.toString());
+        statement.executeQuery();
     }
 
     @Override
@@ -70,7 +84,7 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public void remove(int userId, int productId) {
+    public void remove(int userId, int productId) throws SQLException {
         try {
             PreparedStatement statement = connection.prepareStatement("""
                     DELETE FROM carts
@@ -87,7 +101,7 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public void remove(int userId) {
+    public void remove(int userId) throws SQLException {
         try {
             PreparedStatement statement = connection.prepareStatement("""
                     DELETE FROM carts

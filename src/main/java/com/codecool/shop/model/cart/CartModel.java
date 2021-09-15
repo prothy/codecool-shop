@@ -15,7 +15,7 @@ public class CartModel {
         this.productId = productId;
     }
 
-    public CartModel() {
+    public CartModel(int userId) {
     }
 
     public int getUserId() {
@@ -55,7 +55,12 @@ public class CartModel {
     }
 
     public void removeAllFromCart(Product product) {
-
+        for (int i = 0; i < cart.size(); i++) {
+            if (cart.get(i).getProduct() == product) {
+                cart.remove(i);
+                break;
+            }
+        }
     }
 
     public void removeFromCart(Product product, int quantity) {
