@@ -10,6 +10,7 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Util;
 import com.codecool.shop.service.ProductCategoryService;
 import com.codecool.shop.service.ProductService;
+import com.codecool.shop.service.SupplierService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -32,6 +33,7 @@ public class SortingCriteriaController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = new ProductCategoryDaoJDBC(dataSource);
         SupplierDao supplierDao = new SupplierDaoJDBC(dataSource);
         ProductCategoryService productCategoryService = new ProductCategoryService(productCategoryDataStore);
+        SupplierService supplierService = new SupplierService(supplierDao);
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
 
@@ -41,7 +43,7 @@ public class SortingCriteriaController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         if (request.getParameter("criteria").equals("category")) out.print(gson.toJson(productCategoryService.getCategories()));
-        if (request.getParameter("criteria").equals("supplier")) out.print(gson.toJson(productCategoryService.getCategories()));
+        if (request.getParameter("criteria").equals("supplier")) out.print(gson.toJson(supplierService.getAllSuppliers()));
 
         out.flush();
 
