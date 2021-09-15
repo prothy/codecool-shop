@@ -36,7 +36,19 @@ public class UserController extends HttpServlet {
 
     }
 
-    private void userLogin(HttpServletRequest request, HttpServletResponse response, String jsonBody ) {
+    private void userLogin(HttpServletRequest request, HttpServletResponse response, String jsonBody ) throws IOException {
+        User user = userService.findUser(jsonBody);
+
+        JsonObject jsonObject = new JsonObject();
+        if (user.equals(null)) {
+            jsonObject.addProperty("message", "User is not found");
+        } else {
+            jsonObject.addProperty("message", "User is logged in");
+        }
+        PrintWriter out = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        out.print(jsonObject);
 
     }
 
