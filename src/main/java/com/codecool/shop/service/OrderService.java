@@ -18,6 +18,6 @@ public class OrderService {
 
     public void addNewOrderToDatabase(Order order, List<Product> products) {
         orderDao.add(order);
-        products.forEach(product -> productsOrders.add(1 ,product.getId()));
+        products.forEach(product -> productsOrders.add(2 ,product.getId()));
     }
 }

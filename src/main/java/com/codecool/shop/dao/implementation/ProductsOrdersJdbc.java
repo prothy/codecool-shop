@@ -22,7 +22,7 @@ public class ProductsOrdersJdbc implements ProductsOrders {
     @Override
     public void add(int orderId, int productId) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "INSERT INTO products (product_name, product_category_id, supplier_id, description, languages, yearlyprice, monthlyprice, currency, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO products_orders (order_id , product_id) VALUES (?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, orderId);
             statement.setInt(2, productId);
