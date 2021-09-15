@@ -11,6 +11,9 @@ import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.util.*;
 
+/**
+ * This class is used to save the cart info that is then sent to the CartDao for use in SQL *
+ */
 public class CartService {
     private int userId;
     private int productId;
