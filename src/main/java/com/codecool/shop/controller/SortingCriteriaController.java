@@ -6,7 +6,9 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoJDBC;
 import com.codecool.shop.dao.implementation.ProductDaoJDBC;
 import com.codecool.shop.dao.implementation.SupplierDaoJDBC;
+import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Util;
+import com.codecool.shop.service.ProductCategoryService;
 import com.codecool.shop.service.ProductService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+import java.util.List;
 
 @WebServlet(name = "productByCriteriaServlet", urlPatterns = {"/api/products?criteria=*"})
 public class SortingCriteriaController extends HttpServlet {
@@ -27,17 +31,19 @@ public class SortingCriteriaController extends HttpServlet {
         DataSource dataSource = Util.getDataSource();
         ProductCategoryDao productCategoryDataStore = new ProductCategoryDaoJDBC(dataSource);
         SupplierDao supplierDao = new SupplierDaoJDBC(dataSource);
+        ProductCategoryService productCategoryService = new ProductCategoryService(productCategoryDataStore);
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
-
-
-//        if (request.getParameter("criteria") != null)
 
 
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        out.print(gson.toJson("szia lajos"));
+
+        if (request.getParameter("criteria").equals("category")) out.print(gson.toJson(productCategoryService.getCategories()));
+        if (request.getParameter("criteria").equals("supplier")) out.print(gson.toJson(productCategoryService.getCategories()));
+
         out.flush();
+
     }
 }
