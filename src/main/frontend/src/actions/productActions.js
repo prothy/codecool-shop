@@ -6,7 +6,9 @@ import {
 
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
-    PRODUCT_DETAILS_FAIL
+    PRODUCT_DETAILS_FAIL,
+    SET_CATEGORY_FILTER,
+    SET_SUPPLIER_FILTER
 } from '../constants/productConstants'
 
 // Fetch the list of products:
@@ -51,5 +53,15 @@ export const listProductDetails = (id) => async (dispatch) => {
                 ? e.response.data.message
                 : e.message
         })
+    }
+}
+
+export const setFilters = ({category, supplier}) => (dispatch) => {
+    if (typeof category !== 'undefined') {
+        dispatch({type: SET_CATEGORY_FILTER, payload: category})
+    }
+
+    if (typeof supplier !== 'undefined') {
+        dispatch({type: SET_SUPPLIER_FILTER, payload: supplier})
     }
 }
