@@ -45,4 +45,10 @@ public class UserService {
 
         return userDao.createObjectFromJson(jsonElement);
     }
+
+    public User findUser(String jsonElement) {
+        JsonObject jsonObject = new Gson().fromJson(jsonElement, JsonObject.class);
+
+        return userDao.find(jsonObject.get("email").getAsString());
+    }
 }
