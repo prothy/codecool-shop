@@ -14,10 +14,8 @@ import java.sql.Timestamp;
 public class ProperLogMessages {
 
     private final Logger loggerForCart = Logger.getLogger(Cart.class.getName());
-    //private final org.slf4j.Logger loggerForCart = org.slf4j.LoggerFactory.getLogger(Cart.class);
     private final org.slf4j.Logger loggerForUser = org.slf4j.LoggerFactory.getLogger(User.class);
     private final org.slf4j.Logger loggerForOrder = org.slf4j.LoggerFactory.getLogger(OrderModel.class);
-
 
     public void addProductToCartLog(String productName) {
         loggerForCart.info(productName +  " has been added to the cart.");
@@ -35,6 +33,7 @@ public class ProperLogMessages {
         loggerForCart.warn(productName +  " was not removed to the cart!");
     }
 
+    //Waiting for the user registration
     public void userHasBeenRegisteredToTheWebShop(String userName) {
         loggerForUser.info(userName + " has been registered into the web shop.");
     }
@@ -43,6 +42,7 @@ public class ProperLogMessages {
         loggerForUser.warn(userName + " could not register into the web shop!");
     }
 
+    //Waiting for the login system
     public void userHasBeenLoggedIntoTheWebShop(String userName) {
         loggerForUser.info(userName + " has been logged into the web shop.");
     }
@@ -51,6 +51,7 @@ public class ProperLogMessages {
         loggerForUser.warn(userName + " could not login into the web shop!");
     }
 
+    //Waiting for the user registration and for the user registration
     public void userHasBeenRemovedFromTheDatabase(String userName) {
         loggerForUser.info(userName + " has been removed from the database.");
     }
@@ -59,6 +60,7 @@ public class ProperLogMessages {
         loggerForUser.warn(userName + " could not remove from the database!");
     }
 
+    //Waiting for the order information (after checkout?)
     public void getOrderInformation(String orderStatus, Timestamp orderDate, int userId) {
         loggerForOrder.info("An order has been ordered on: " + orderDate + " | from this user: " + userId +
                 " | apparently the order status is: " + orderStatus);
