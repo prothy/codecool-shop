@@ -60,6 +60,10 @@ public class Cart {
     public void removeProduct(Product product) {
         totalNumberOfProducts--;
 
+        // remove from cart, then update
+        cartService.removeFromCart(product);
+        cartDao.updateCart(cartService);
+
         if (content.containsKey(product.getName())) {
 
             HashMap<Product, Integer> innerMap = content.get(product.getName());

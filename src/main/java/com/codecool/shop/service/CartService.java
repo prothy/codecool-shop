@@ -66,17 +66,24 @@ public class CartService {
         }
     }
 
-    public void removeAllFromCart(Product product) {
-        for (int i = 0; i < cart.size(); i++) {
-            if (cart.get(i).getProduct() == product) {
-                cart.remove(i);
-                break;
-            }
-        }
+    public void removeFromCart(Product product) {
+        this.removeFromCart(product, 1);
     }
 
     public void removeFromCart(Product product, int quantity) {
+        for (int i = 0; i < cart.size(); i++) {
+            CartItem cartItem = cart.get(i);
+            int newQuantity = cartItem.getQuantity() - quantity;
 
+            if (cartItem.getProduct() == product) {
+                if (newQuantity <= 0) {
+                    cart.remove(i);
+                    break;
+                } else {
+                    cartItem.setQuantity(newQuantity);
+                }
+            }
+        }
     }
 
     public List<CartItem> getCart() {
