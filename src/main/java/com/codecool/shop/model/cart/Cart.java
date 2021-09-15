@@ -1,8 +1,12 @@
 
 package com.codecool.shop.model.cart;
 
+import com.codecool.shop.dao.implementation.CartDaoJdbc;
+import com.codecool.shop.model.Util;
 import com.codecool.shop.model.products.Product;
+import com.codecool.shop.service.CartService;
 
+import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -14,12 +18,21 @@ public class Cart {
     private Currency currency;
     private int totalNumberOfProducts = 0;
 
+    // block of initializations for database
+    private final CartService cartService = new CartService();
+    private final DataSource dataSource = Util.getDataSource();
+    private final CartDaoJdbc cartDao = new CartDaoJdbc(dataSource);
+
     public Cart() {
     }
 
     public void addProduct(Product product) {
         currency = product.getDefaultCurrency();
         totalNumberOfProducts++;
+
+        // add product to cart, then update sql (it'll remove related entries, then add them all again)
+        cartService.addToCart(product);
+        cartDao.updateCart(cartService);
 
         if (content.containsKey(product.getName())) {
             HashMap<Product, Integer> innerMap = content.get(product.getName());
@@ -46,6 +59,10 @@ public class Cart {
 
     public void removeProduct(Product product) {
         totalNumberOfProducts--;
+
+        // remove from cart, then update
+        cartService.removeFromCart(product);
+        cartDao.updateCart(cartService);
 
         if (content.containsKey(product.getName())) {
 

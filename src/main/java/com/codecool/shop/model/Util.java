@@ -1,6 +1,9 @@
 package com.codecool.shop.model;
 
 import com.codecool.shop.dao.DatabaseManager;
+import com.codecool.shop.model.products.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.crypto.spec.PBEKeySpec;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +15,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.Base64;
 import java.util.Random;
 
@@ -48,6 +56,90 @@ public class Util {
         return jsonString;
     }
 
+    public static List<List<Product>> createObjectsFromJson() throws IOException {
+        String file ="src/main/java/com/codecool/shop/resources/products.json";
+        String jsonText = Util.readDataFromFile(file);
+
+        List<List<Product>> products = new ArrayList<>();
+        products.add(getJsonOfCloud(jsonText));
+        products.add(getJsonOfOs(jsonText));
+        products.add(getJsonOfIDE(jsonText));
+        products.add(getJsonOfWorkTool(jsonText));
+
+        return products;
+    }
+
+    public static Product createObjectFromJson(String jsonText) {
+        System.out.println("kuki");
+        List<List<Product>> products = new ArrayList<>();
+        products.add(getJsonOfCloud(jsonText));
+        products.add(getJsonOfOs(jsonText));
+        products.add(getJsonOfIDE(jsonText));
+        products.add(getJsonOfWorkTool(jsonText));
+
+        for (List<Product> productList : products) {
+            if (productList.size() > 0) return productList.get(0);
+        }
+        return null;
+    }
+
+    private static List<Product> getJsonOfCloud(String jsonString) {
+        //Deserialize
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson customGson = gsonBuilder.create();
+
+        Cloud[] cloudProducts = customGson.fromJson(jsonString, Cloud[].class);
+        List<Product> finalCloudProducts = new ArrayList<>(Arrays.asList(cloudProducts));
+
+        return finalCloudProducts.stream()
+                .filter(element -> element.getProductCategory().getName().equals("Cloud"))
+                .collect(Collectors.toList());
+    }
+
+    private static List<Product> getJsonOfOs(String jsonString) {
+        //Deserialize
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson customGson = gsonBuilder.create();
+
+        OS[] OSProducts = customGson.fromJson(jsonString, OS[].class);
+        List<Product> finalOSProducts = new ArrayList<>(Arrays.asList(OSProducts));
+        finalOSProducts.removeAll(Collections.singleton(null));
+
+        return finalOSProducts.stream()
+                .filter(element -> element.getProductCategory().getName().equals("OS"))
+                .collect(Collectors.toList());
+    }
+    //
+    private static List<Product> getJsonOfIDE(String jsonString) {
+        //Deserialize
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson customGson = gsonBuilder.create();
+
+
+        IDE[] IDEProducts = customGson.fromJson(jsonString, IDE[].class);
+        List<Product> finalIDEProducts = new ArrayList<>(Arrays.asList(IDEProducts));
+        finalIDEProducts.removeAll(Collections.singleton(null));
+
+        return finalIDEProducts.stream()
+                .filter(element -> element.getProductCategory().getName().equals("IDE"))
+                .collect(Collectors.toList());
+    }
+
+    private static List<Product> getJsonOfWorkTool(String jsonString) {
+        //Deserialize
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson customGson = gsonBuilder.create();
+
+
+        WorkTool[] WorkToolProducts = customGson.fromJson(jsonString, WorkTool[].class);
+        List<Product> finalWorkToolProducts = new ArrayList<>(Arrays.asList(WorkToolProducts));
+        finalWorkToolProducts.removeAll(Collections.singleton(null));
+
+        return finalWorkToolProducts.stream()
+                .filter(element -> element.getProductCategory().getName().equals("WorkTool"))
+                .collect(Collectors.toList());
+    }
+
     public static DataSource getDataSource() {
         DataSource dataSource = null;
         try {
@@ -56,6 +148,10 @@ public class Util {
             throwables.printStackTrace();
         }
         return dataSource;
+    }
+
+    public static Product createCartObjectFromJson(String jsonElement) {
+        return Util.createObjectFromJson(jsonElement);
     }
 
     public static void hashPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -71,5 +167,4 @@ public class Util {
         Base64.Encoder encoder = Base64.getEncoder();
 
     }
-
 }
