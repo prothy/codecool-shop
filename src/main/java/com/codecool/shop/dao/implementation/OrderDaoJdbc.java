@@ -18,21 +18,19 @@ public class OrderDaoJdbc implements OrderDao {
 
     @Override
     public void add(Order order) {
-        int orderId = order.getOrderId();
         int userId = order.getUserId();
         Timestamp timestamp = order.getOrderDate();
         OrderStatus orderStatus = order.getOrderStatus();
 
         try (Connection connection = dataSource.getConnection()){
             PreparedStatement statement = connection.prepareStatement("""
-                    INSERT INTO orders (order_id, user_id, order_date, order_status)
-                    VALUES(?, ?, ?, ?)
+                    INSERT INTO orders (user_id, order_date, order_status)
+                    VALUES(?, ?, ?)
                     """);
 
-            statement.setInt(1, orderId);
-            statement.setInt(2, userId);
-            statement.setTimestamp(3, timestamp);
-            statement.setObject(4, orderStatus);
+            statement.setInt(1, userId);
+            statement.setTimestamp(2, timestamp);
+            statement.setString(3, orderStatus.toString());
 
             statement.executeQuery();
         } catch (SQLException e) {

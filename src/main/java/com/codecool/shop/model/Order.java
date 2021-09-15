@@ -23,10 +23,10 @@ public class Order {
         this.cart = cart;
     }
 
-    public Order(int userId, Timestamp orderDate, OrderStatus orderStatus) {
+    public Order(int userId) {
         this.userId = userId;
-        this.orderDate = orderDate;
-        this.orderStatus = orderStatus;
+        this.orderDate = new Timestamp(System.currentTimeMillis());
+        this.orderStatus = OrderStatus.NEW;
     }
 
     public Order(int orderId, int userId, Timestamp orderDate, OrderStatus orderStatus) {
