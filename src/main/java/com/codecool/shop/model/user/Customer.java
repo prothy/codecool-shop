@@ -51,7 +51,7 @@ public class Customer extends User{
 
     public void cancelOrder(int id) {
         Order chosenOrder = orders.stream()
-                .parallel().filter(order -> order.getId() == id)
+                .parallel().filter(order -> order.getUserId() == id)
                 .findFirst().orElseThrow(NoSuchElementException::new);
         orders.remove(chosenOrder);
     }

@@ -56,9 +56,7 @@ public class Util {
         return jsonString;
     }
 
-    public static List<List<Product>> createObjectsFromJson() throws IOException {
-        String file ="src/main/java/com/codecool/shop/resources/products.json";
-        String jsonText = Util.readDataFromFile(file);
+    public static List<List<Product>> createObjectsFromJson(String jsonText) throws IOException {
 
         List<List<Product>> products = new ArrayList<>();
         products.add(getJsonOfCloud(jsonText));
@@ -70,7 +68,6 @@ public class Util {
     }
 
     public static Product createObjectFromJson(String jsonText) {
-        System.out.println("kuki");
         List<List<Product>> products = new ArrayList<>();
         products.add(getJsonOfCloud(jsonText));
         products.add(getJsonOfOs(jsonText));
