@@ -14,6 +14,9 @@ public class Cart {
     private Currency currency;
     private int totalNumberOfProducts = 0;
 
+    public Cart() {
+    }
+
     public void addProduct(Product product) {
         currency = product.getDefaultCurrency();
         totalNumberOfProducts++;
