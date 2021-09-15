@@ -23,6 +23,12 @@ public class Order {
         this.cart = cart;
     }
 
+    public Order(int userId, Timestamp orderDate, OrderStatus orderStatus) {
+        this.userId = userId;
+        this.orderDate = orderDate;
+        this.orderStatus = orderStatus;
+    }
+
     public Order(int orderId, int userId, Timestamp orderDate, OrderStatus orderStatus) {
         this.orderId = orderId;
         this.userId = userId;

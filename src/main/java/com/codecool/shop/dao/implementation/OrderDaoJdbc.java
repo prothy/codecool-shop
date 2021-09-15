@@ -4,15 +4,16 @@ import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.OrderStatus;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoJdbc implements OrderDao {
-    Connection connection;
+    private DataSource dataSource;
 
-    public OrderDaoJdbc(Connection connection) {
-        this.connection = connection;
+    public OrderDaoJdbc(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     @Override
@@ -22,7 +23,7 @@ public class OrderDaoJdbc implements OrderDao {
         Timestamp timestamp = order.getOrderDate();
         OrderStatus orderStatus = order.getOrderStatus();
 
-        try {
+        try (Connection connection = dataSource.getConnection()){
             PreparedStatement statement = connection.prepareStatement("""
                     INSERT INTO orders (order_id, user_id, order_date, order_status)
                     VALUES(?, ?, ?, ?)
@@ -48,7 +49,7 @@ public class OrderDaoJdbc implements OrderDao {
         Timestamp orderDate = order.getOrderDate();
         OrderStatus orderStatus = order.getOrderStatus();
 
-        try {
+        try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("""
                     SELECT *
                     FROM orders
@@ -81,7 +82,7 @@ public class OrderDaoJdbc implements OrderDao {
 
     @Override
     public void remove(int orderId) {
-        try {
+        try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("""
                     DELETE FROM orders
                     WHERE order_id = ?
@@ -98,7 +99,7 @@ public class OrderDaoJdbc implements OrderDao {
     @Override
     public List<Order> getAll() {
         List<Order> orders = new ArrayList<>();
-        try {
+        try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("""
                     SELECT *
                     FROM carts
