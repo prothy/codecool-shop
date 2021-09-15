@@ -83,11 +83,6 @@ public class ProductDaoJDBC implements ProductDao {
     }
 
     @Override
-    public List<List<Product>> createObjectsFromJson() throws IOException {
-        return null;
-    }
-
-    @Override
     public List<Product> getBy(Supplier supplier) {
         return getAll().stream()
                 .filter(product -> product.getSupplier().getId() == supplier.getId())
