@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.products.Product;
 
 import javax.sql.DataSource;
@@ -9,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCategoryDaoJDBC implements ProductCategoryDao {
@@ -51,6 +53,17 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 
     @Override
     public List<ProductCategory> getAll() {
-        return null;
+        try (Connection conn = dataSource.getConnection()) {
+            String sql = "SELECT * FROM product_categories";
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+            List<ProductCategory> result = new ArrayList<>();
+            while (rs.next()) { // while result set pointer is positioned before or on last row read authors
+                ProductCategory productCategory = new ProductCategory(rs.getInt(1), rs.getString(2));
+                result.add(productCategory);
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error while reading all authors", e);
+        }
     }
 }

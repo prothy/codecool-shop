@@ -71,10 +71,10 @@ public class Cart {
 
     private void calculatePriceAfterAddItem(Product product, int getQuantity) {
 
-        String[] splitPrice = product.getPrice().split(" ");
-        BigDecimal getPrice = new BigDecimal(splitPrice[0]);
+        if (product.getPrice() != null) {
+            String[] splitPrice = product.getPrice().split(" ");
+            BigDecimal getPrice = new BigDecimal(splitPrice[0]);
 
-        {
             BigDecimal getNewPrice = getPrice.multiply(BigDecimal.valueOf(getQuantity));
             setSumPrice(product.getName(), getNewPrice);
         }
@@ -82,11 +82,13 @@ public class Cart {
 
     private void calculatePriceAfterRemoveItem(Product product, int quantity) {
 
-        String[] splitPrice = product.getPrice().split(" ");
-        BigDecimal getPrice = new BigDecimal(splitPrice[0]);
+        if (product.getPrice() != null) {
+            String[] splitPrice = product.getPrice().split(" ");
+            BigDecimal getPrice = new BigDecimal(splitPrice[0]);
 
-        BigDecimal getNewPrice = getPrice.multiply(BigDecimal.valueOf(quantity));
-        sumEachItem.put(product.getName(), getNewPrice);
+            BigDecimal getNewPrice = getPrice.multiply(BigDecimal.valueOf(quantity));
+            sumEachItem.put(product.getName(), getNewPrice);
+        }
     }
 
     private void setSumPrice(String productName, BigDecimal price) {
@@ -124,12 +126,12 @@ public class Cart {
 
         List<ProductDetail> productsDetails = new LinkedList<>();
         content.forEach((name, product) -> {
-            for (Map.Entry<Product, Integer> details: product.entrySet()) {
+            for (Map.Entry<Product, Integer> details : product.entrySet()) {
 
                 String getName = details.getKey().getName();
                 String getPrice = details.getKey().getPrice();
                 Integer quantity = this.quantity.get(getName);
-                String sumPrice= this.sumEachItem.get(getName).toString() + " " + currency;
+                String sumPrice = this.sumEachItem.get(getName).toString() + " " + currency;
 
                 productsDetails.add(new ProductDetail(getName, getPrice, quantity, sumPrice));
             }
