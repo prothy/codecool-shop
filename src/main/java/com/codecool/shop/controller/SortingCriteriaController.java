@@ -25,7 +25,7 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
-@WebServlet(name = "productByCriteriaServlet", urlPatterns = {"/api/products?criteria=*"})
+@WebServlet(name = "sortCriteriaServlet", urlPatterns = {"/api/sortCriteria", "/api/sortCriteria?criteria=*"})
 public class SortingCriteriaController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
