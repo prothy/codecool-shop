@@ -5,7 +5,10 @@ import {
 
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
-    PRODUCT_DETAILS_FAIL
+    PRODUCT_DETAILS_FAIL,
+
+    SET_CATEGORY_FILTER,
+    SET_SUPPLIER_FILTER
 } from '../constants/productConstants'
 
 export const productListReducer =
@@ -19,7 +22,6 @@ export const productListReducer =
 
             case PRODUCT_LIST_FAIL:
                 return {loading: false, error: action.payload}
-
             default:
                 return state
         }
@@ -41,4 +43,15 @@ export const productDetailsReducer =
             default:
                 return state
         }
+    }
+
+    export const productFiltersReducer = (state = {category: '', supplier: ''}, action) => {
+    switch(action.type) {
+        case SET_CATEGORY_FILTER:
+            return {...state, category: action.payload}
+        case SET_SUPPLIER_FILTER:
+            return {...state, supplier: action.payload}
+        default:
+            return state
+    }
     }
