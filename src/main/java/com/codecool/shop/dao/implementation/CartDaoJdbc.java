@@ -2,7 +2,9 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.model.cart.CartItem;
+import com.codecool.shop.model.products.Product;
 import com.codecool.shop.service.CartService;
+import com.codecool.shop.service.ProductService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -17,9 +19,11 @@ import java.util.List;
 public class CartDaoJdbc implements CartDao {
     private Connection connection;
     private static final Logger logger = LogManager.getLogger(CartDaoJdbc.class);
+    private DataSource ds;
 
     public CartDaoJdbc(DataSource ds) {
         try {
+            this.ds = ds;
             connection = ds.getConnection();
         } catch (SQLException e) {
             logger.error(e.getMessage());
@@ -63,8 +67,13 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public List<CartService> findAll(int userId) {
-        List<CartService> cartContent = new ArrayList<>();
+    public List<CartItem> findAll(int userId) {
+        List<CartItem> cartContent = new ArrayList<>();
+
+        // product service needed to generate product instance for use in adding new cart item to list
+        ProductDaoJDBC productDao = new ProductDaoJDBC(ds);
+        ProductService productService = new ProductService(productDao);
+
         try {
             PreparedStatement statement = connection.prepareStatement("""
                     SELECT *
@@ -76,7 +85,8 @@ public class CartDaoJdbc implements CartDao {
 
             ResultSet results = statement.executeQuery();
             while (results.next()) {
-                cartContent.add(new CartService(results.getInt(0), results.getInt(1)));
+                Product product = productService.getProductById(results.getInt(1));
+                cartContent.add(new CartItem(product, results.getInt(2)));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
