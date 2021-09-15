@@ -13,9 +13,11 @@ import java.sql.Timestamp;
 
 public class ProperLogMessages {
 
-    private final Logger loggerForCart = Logger.getLogger(Cart.class.getName());
-    private final org.slf4j.Logger loggerForUser = org.slf4j.LoggerFactory.getLogger(User.class);
-    private final org.slf4j.Logger loggerForOrder = org.slf4j.LoggerFactory.getLogger(OrderModel.class);
+    private final org.slf4j.Logger loggerForCart = org.slf4j.LoggerFactory.getLogger(Cart.class.getName());
+    private final org.slf4j.Logger loggerForUser = org.slf4j.LoggerFactory.getLogger(User.class.getName());
+    private final org.slf4j.Logger loggerForOrder = org.slf4j.LoggerFactory.getLogger(OrderModel.class.getName());
+    private final org.slf4j.Logger loggerForAdmin = org.slf4j.LoggerFactory.getLogger(AdminLog.class.getName());
+
 
     public void addProductToCartLog(String productName) {
         loggerForCart.info(productName +  " has been added to the cart.");
@@ -69,6 +71,22 @@ public class ProperLogMessages {
     public void getOrderInformationWarning(String orderStatus, Timestamp orderDate, int userId) {
         loggerForOrder.warn("An order has been ordered on: " + orderDate + " | from this user: " + userId +
                 " | apparently the order status is: " + "FAILED");
+    }
+
+    public void adminLogHasBeenCreated() {
+        loggerForAdmin.info("Admin log has been created.");
+    }
+
+    public void adminLogHasBeenCreatedWarning() {
+        loggerForAdmin.warn("Admin log was not created!");
+    }
+
+    public void saveAdminLogInformationIntoJSON() {
+        loggerForAdmin.info("Admin JSON has been created.");
+    }
+
+    public void saveAdminLogInformationIntoJSONWarning() {
+        loggerForAdmin.warn("It was not possible to save into your request to as a JSON file!");
     }
 
 }
