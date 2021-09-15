@@ -9,52 +9,47 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testng.annotations.BeforeTest;
 
-import java.math.BigDecimal;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class CartTest {
 
+    //Tested class:
+    private Cart cart;
+    //Dependencies:
     private Cloud cloud;
 
     @BeforeEach
     public void setUp() {
-        cloud = new Cloud(0, "Google Drive", "",
-                new ProductCategory(2, "Cloud"), new Supplier(2, "Google"), "",
-                new BigDecimal(20), new BigDecimal(20), new BigDecimal(20));
+        cloud = mock(Cloud.class);
+        cart = new Cart();
     }
 
     @Test
-    public void productIsAlreadyExists() {
-        assertNotNull(cloud);
+    public void cartIsExists() {
+        assertNotNull(cart);
     }
 
     @Test
-    public void addProductToCart() {
+    public void addProductToCartAndCheckingIfContentIsNotEmpty() {
 
-        Product product = mock(Product.class);
-        Cart cart = new Cart();
-        cart.addProduct(product);
-        when(product.getName()).thenReturn(cloud.getName());
+        cart.addProduct(cloud);
+        when(cart.getContent().size()).thenCallRealMethod();
 
-        assertFalse(cart.getContent().isEmpty());
+        assertEquals(cart.getContent().size(), 1);
 
     }
 
     @Test
-    public void removeProductFromCart() {
+    public void removeProductFromCartAndCheckingIfContentIsEmpty() {
 
-        Product product = mock(Product.class);
-        Cart cart = new Cart();
-        cart.removeProduct(product);
-        when(product.getProductCategory()).thenReturn(cloud.getProductCategory());
+        cart.addProduct(cloud);
+        cart.removeProduct(cloud);
+        when(cart.getContent().size()).thenCallRealMethod();
 
-        assertTrue(cart.getContent().isEmpty());
+        assertEquals(cart.getContent().size(), 0);
 
     }
-
-
 
 }
