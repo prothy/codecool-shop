@@ -80,4 +80,9 @@ public class UserDaoMem implements UserDao {
     public User createObjectFromJson(String jsonElement) {
         return null;
     }
+
+    @Override
+    public User find(String email) {
+        return null;
+    }
 }
