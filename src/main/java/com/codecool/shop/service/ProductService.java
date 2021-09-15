@@ -31,39 +31,8 @@ public class ProductService{
         return productDao.getBy(category);
     }
 
-//    public List<Product> getProductsForCategory(String categoryName, List<Product> products) {
-//        List<Product> sortedProductList = new ArrayList<>();
-//        products.forEach(product -> {
-//            if (product.getProductCategory().getName().equals(categoryName)) {
-//                sortedProductList.add(product);
-//            }
-//        });
-//
-//        return sortedProductList;
-//    }
-
     public List<Product> getProductsForSupplier(int supplierId) {
         var supplier = supplierDao.find(supplierId);
         return productDao.getBy(supplier);
     }
-
-//    public List<Product> getProductsForSupplier(String supplierName, List<Product> products) {
-//        List<Product> sortedProductList = new ArrayList<>();
-//        products.forEach(product -> {
-//            if (product.getSupplier().getName().equals(supplierName)) {
-//                sortedProductList.add(product);
-//            }
-//        });
-//
-//        return sortedProductList;
-//    }
-
-//    public List<List<Product>> createProductListFromJson() throws IOException {
-//        return productDao.createObjectsFromJson();
-//    }
-
-    public Product createCartObjectFromJson(String jsonElement) throws IOException {
-        return productDao.createObjectFromJson(jsonElement);
-    }
-
 }
