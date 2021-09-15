@@ -2,12 +2,21 @@ package com.codecool.shop.model;
 
 import com.codecool.shop.dao.DatabaseManager;
 
+import javax.crypto.spec.PBEKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.sql.SQLException;
+import java.util.Base64;
+import java.util.Random;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 public class Util {
     public static String readDataFromFile(String filePath) throws IOException {
@@ -47,6 +56,20 @@ public class Util {
             throwables.printStackTrace();
         }
         return dataSource;
+    }
+
+    public static void hashPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        Random random = new Random();
+
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+
+        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+
+        byte[] hash = factory.generateSecret(spec).getEncoded();
+        Base64.Encoder encoder = Base64.getEncoder();
+
     }
 
 }
