@@ -3,7 +3,6 @@ package com.codecool.shop.dao;
 import javax.sql.DataSource;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -11,7 +10,7 @@ import org.postgresql.ds.PGSimpleDataSource;
 
 public class DatabaseManager {
 
-    public void setup() throws SQLException {
+    public DataSource setup() throws SQLException {
         Properties prop = new Properties();
         String filename = "src/main/java/com/codecool/shop/resources/connection.properties";
 
@@ -24,8 +23,7 @@ public class DatabaseManager {
             e.printStackTrace();
         }
 
-        DataSource dataSource = connect(prop);
-
+        return connect(prop);
     }
 
     private DataSource connect(Properties prop) throws SQLException {

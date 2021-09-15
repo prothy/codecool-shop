@@ -1,59 +1,32 @@
-import React, { useEffect, useState } from 'react'
-import Products from './components/Products/Products'
-import Dashboard from './components/Dashboard/Dashboard'
-import {getAllProducts, getProductByCategory, getSuppliers} from './services/webshopAPI'
-import {Switch, Route} from 'react-router-dom'
-import ProductPage from './components/ProductPage/ProductPage'
-import { fetchCart } from './services/webshopAPI'
+import {BrowserRouter, Route} from 'react-router-dom'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import HomePage from './pages/HomePage'
+import ProductPage from './pages/ProductPage'
+import CartPage from './pages/CartPage'
+import {Container} from 'react-bootstrap'
+// Library Core:
+import {library} from '@fortawesome/fontawesome-svg-core'
+// Brand Icons:
+import {fab} from '@fortawesome/free-brands-svg-icons'
+// FontAwesome icons used in the project:
+import {faShoppingCart, faUser, faTrash} from '@fortawesome/free-solid-svg-icons'
+// Collect the icons into the library:
+library.add(fab, faShoppingCart, faUser, faTrash)
 
-const App = () => {
-
-    const [cart, setCart] = useState([])
-    const [products, setProducts] = useState([])
-    const [category, setCategory] = useState('all')
-    const [supplier, setSupplier] = useState('')
-
-    const handleSetProducts = (category) => {
-        setCategory(category)
-    }
-
-    const handleSupplier = (supplier) => {
-        setSupplier(supplier)
-    }
-
-    useEffect(() => {
-        if (category === 'all') {
-            getAllProducts().then(products => {
-                setProducts(products)
-                setCategory('')
-            })
-        } else if (category.length > 0) {
-            getProductByCategory(category).then(products => {
-                setProducts(products)
-                setCategory('')
-            })
-        } else if (supplier.length > 0) {
-            getSuppliers(supplier).then(supplier => {
-                setProducts(supplier)
-                setSupplier('')
-            })
-        }
-        fetchCart().then((c) => setCart(c))
-    }, [category, supplier])
-
+function App() {
     return (
-        <>
-            <Dashboard products={products} handleSetProducts={handleSetProducts} handleSupplier={handleSupplier} cart={cart} setCart={setCart}>
-                <Switch>
-                    <Route exact path="/">
-                        <Products products={products} cart={cart} setCart={setCart}/>
-                    </Route>
-                    <Route exact path="/products/:productId">
-                        <ProductPage products={products}/>
-                    </Route>
-                </Switch>
-            </Dashboard>
-        </>
+        <BrowserRouter>
+            <Header/>
+            <main className="py-3">
+                <Container>
+                    <Route path="/" component={HomePage} exact/>
+                    <Route path="/products/:id" component={ProductPage}/>
+                    <Route path="/cart/:id?" component={CartPage}/>
+                </Container>
+            </main>
+            <Footer/>
+        </BrowserRouter>
     )
 }
 

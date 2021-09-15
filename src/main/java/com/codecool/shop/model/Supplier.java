@@ -24,12 +24,4 @@ public class Supplier extends BaseModel {
         this.products.add(product);
     }
 
-    @Override
-    public String toString() {
-        return "Supplier{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", products=" + products +
-                '}';
-    }
 }

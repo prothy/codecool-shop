@@ -6,19 +6,12 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.model.Order;
-import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
-import com.codecool.shop.model.cart.Cart;
-import com.codecool.shop.model.products.OS;
-import com.codecool.shop.model.products.Product;
+import com.codecool.shop.model.cart.CartModel;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.Currency;
 
 @WebListener
 public class Initializer implements ServletContextListener {
@@ -32,7 +25,7 @@ public class Initializer implements ServletContextListener {
         //setting up a new supplier
         Supplier amazon = new Supplier(1, "me");
         supplierDataStore.add(amazon);
-        Cart cart = new Cart();
+        CartModel cart = new CartModel();
 
     }
 }
