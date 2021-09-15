@@ -31,4 +31,8 @@ public class UserService {
     public <T extends User> T convertUserObject(User user, Class<T> type) {
         return type.cast(user);
     }
+
+    public User createUserObjectFromJson(String jsonElement) {
+        return userDao.createObjectFromJson(jsonElement);
+    }
 }
