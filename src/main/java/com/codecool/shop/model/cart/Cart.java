@@ -1,6 +1,7 @@
 
 package com.codecool.shop.model.cart;
 
+import com.codecool.shop.logger.ProperLogMessages;
 import com.codecool.shop.model.products.Product;
 
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ public class Cart {
     private Map<String, BigDecimal> sumEachItem = new HashMap<>();
     private Currency currency;
     private int totalNumberOfProducts = 0;
+    private final ProperLogMessages properLogMessages = new ProperLogMessages();
 
     public Cart() {
     }
@@ -41,7 +43,7 @@ public class Cart {
             setQuantity(this.quantity);
             calculatePriceAfterAddItem(product, 1);
         }
-        System.out.println("Item has been added to the cart!");
+        properLogMessages.addProductToCartLog(product.getName());
     }
 
     public void removeProduct(Product product) {
@@ -66,7 +68,7 @@ public class Cart {
 
             calculatePriceAfterRemoveItem(product, quantity);
         }
-        System.out.println("Item has been removed successfully!");
+        properLogMessages.removeProductFromCartLog(product.getName());
     }
 
     private void calculatePriceAfterAddItem(Product product, int getQuantity) {
