@@ -140,6 +140,9 @@ public class Cart {
     }
 
     public List<ProductDetail> convertProductDetail() {
+        // refresh cartService card content
+        cartService.refreshCart(cartDao);
+        List<CartItem> cart = cartService.getCart();
 
         List<ProductDetail> productsDetails = new LinkedList<>();
         content.forEach((name, product) -> {
