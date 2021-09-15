@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "userServlet", urlPatterns = "api/user-registration")
+@WebServlet(name = "userServlet", urlPatterns = {"api/user?registration", "api/user?login"})
 public class UserController extends HttpServlet {
     DataSource dataSource = Util.getDataSource();
     UserDao userDao = new UserDaoJdbc(dataSource);
@@ -28,7 +28,19 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String jsonBody = "[" + Util.getJsonBodyOutOfFetch(request) + "]";
+        if (request.getParameter("registration") != null) {
+            userRegistration(request, response, jsonBody);
+        } else if (request.getParameter("login") != null) {
+            userLogin(request, response, jsonBody);
+        }
 
+    }
+
+    private void userLogin(HttpServletRequest request, HttpServletResponse response, String jsonBody ) {
+
+    }
+
+    private void userRegistration(HttpServletRequest request, HttpServletResponse response, String jsonBody ) throws IOException {
         User user = userService.createUserObjectFromJson(jsonBody);
 
         JsonObject jsonObject = new JsonObject();
@@ -37,7 +49,5 @@ public class UserController extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         out.print(jsonObject);
-
-
     }
 }
