@@ -1,36 +1,36 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.OrderDao;
-import com.codecool.shop.model.OrderModel;
+import com.codecool.shop.model.Order;
+import com.codecool.shop.model.OrderStatus;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoJdbc implements OrderDao {
-    Connection connection;
+    private DataSource dataSource;
 
-    public OrderDaoJdbc(Connection connection) {
-        this.connection = connection;
+    public OrderDaoJdbc(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     @Override
-    public void add(OrderModel order) {
-        int orderId = order.getOrderId();
+    public void add(Order order) {
         int userId = order.getUserId();
         Timestamp timestamp = order.getOrderDate();
-        String orderStatus = order.getOrderStatus();
+        OrderStatus orderStatus = order.getOrderStatus();
 
-        try {
+        try (Connection connection = dataSource.getConnection()){
             PreparedStatement statement = connection.prepareStatement("""
-                    INSERT INTO orders (order_id, user_id, order_date, order_status)
-                    VALUES(?, ?, ?, ?)
+                    INSERT INTO orders (user_id, order_date, order_status)
+                    VALUES(?, ?, ?)
                     """);
 
-            statement.setInt(1, orderId);
-            statement.setInt(2, userId);
-            statement.setTimestamp(3, timestamp);
-            statement.setString(4, orderStatus);
+            statement.setInt(1, userId);
+            statement.setTimestamp(2, timestamp);
+            statement.setString(3, orderStatus.toString());
 
             statement.executeQuery();
         } catch (SQLException e) {
@@ -39,15 +39,15 @@ public class OrderDaoJdbc implements OrderDao {
     }
 
     @Override
-    public OrderModel find(OrderModel order) {
-        OrderModel orderResult = null;
+    public Order find(Order order) {
+        Order orderResult = null;
 
         int orderId = order.getOrderId();
         int userId = order.getUserId();
         Timestamp orderDate = order.getOrderDate();
-        String orderStatus = order.getOrderStatus();
+        OrderStatus orderStatus = order.getOrderStatus();
 
-        try {
+        try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("""
                     SELECT *
                     FROM orders
@@ -57,16 +57,16 @@ public class OrderDaoJdbc implements OrderDao {
             statement.setInt(1, orderId);
             statement.setInt(2, userId);
             statement.setTimestamp(3, orderDate);
-            statement.setString(4, orderStatus);
+            statement.setObject(4, orderStatus);
 
             ResultSet results = statement.executeQuery();
             results.next();
 
-            orderResult = new OrderModel(
+            orderResult = new Order(
                     results.getInt(0),
                     results.getInt(1),
                     results.getTimestamp(2),
-                    results.getString(3));
+                    results.getObject(3, OrderStatus.class));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -74,13 +74,13 @@ public class OrderDaoJdbc implements OrderDao {
         return orderResult;
     }
 
-    public void remove(OrderModel order) {
+    public void remove(Order order) {
         this.remove(order.getOrderId());
     }
 
     @Override
     public void remove(int orderId) {
-        try {
+        try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("""
                     DELETE FROM orders
                     WHERE order_id = ?
@@ -95,9 +95,9 @@ public class OrderDaoJdbc implements OrderDao {
     }
 
     @Override
-    public List<OrderModel> getAll() {
-        List<OrderModel> orders = new ArrayList<>();
-        try {
+    public List<Order> getAll() {
+        List<Order> orders = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("""
                     SELECT *
                     FROM carts
@@ -105,7 +105,7 @@ public class OrderDaoJdbc implements OrderDao {
 
             ResultSet results = statement.executeQuery();
             while (results.next()) {
-                orders.add(new OrderModel(results.getInt(0), results.getInt(1), results.getTimestamp(2), results.getString(3)));
+                orders.add(new Order(results.getInt(0), results.getInt(1), results.getTimestamp(2), results.getObject(3, OrderStatus.class)));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

@@ -83,11 +83,6 @@ public class ProductDaoJDBC implements ProductDao {
     }
 
     @Override
-    public List<List<Product>> createObjectsFromJson() throws IOException {
-        return null;
-    }
-
-    @Override
     public List<Product> getBy(Supplier supplier) {
         return getAll().stream()
                 .filter(product -> product.getSupplier().getId() == supplier.getId())
@@ -99,11 +94,6 @@ public class ProductDaoJDBC implements ProductDao {
         return getAll().stream()
                 .filter(product -> product.getProductCategory().getId() == productCategory.getId())
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public Product createObjectFromJson(String jsonElement) {
-        return null;
     }
 
     private void addNewIDEToDB(Connection conn, Product product) throws SQLException {
