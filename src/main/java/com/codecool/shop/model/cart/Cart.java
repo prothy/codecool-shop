@@ -11,7 +11,16 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class Cart {
-
+    /**
+     * content hash map has the following format:
+     * {
+     * key = "{String: product name}"
+     * value = HashMap: {
+     * key = Product: product
+     * value = int: ?
+     * }
+     * }
+     */
     private Map<String, HashMap<Product, Integer>> content = new HashMap<>();
     private Map<String, Integer> quantity = new HashMap<>();
     private Map<String, BigDecimal> sumEachItem = new HashMap<>();
@@ -139,11 +148,28 @@ public class Cart {
         this.quantity = quantity;
     }
 
-    public List<ProductDetail> convertProductDetail() {
-        // refresh cartService card content
+    /**
+     * refresh 'content'-field content
+     */
+    public void refreshContent() {
         cartService.refreshCart(cartDao);
         List<CartItem> cart = cartService.getCart();
 
+        Map<String, HashMap<Product, Integer>> newContent = new HashMap<>();
+        for (CartItem cartItem : cart) {
+            HashMap<Product, Integer> productHashMap = new HashMap<>();
+            productHashMap.put(cartItem.getProduct(), cartItem.getQuantity());
+
+            newContent.put(
+                    cartItem.getProduct().getName(),
+                    productHashMap
+            );
+        }
+
+        content = newContent;
+    }
+
+    public List<ProductDetail> convertProductDetail() {
         List<ProductDetail> productsDetails = new LinkedList<>();
         content.forEach((name, product) -> {
             for (Map.Entry<Product, Integer> details : product.entrySet()) {

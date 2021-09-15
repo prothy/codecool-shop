@@ -78,6 +78,7 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        userCart.refreshContent();
 
         JsonObject productOfCart = new JsonObject();
         productOfCart.add("products", gson.toJsonTree(userCart.convertProductDetail()));
