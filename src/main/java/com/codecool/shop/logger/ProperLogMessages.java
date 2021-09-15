@@ -13,7 +13,8 @@ import java.sql.Timestamp;
 
 public class ProperLogMessages {
 
-    private final org.slf4j.Logger loggerForCart = org.slf4j.LoggerFactory.getLogger(Cart.class);
+    private final Logger loggerForCart = Logger.getLogger(Cart.class.getName());
+    //private final org.slf4j.Logger loggerForCart = org.slf4j.LoggerFactory.getLogger(Cart.class);
     private final org.slf4j.Logger loggerForUser = org.slf4j.LoggerFactory.getLogger(User.class);
     private final org.slf4j.Logger loggerForOrder = org.slf4j.LoggerFactory.getLogger(OrderModel.class);
 
