@@ -1,10 +1,8 @@
 package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.controller.CartController;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.model.cart.CartItem;
-import com.codecool.shop.model.cart.CartModel;
-import com.codecool.shop.model.products.Product;
+import com.codecool.shop.service.CartService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -28,8 +26,12 @@ public class CartDaoJdbc implements CartDao {
         }
     }
 
+    /**
+     * Removes all entries that contain the user id of the cart, and adds the content of the cart again.
+     * @param cart
+     */
     @Override
-    public void updateCart(CartModel cart) {
+    public void updateCart(CartService cart) {
         int userId = cart.getUserId();
         try {
             this.remove(userId);
@@ -39,7 +41,7 @@ public class CartDaoJdbc implements CartDao {
         }
     }
 
-    private void add(CartModel cart) throws SQLException {
+    private void add(CartService cart) throws SQLException {
         int userId = cart.getUserId();
         List<CartItem> cartItems = cart.getCart();
 
@@ -61,8 +63,8 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public List<CartModel> findAll(int userId) {
-        List<CartModel> cartContent = new ArrayList<>();
+    public List<CartService> findAll(int userId) {
+        List<CartService> cartContent = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("""
                     SELECT *
@@ -74,7 +76,7 @@ public class CartDaoJdbc implements CartDao {
 
             ResultSet results = statement.executeQuery();
             while (results.next()) {
-                cartContent.add(new CartModel(results.getInt(0), results.getInt(1)));
+                cartContent.add(new CartService(results.getInt(0), results.getInt(1)));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -133,8 +135,8 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public List<CartModel> getAll() {
-        List<CartModel> cartContent = new ArrayList<>();
+    public List<CartService> getAll() {
+        List<CartService> cartContent = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("""
                     SELECT *
@@ -143,7 +145,7 @@ public class CartDaoJdbc implements CartDao {
 
             ResultSet results = statement.executeQuery();
             while (results.next()) {
-                cartContent.add(new CartModel(results.getInt(0), results.getInt(1)));
+                cartContent.add(new CartService(results.getInt(0), results.getInt(1)));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

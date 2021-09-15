@@ -1,6 +1,6 @@
 package com.codecool.shop.model;
 
-import com.codecool.shop.model.cart.CartModel;
+import com.codecool.shop.service.CartService;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -24,7 +24,7 @@ public class OrderModel {
         this.orderStatus = orderStatus;
     }
 
-    public OrderModel(int i, CartModel cart) {
+    public OrderModel(int i, CartService cart) {
     }
 
     public int getOrderId() {
