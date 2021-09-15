@@ -10,5 +10,7 @@ public interface UserDao {
     User find(int id);
     void remove(int id);
 
+    User createObjectFromJson(String jsonElement);
+
 
 }

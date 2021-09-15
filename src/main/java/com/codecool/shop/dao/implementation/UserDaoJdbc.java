@@ -5,6 +5,8 @@ import com.codecool.shop.model.cart.Cart;
 import com.codecool.shop.model.user.Admin;
 import com.codecool.shop.model.user.Customer;
 import com.codecool.shop.model.user.User;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -77,5 +79,12 @@ public class UserDaoJdbc implements UserDao {
     @Override
     public void remove(int id) {
 
+    }
+
+    public User createObjectFromJson(String jsonElement) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson customGson = gsonBuilder.create();
+
+        return customGson.fromJson(jsonElement, Customer.class);
     }
 }

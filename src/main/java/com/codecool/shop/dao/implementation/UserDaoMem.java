@@ -75,4 +75,9 @@ public class UserDaoMem implements UserDao {
                 .filter(User::isAdmin)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public User createObjectFromJson(String jsonElement) {
+        return null;
+    }
 }
