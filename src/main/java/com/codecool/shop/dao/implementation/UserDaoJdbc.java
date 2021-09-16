@@ -33,6 +33,7 @@ public class UserDaoJdbc implements UserDao {
                 statement.setBigDecimal(6, ((Customer) user).getWallet());
                 statement.setString(7, ((Customer) user).getDefaultCurrencyString());
             }
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
