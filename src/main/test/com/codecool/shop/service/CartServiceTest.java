@@ -43,14 +43,14 @@ public class CartServiceTest {
         testCart.add(testItem1);
         testCart.add(testItem2);
 
-        cartService.setCart(testCart);
-
         //Act
         cartService.addToCart(ide, quantity1);
         cartService.addToCart(os, quantity2);
 
         //Assert
-        assertEquals(cartService.getCart(), testCart);
+        assertEquals(cartService.getCart().size(), testCart.size());
+        assertEquals(cartService.getCart().get(0).getProduct(), testCart.get(0).getProduct());
+        assertEquals(cartService.getCart().get(1).getProduct(), testCart.get(1).getProduct());
     }
 
 
