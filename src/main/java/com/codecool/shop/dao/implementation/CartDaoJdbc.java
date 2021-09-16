@@ -38,7 +38,6 @@ public class CartDaoJdbc implements CartDao {
     public void updateCart(CartService cart) {
         int userId = cart.getUserId();
         try {
-            this.remove(userId);
             this.add(cart);
         } catch (SQLException e) {
             logger.error(e.getMessage());
@@ -50,6 +49,12 @@ public class CartDaoJdbc implements CartDao {
         List<CartItem> cartItems = cart.getCart();
 
         StringBuilder query = new StringBuilder();
+
+        String clearCart = String.format("""
+                DELETE FROM carts
+                WHERE user_id = %o;
+                """, userId);
+        query.append(clearCart);
 
         for (CartItem cartItem : cartItems) {
             int quantity = cartItem.getQuantity();
@@ -86,7 +91,8 @@ public class CartDaoJdbc implements CartDao {
             ResultSet results = statement.executeQuery();
             while (results.next()) {
                 Product product = productService.getProductById(results.getInt(1));
-                cartContent.add(new CartItem(product, results.getInt(2)));
+                int quantity = results.getInt(3);
+                cartContent.add(new CartItem(product, quantity));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
