@@ -7,7 +7,7 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Supplier;
-import com.codecool.shop.model.cart.CartModel;
+import com.codecool.shop.model.cart.Cart;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -25,7 +25,7 @@ public class Initializer implements ServletContextListener {
         //setting up a new supplier
         Supplier amazon = new Supplier(1, "me");
         supplierDataStore.add(amazon);
-        CartModel cart = new CartModel();
+        Cart cart = new Cart();
 
     }
 }

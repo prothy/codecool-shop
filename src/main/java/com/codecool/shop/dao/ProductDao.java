@@ -14,8 +14,6 @@ public interface ProductDao {
     void remove(int id);
 
     List<Product> getAll();
-    List<List<Product>> createObjectsFromJson() throws IOException;
     List<Product> getBy(Supplier supplier);
     List<Product> getBy(ProductCategory productCategory);
-    Product createObjectFromJson(String jsonElement);
 }

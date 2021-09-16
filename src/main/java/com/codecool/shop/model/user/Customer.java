@@ -2,7 +2,6 @@ package com.codecool.shop.model.user;
 
 import com.codecool.shop.model.*;
 import com.codecool.shop.model.cart.Cart;
-import com.codecool.shop.model.cart.CartModel;
 import com.codecool.shop.model.payment.CreditCard;
 import com.codecool.shop.model.payment.PayPal;
 
@@ -52,7 +51,7 @@ public class Customer extends User{
 
     public void cancelOrder(int id) {
         Order chosenOrder = orders.stream()
-                .parallel().filter(order -> order.getId() == id)
+                .parallel().filter(order -> order.getUserId() == id)
                 .findFirst().orElseThrow(NoSuchElementException::new);
         orders.remove(chosenOrder);
     }

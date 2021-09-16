@@ -51,7 +51,8 @@ public class CartController extends HttpServlet {
         String jsonBody = "[" + Util.getJsonBodyOutOfFetch(request) + "]";
 
         System.out.println(jsonBody);
-        Product jsonObject = productService.createCartObjectFromJson(jsonBody);
+        Product jsonObject = Util.createCartObjectFromJson(jsonBody);
+
         if (request.getParameter("action").equals("add")) {
             BigDecimal newPrice;
             if (jsonObject instanceof SubscriptionProduct) {
@@ -61,6 +62,7 @@ public class CartController extends HttpServlet {
 
             jsonObject.setDefaultCurrency(Currency.getInstance("USD"));
             userCart.addProduct(jsonObject);
+
         } else if (request.getParameter("action").equals("remove")) {
             BigDecimal newPrice;
             if (jsonObject instanceof SubscriptionProduct) {
@@ -76,6 +78,7 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        userCart.refreshContent();
 
         JsonObject productOfCart = new JsonObject();
         productOfCart.add("products", gson.toJsonTree(userCart.convertProductDetail()));
