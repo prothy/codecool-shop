@@ -29,7 +29,7 @@ public class UserController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String jsonBody = "[" + Util.getJsonBodyOutOfFetch(request) + "]";
+        String jsonBody = Util.getJsonBodyOutOfFetch(request);
         String url = request.getServletPath();
         if (url.equals("/api/user/registration")) {
             userRegistration(request, response, jsonBody);

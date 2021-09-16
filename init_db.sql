@@ -52,8 +52,8 @@ CREATE TABLE users
     email    varchar(50)        NOT NULL,
     password varchar(50)        NOT NULL,
     isAdmin  boolean            NOT NULL,
-    address  text               NOT NULL,
-    wallet   decimal            NOT NULL,
+    address  text,
+    wallet   decimal,
     currency text
 );
 
@@ -134,10 +134,10 @@ ALTER TABLE ONLY products
     ADD CONSTRAINT fk_supplier_id FOREIGN KEY (supplier_id) REFERENCES suppliers (supplier_id);
 
 INSERT INTO users
-VALUES (1, 'guest' ,'guest@guest.com', '12345', false, 'none', 999.99, 'USD');
+VALUES (0, 'guest' ,'guest@guest.com', '12345', false, 'none', 999.99, 'USD');
 
 INSERT INTO orders
-VALUES (1, 1, '2021-09-13 12:00:54', 'IN_PROGRESS');
+VALUES (1, 0, '2021-09-13 12:00:54', 'IN_PROGRESS');
 
 INSERT INTO product_categories
 VALUES (0, 'OS');
