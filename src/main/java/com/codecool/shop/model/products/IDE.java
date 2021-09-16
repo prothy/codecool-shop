@@ -15,6 +15,10 @@ public class IDE extends SubscriptionProduct{
         this.languages = languages;
     }
 
+    public IDE() {
+        super();
+    }
+
     public String getLanguages() {
         return languages;
     }

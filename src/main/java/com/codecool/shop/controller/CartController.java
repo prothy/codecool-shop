@@ -6,6 +6,7 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.UserDao;
 
 import com.codecool.shop.dao.implementation.*;
+import com.codecool.shop.logger.ProperLogMessages;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.Util;
@@ -45,6 +46,7 @@ public class CartController extends HttpServlet {
     Gson gson = gsonBuilder.create();
     Customer user = new Customer();
     Cart userCart = user.getCart();
+    ProperLogMessages logMessages = new ProperLogMessages();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,6 +64,8 @@ public class CartController extends HttpServlet {
 
             jsonObject.setDefaultCurrency(Currency.getInstance("USD"));
             userCart.addProduct(jsonObject);
+            logMessages.addProductToCartLog(jsonObject.getName());
+
 
         } else if (request.getParameter("action").equals("remove")) {
             BigDecimal newPrice;
@@ -72,6 +76,7 @@ public class CartController extends HttpServlet {
 
             jsonObject.setDefaultCurrency(Currency.getInstance("USD"));
             userCart.removeProduct(jsonObject);
+            logMessages.removeProductFromCartLog(jsonObject.getName());
         }
         doGet(request, response);
     }

@@ -15,6 +15,10 @@ public class BaseModel {
         this.name = name;
     }
 
+    public BaseModel() {
+
+    }
+
     public int getId() {
         return id;
     }
