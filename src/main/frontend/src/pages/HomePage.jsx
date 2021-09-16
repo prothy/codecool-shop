@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {Row, Col, Dropdown, ListGroup, Container} from 'react-bootstrap'
+import {Row, Col, Dropdown, Container} from 'react-bootstrap'
 import Product from '../components/Product'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -9,7 +9,7 @@ import {setFilters} from '../actions/productActions'
 
 // TODO: FIX -> Fetch it from the backend:
 const categories = ['OS', 'WorkTool', 'IDE', 'Cloud']
-const suppliers = ['Microsoft', 'Google', 'JetBrains', 'Amazon', 'Slack', 'Atlassian']
+const suppliers = ['Microsoft', 'Google', 'Jetbrains', 'Amazon', 'Slack', 'Atlassian']
 
 // TODO: REFACTOR -> Place it into a util/helper folder and import it:
 const filterProducts = ({category, supplier}, products) => {
@@ -47,10 +47,10 @@ function HomePage() {
                 : error ? <Message variant="danger">{error}</Message>
                     :
                     <>
-                        <Container>
-                            <Col>
+                        <Container className="align-items-center justify-content-start d-flex">
+                            <Col className="w-auto flex-grow-0">
                                 {/* TODO: FIX -> Button alignment */}
-                                <Dropdown className="py-2">
+                                <Dropdown className="py-2 d-inline">
                                     <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
                                         {filters.category.length > 0 ? filters.category : 'Category'}
                                     </Dropdown.Toggle>
@@ -68,8 +68,8 @@ function HomePage() {
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Col>
-                            <Col>
-                                <Dropdown className="py2">
+                            <Col className="w-auto">
+                                <Dropdown className="py2 d-inline">
                                     <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
                                         {filters.supplier.length > 0 ? filters.supplier : 'Supplier'}
                                     </Dropdown.Toggle>
