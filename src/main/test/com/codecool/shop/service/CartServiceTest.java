@@ -56,6 +56,20 @@ public class CartServiceTest {
     @Test
     void removeFromCartRemovesParticularQuantity() {
         //Arrange
+        int quantity1 = (int) (Math.random() * 10 + 2);
+
+        //Act
+        cartService.addToCart(ide, quantity1);
+        cartService.removeFromCart(ide, quantity1 - 1);
+
+        //Assert
+        assertEquals(cartService.getCart().get(0).getQuantity(), 1);
+    }
+
+
+    @Test
+    void removeFromCartRemoveAllQuantityRemovesItemFromCart() {
+        //Arrange
         int quantity1 = (int) (Math.random() * 10);
         int quantity2 = (int) (Math.random() * 10);
 
