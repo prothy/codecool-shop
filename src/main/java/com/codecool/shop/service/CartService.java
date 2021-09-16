@@ -1,15 +1,11 @@
 package com.codecool.shop.service;
 
-import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.DatabaseManager;
 import com.codecool.shop.dao.implementation.CartDaoJdbc;
-import com.codecool.shop.model.Util;
 import com.codecool.shop.model.cart.CartItem;
 import com.codecool.shop.model.products.Product;
 
-import javax.sql.DataSource;
-import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class is used to save the cart info that is then sent to the CartDao for use in SQL *
@@ -57,7 +53,7 @@ public class CartService {
         boolean containsProduct = false;
 
         for (CartItem cartItem : cart) {
-            if (cartItem.getProduct() == product) {
+            if (cartItem.getProduct().getId() == product.getId()) {
                 int currentQuantity = cartItem.getQuantity();
                 cartItem.setQuantity(currentQuantity + quantity);
                 containsProduct = true;
@@ -78,7 +74,7 @@ public class CartService {
             CartItem cartItem = cart.get(i);
             int newQuantity = cartItem.getQuantity() - quantity;
 
-            if (cartItem.getProduct() == product) {
+            if (cartItem.getProduct().getId() == product.getId()) {
                 if (newQuantity <= 0) {
                     cart.remove(i);
                     break;
@@ -93,6 +89,10 @@ public class CartService {
 
     public List<CartItem> getCart() {
         return cart;
+    }
+
+    public void setCart(List<CartItem> cart) {
+        this.cart = cart;
     }
 }
 

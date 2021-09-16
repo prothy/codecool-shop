@@ -19,6 +19,9 @@ public abstract class SubscriptionProduct extends Product {
 
     }
 
+    public SubscriptionProduct() {
+    }
+
     public BigDecimal getYearlyPrice() {
         return yearlyPrice;
     }

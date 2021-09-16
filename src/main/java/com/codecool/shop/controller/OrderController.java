@@ -4,6 +4,8 @@ import com.codecool.shop.dao.OrderDao;
 import com.codecool.shop.dao.ProductsOrders;
 import com.codecool.shop.dao.implementation.OrderDaoJdbc;
 import com.codecool.shop.dao.implementation.ProductsOrdersJdbc;
+import com.codecool.shop.logger.AdminLog;
+import com.codecool.shop.logger.ProperLogMessages;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Util;
 import com.codecool.shop.model.products.Product;
@@ -23,6 +25,9 @@ import java.util.stream.Collectors;
 
 @WebServlet(name = "orderServlet", urlPatterns = {"/api/order","/api/order?userId&action"})
 public class OrderController extends HttpServlet {
+
+    ProperLogMessages logMessages = new ProperLogMessages();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DataSource dataSource = Util.getDataSource();
@@ -38,11 +43,16 @@ public class OrderController extends HttpServlet {
 
         if (req.getParameter("action").equals("add")) orderService.addNewOrderToDatabase(newOrder, products);
 
-
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         out.print("Order added to orders"); //Use logger here
+
+        logMessages.orderHasBeenAddedToTheOrders();
+        AdminLog adminLog = new AdminLog(
+                newOrder.getOrderStatus(), newOrder.getOrderId(), newOrder.getUserId(), newOrder.getCurrentDate(), newOrder.getCart());
+        adminLog.adminLogDetailsSaveIntoFile();
+
         out.flush();
     }
 }

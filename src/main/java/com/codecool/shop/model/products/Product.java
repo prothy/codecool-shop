@@ -25,6 +25,10 @@ public abstract class Product extends BaseModel {
         this.price = price;
     }
 
+    public Product() {
+        super();
+    }
+
     public ProductCategory getProductCategory() {
         return productCategory;
     }
