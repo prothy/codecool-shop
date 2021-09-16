@@ -74,7 +74,7 @@ public class CartService {
             CartItem cartItem = cart.get(i);
             int newQuantity = cartItem.getQuantity() - quantity;
 
-            if (cartItem.getProduct() == product) {
+            if (cartItem.getProduct().getId() == product.getId()) {
                 if (newQuantity <= 0) {
                     cart.remove(i);
                     break;
