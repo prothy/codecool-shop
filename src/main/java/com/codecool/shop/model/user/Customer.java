@@ -38,9 +38,6 @@ public class Customer extends User{
         this.address = null;
     }
 
-
-
-
     public void addOrder() {
         if (confirmOrder()){
             if (isPaymentSuccess(paymentDetail.get("paymentType"))) {
