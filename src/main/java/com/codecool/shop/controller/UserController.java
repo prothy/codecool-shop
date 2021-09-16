@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "userServlet", urlPatterns = {"api/user?registration", "api/user?login"})
+@WebServlet(name = "userServlet", urlPatterns = {"api/user/registration", "api/user/login"})
 public class UserController extends HttpServlet {
     DataSource dataSource = Util.getDataSource();
     UserDao userDao = new UserDaoJdbc(dataSource);
@@ -28,15 +28,28 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String jsonBody = "[" + Util.getJsonBodyOutOfFetch(request) + "]";
-        if (request.getParameter("registration") != null) {
+        String url = request.getServletPath();
+        if (url.equals("/api/user/registration")) {
             userRegistration(request, response, jsonBody);
-        } else if (request.getParameter("login") != null) {
+        } else if (url.equals("/api/user/login")) {
             userLogin(request, response, jsonBody);
         }
 
     }
 
-    private void userLogin(HttpServletRequest request, HttpServletResponse response, String jsonBody ) {
+    private void userLogin(HttpServletRequest request, HttpServletResponse response, String jsonBody ) throws IOException {
+        User user = userService.findUser(jsonBody);
+
+        JsonObject jsonObject = new JsonObject();
+        if (user.equals(null)) {
+            jsonObject.addProperty("message", "User is not found");
+        } else {
+            jsonObject.addProperty("message", "User is logged in");
+        }
+        PrintWriter out = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        out.print(jsonObject);
 
     }
 

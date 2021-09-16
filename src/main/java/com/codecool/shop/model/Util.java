@@ -151,17 +151,23 @@ public class Util {
         return Util.createObjectFromJson(jsonElement);
     }
 
-    public static void hashPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        public static byte[] hashPassword(String password) {
         Random random = new Random();
 
         byte[] salt = new byte[16];
         random.nextBytes(salt);
-
         KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
-        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-
-        byte[] hash = factory.generateSecret(spec).getEncoded();
+        SecretKeyFactory factory;
+        byte[] hash;
+        try {
+            factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            hash = factory.generateSecret(spec).getEncoded();
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException exception){
+            throw new RuntimeException(exception);
+        }
         Base64.Encoder encoder = Base64.getEncoder();
+
+        return hash;
 
     }
 }

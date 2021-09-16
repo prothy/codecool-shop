@@ -1,11 +1,17 @@
 package com.codecool.shop.service;
 
 import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.model.Util;
 import com.codecool.shop.model.user.Admin;
 import com.codecool.shop.model.user.Customer;
 import com.codecool.shop.model.user.User;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collection;
 
 public class UserService {
@@ -33,6 +39,16 @@ public class UserService {
     }
 
     public User createUserObjectFromJson(String jsonElement) {
+        JsonObject jsonObject = new Gson().fromJson(jsonElement, JsonObject.class);
+        byte[] hashPassword = Util.hashPassword(jsonObject.get("password").getAsString());
+        jsonObject.addProperty("password", Arrays.toString(hashPassword));
+
         return userDao.createObjectFromJson(jsonElement);
+    }
+
+    public User findUser(String jsonElement) {
+        JsonObject jsonObject = new Gson().fromJson(jsonElement, JsonObject.class);
+
+        return userDao.find(jsonObject.get("email").getAsString());
     }
 }
