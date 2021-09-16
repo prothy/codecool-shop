@@ -36,6 +36,7 @@ function OrderPage({match, history}) {
     const addPayPalScript = () => {
         const script = document.createElement('script')
         script.type = 'text/javascript'
+        // TODO: Put the test client ID here from PayPal dummy:
         script.src = 'https://www.paypal.com/sdk/js?client-id=AeDXja18CkwFUkL-HQPySbzZsiTrN52cG13mf9Yz7KiV2vNnGfTDP0wDEN9sGlhZHrbb_USawcJzVDgn'
         script.async = true
         script.onload = () => {
