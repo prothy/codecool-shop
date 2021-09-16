@@ -9,7 +9,7 @@ import FormContainer from '../components/FormContainer'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 
-function LoginPage(location, history) {
+function LoginPage({location, history}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
