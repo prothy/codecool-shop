@@ -29,10 +29,11 @@ public class UserDaoJdbc implements UserDao {
             statement.setString(3, user.getPassword());
             statement.setBoolean(4, user.isAdmin());
             if (user instanceof Customer) {
-                statement.setString(4, ((Customer) user).getAddress());
-                statement.setBigDecimal(5, ((Customer) user).getWallet());
-                statement.setString(6, ((Customer) user).getDefaultCurrencyString());
+                statement.setString(5, ((Customer) user).getAddress());
+                statement.setBigDecimal(6, ((Customer) user).getWallet());
+                statement.setString(7, ((Customer) user).getDefaultCurrencyString());
             }
+            statement.executeUpdate();
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
@@ -123,7 +124,9 @@ public class UserDaoJdbc implements UserDao {
     public User createObjectFromJson(String jsonElement) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson customGson = gsonBuilder.create();
+        User user = customGson.fromJson(jsonElement, Customer.class);
+        add(user);
 
-        return customGson.fromJson(jsonElement, Customer.class);
+        return user;
     }
 }
