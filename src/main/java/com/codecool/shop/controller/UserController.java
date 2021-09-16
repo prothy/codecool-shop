@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,6 +51,21 @@ public class UserController extends HttpServlet {
 //            jsonObject.addProperty("message", "User is logged in");
 //            logMessages.userHasBeenLoggedIntoTheWebShop(user.getName());
 //        }
+        HttpSession session = request.getSession(true);
+        session.setAttribute("development", "development");
+
+        // User user = userService.findUser(jsonBody);
+
+        JsonObject jsonObject = new JsonObject();
+        /*if (user.equals(null)) {
+            jsonObject.addProperty("message", "User is not found");
+            logMessages.userNotFoundInTheDatabase(user.getName());
+        } else {
+            jsonObject.addProperty("message", "User is logged in");
+            logMessages.userHasBeenLoggedIntoTheWebShop(user.getName());
+        }
+        }*/
+        jsonObject.addProperty("message", session.getAttribute("development").toString());
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
