@@ -66,20 +66,6 @@ public class ProductDaoMem implements ProductDao {
         return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
     }
 
-    @Override
-    public List<List<Product>> createObjectsFromJson() throws IOException {
-        String file ="src/main/java/com/codecool/shop/resources/products.json";
-        String jsonText = Util.readDataFromFile(file);
-
-        List<List<Product>> products = new ArrayList<>();
-        products.add(getJsonOfCloud(jsonText));
-        products.add(getJsonOfOs(jsonText));
-        products.add(getJsonOfIDE(jsonText));
-        products.add(getJsonOfWorkTool(jsonText));
-
-        return products;
-    }
-
     public Product createObjectFromJson(String jsonText) {
         List<List<Product>> products = new ArrayList<>();
         products.add(getJsonOfCloud(jsonText));

@@ -89,6 +89,8 @@ public class CartService {
         }
     }
 
+    public void refreshCart(CartDaoJdbc cartDao) { cart = cartDao.findAll(this.userId); }
+
     public List<CartItem> getCart() {
         return cart;
     }
