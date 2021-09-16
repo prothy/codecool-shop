@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.dao.implementation.UserDaoJdbc;
+import com.codecool.shop.logger.ProperLogMessages;
 import com.codecool.shop.model.Util;
 import com.codecool.shop.model.user.Customer;
 import com.codecool.shop.model.user.User;
@@ -24,6 +25,7 @@ public class UserController extends HttpServlet {
     DataSource dataSource = Util.getDataSource();
     UserDao userDao = new UserDaoJdbc(dataSource);
     UserService userService = new UserService(userDao);
+    ProperLogMessages logMessages = new ProperLogMessages();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,8 +45,10 @@ public class UserController extends HttpServlet {
         JsonObject jsonObject = new JsonObject();
         if (user.equals(null)) {
             jsonObject.addProperty("message", "User is not found");
+            logMessages.userNotFoundInTheDatabase(user.getName());
         } else {
             jsonObject.addProperty("message", "User is logged in");
+            logMessages.userHasBeenLoggedIntoTheWebShop(user.getName());
         }
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
@@ -58,6 +62,7 @@ public class UserController extends HttpServlet {
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("message", "New user created");
+        logMessages.userHasBeenRegisteredToTheWebShop(user.getName());
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
