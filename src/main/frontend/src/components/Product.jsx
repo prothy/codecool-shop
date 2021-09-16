@@ -20,14 +20,14 @@ function Product({product}) {
             <Card.Body>
                 {/* Product Title */}
                 <Link to={`/products/${product.id}`} style={{textDecoration: 'none'}}>
-                    <Card.Title as="div">
+                    <Card.Title as="div" className="text-center">
                         <strong>{product.name}</strong>
                     </Card.Title>
                 </Link>
 
                 {/* Product price */}
-                <Card.Text as="h3">
-                    {product.price || product.yearlyPrice}$
+                <Card.Text as="h3" className="text-center">
+                    {product.price}$
                 </Card.Text>
             </Card.Body>
         </Card>
