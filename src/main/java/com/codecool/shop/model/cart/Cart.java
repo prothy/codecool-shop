@@ -158,7 +158,7 @@ public class Cart {
         Map<String, HashMap<Product, Integer>> newContent = new HashMap<>();
         for (CartItem cartItem : cart) {
             HashMap<Product, Integer> productHashMap = new HashMap<>();
-            productHashMap.put(cartItem.getProduct(), cartItem.getQuantity());
+            productHashMap.put(cartItem.getProduct(), cart.size());
 
             newContent.put(
                     cartItem.getProduct().getName(),
