@@ -1,7 +1,7 @@
 package com.codecool.shop.logger;
 
 import com.codecool.shop.dao.implementation.CartDaoJdbc;
-import com.codecool.shop.model.OrderModel;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.cart.Cart;
 import com.codecool.shop.model.user.User;
 import org.apache.log4j.Level;
@@ -15,7 +15,7 @@ public class ProperLogMessages {
 
     private final org.slf4j.Logger loggerForCart = org.slf4j.LoggerFactory.getLogger(Cart.class.getName());
     private final org.slf4j.Logger loggerForUser = org.slf4j.LoggerFactory.getLogger(User.class.getName());
-    private final org.slf4j.Logger loggerForOrder = org.slf4j.LoggerFactory.getLogger(OrderModel.class.getName());
+    private final org.slf4j.Logger loggerForOrder = org.slf4j.LoggerFactory.getLogger(Order.class.getName());
     private final org.slf4j.Logger loggerForAdmin = org.slf4j.LoggerFactory.getLogger(AdminLog.class.getName());
 
 
@@ -51,6 +51,10 @@ public class ProperLogMessages {
 
     public void userHasBeenLoggedIntoTheWebShopWarning(String userName) {
         loggerForUser.warn(userName + " could not login into the web shop!");
+    }
+
+    public void userNotFoundInTheDatabase(String userName) {
+        loggerForUser.warn(userName + " is not found in the database!");
     }
 
     //Waiting for the user registration and for the user registration
@@ -89,4 +93,7 @@ public class ProperLogMessages {
         loggerForAdmin.warn("It was not possible to save into your request to as a JSON file!");
     }
 
+    public void orderHasBeenAddedToTheOrders() {
+        loggerForOrder.info("An order has been added to the orders!");
+    }
 }
