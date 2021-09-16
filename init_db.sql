@@ -77,7 +77,8 @@ DROP TABLE IF EXISTS public.carts;
 CREATE TABLE carts
 (
     user_id    int NOT NULL,
-    product_id int NOT NULL
+    product_id int NOT NULL,
+    quantity int
 );
 
 DROP TABLE IF EXISTS public.suppliers;

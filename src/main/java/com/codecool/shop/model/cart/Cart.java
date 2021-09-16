@@ -2,13 +2,26 @@
 package com.codecool.shop.model.cart;
 
 import com.codecool.shop.logger.ProperLogMessages;
+import com.codecool.shop.dao.implementation.CartDaoJdbc;
+import com.codecool.shop.model.Util;
 import com.codecool.shop.model.products.Product;
+import com.codecool.shop.service.CartService;
 
+import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.util.*;
 
 public class Cart {
-
+    /**
+     * content hash map has the following format:
+     * {
+     * key = "{String: product name}"
+     * value = HashMap: {
+     * key = Product: product
+     * value = int: ?
+     * }
+     * }
+     */
     private Map<String, HashMap<Product, Integer>> content = new HashMap<>();
     private Map<String, Integer> quantity = new HashMap<>();
     private Map<String, BigDecimal> sumEachItem = new HashMap<>();
@@ -16,12 +29,21 @@ public class Cart {
     private int totalNumberOfProducts = 0;
     private final ProperLogMessages properLogMessages = new ProperLogMessages();
 
+    // block of initializations for database
+    private final CartService cartService = new CartService();
+    private final DataSource dataSource = Util.getDataSource();
+    private final CartDaoJdbc cartDao = new CartDaoJdbc(dataSource);
+
     public Cart() {
     }
 
     public void addProduct(Product product) {
         currency = product.getDefaultCurrency();
         totalNumberOfProducts++;
+
+        // add product to cart, then update sql (it'll remove related entries, then add them all again)
+        cartService.addToCart(product);
+        cartDao.updateCart(cartService);
 
         if (content.containsKey(product.getName())) {
             HashMap<Product, Integer> innerMap = content.get(product.getName());
@@ -48,6 +70,10 @@ public class Cart {
 
     public void removeProduct(Product product) {
         totalNumberOfProducts--;
+
+        // remove from cart, then update
+        cartService.removeFromCart(product);
+        cartDao.updateCart(cartService);
 
         if (content.containsKey(product.getName())) {
 
@@ -124,8 +150,28 @@ public class Cart {
         this.quantity = quantity;
     }
 
-    public List<ProductDetail> convertProductDetail() {
+    /**
+     * refresh 'content'-field content
+     */
+    public void refreshContent() {
+        cartService.refreshCart(cartDao);
+        List<CartItem> cart = cartService.getCart();
 
+        Map<String, HashMap<Product, Integer>> newContent = new HashMap<>();
+        for (CartItem cartItem : cart) {
+            HashMap<Product, Integer> productHashMap = new HashMap<>();
+            productHashMap.put(cartItem.getProduct(), cartItem.getQuantity());
+
+            newContent.put(
+                    cartItem.getProduct().getName(),
+                    productHashMap
+            );
+        }
+
+        content = newContent;
+    }
+
+    public List<ProductDetail> convertProductDetail() {
         List<ProductDetail> productsDetails = new LinkedList<>();
         content.forEach((name, product) -> {
             for (Map.Entry<Product, Integer> details : product.entrySet()) {

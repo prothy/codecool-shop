@@ -12,8 +12,8 @@ import com.codecool.shop.model.OrderStatus;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.cart.Cart;
-import com.codecool.shop.model.cart.CartModel;
 import com.codecool.shop.model.products.Cloud;
+import com.codecool.shop.model.cart.Cart;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -35,7 +35,6 @@ public class Initializer implements ServletContextListener {
         //setting up a new supplier
         Supplier amazon = new Supplier(1, "me");
         supplierDataStore.add(amazon);
-        CartModel cart = new CartModel();
 
         Cart testCart = new Cart();
         Cloud cloud = new Cloud(0, "Google Drive", "", new ProductCategory(0, "test"),
@@ -44,7 +43,7 @@ public class Initializer implements ServletContextListener {
 
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        AdminLog logTest = new AdminLog(OrderStatus.NEW, 1, 0, timestamp, testCart);
+        AdminLog logTest = new AdminLog(OrderStatus.NEW, 1, 0, timestamp.toString(), testCart);
         try {
             logTest.adminLogDetailsSaveIntoFile();
         } catch (IOException e) {
