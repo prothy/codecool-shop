@@ -89,7 +89,7 @@ public class UserDaoJdbc implements UserDao {
             if (!resultSet.next()){
                 return null;
             }
-            if (resultSet.getBoolean(4)) {
+            if (resultSet.getBoolean(5)) {
                 user = new Admin(
                         resultSet.getInt(1),
                         resultSet.getString(2),
