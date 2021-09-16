@@ -22,7 +22,7 @@ function Header() {
                 <Container>
                     {/* Route to the home page */}
                     <LinkContainer to="/">
-                        <Navbar.Brand>NoIDEA Store</Navbar.Brand>
+                        <Navbar.Brand>No_IDEA - Software eCommerce</Navbar.Brand>
                     </LinkContainer>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                     <Navbar.Collapse id="basic-navbar-nav">
