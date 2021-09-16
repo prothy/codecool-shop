@@ -23,7 +23,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "orderServlet", urlPatterns = {"/api/order","/api/order?userId&action"})
+@WebServlet(name = "orderServlet", urlPatterns = {"/api/order/add","/api/order?userId&action"})
 public class OrderController extends HttpServlet {
 
     ProperLogMessages logMessages = new ProperLogMessages();

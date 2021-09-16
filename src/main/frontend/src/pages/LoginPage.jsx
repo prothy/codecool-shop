@@ -9,7 +9,7 @@ import FormContainer from '../components/FormContainer'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 
-function LoginPage(location, history) {
+function LoginPage({location, history}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -34,7 +34,7 @@ function LoginPage(location, history) {
     return (
         <FormContainer>
             <h1>Sign In</h1>
-            {error && <Message variant='danger'>{error}</Message>}
+            {error && <Message variant="danger">{error}</Message>}
             {loading && <Loader/>}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId="email">
@@ -65,12 +65,8 @@ function LoginPage(location, history) {
             </Form>
 
             <Row className="py-3">
-                <Col>
-                    New User?
-                    <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}> Register
-                        <FontAwesomeIcon icon="user"/>
-                    </Link>
-                </Col>
+                <Col><FontAwesomeIcon icon="user"/> New User? <Link
+                    to={redirect ? `/register?redirect=${redirect}` : '/register'}>Register</Link></Col>
             </Row>
         </FormContainer>
     )

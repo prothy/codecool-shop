@@ -1,1 +1,3 @@
 {0} userID is ready to order! | Order status: NEW | Cart size: 1
+{0} userID is ready to order! | Order status: NEW | Cart size: 1
+{0} userID is ready to order! | Order status: NEW | Cart size: 1

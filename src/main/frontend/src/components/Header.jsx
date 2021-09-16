@@ -19,13 +19,14 @@ function Header() {
     return (
         <header>
             <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-                <Container>
+                <Container className="d-flex justify-content-between">
                     {/* Route to the home page */}
                     <LinkContainer to="/">
-                        <Navbar.Brand>NoIDEA Store</Navbar.Brand>
+                        <Navbar.Brand>No_IDEA - Software eCommerce</Navbar.Brand>
                     </LinkContainer>
+
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                    <Navbar.Collapse id="basic-navbar-nav">
+                    <Navbar.Collapse id="basic-navbar-nav" className="flex-grow-0">
                         <Nav className="me-auto">
                             <LinkContainer to="/cart">
                                 <Nav.Link><FontAwesomeIcon icon="shopping-cart"/> Cart</Nav.Link>
