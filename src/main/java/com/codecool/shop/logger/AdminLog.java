@@ -91,7 +91,7 @@ public class AdminLog {
 
         try {
             Gson gson = new Gson();
-            writer = new FileWriter(filePathForJSON);
+            writer = new FileWriter(filePathForJSON,true);
             gson.toJson(dataJSONLog, writer);
             logMessages.saveAdminLogInformationIntoJSON();
 
