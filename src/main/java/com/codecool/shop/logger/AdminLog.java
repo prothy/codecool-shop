@@ -29,13 +29,13 @@ public class AdminLog {
     private OrderStatus orderStatus;
     private int orderId;
     private int userId;
-    private Timestamp orderDate;
+    private String orderDate;
 
     private boolean orderValidation;
     private Cart cart = new Cart();
 
     //Use this:
-    public AdminLog(OrderStatus orderStatus, int orderId, int userId, Timestamp orderDate, Cart cart) {
+    public AdminLog(OrderStatus orderStatus, int orderId, int userId, String orderDate, Cart cart) {
         this.orderStatus = orderStatus;
         this.orderId = orderId;
         this.userId = userId;
@@ -68,13 +68,12 @@ public class AdminLog {
             logMessages.adminLogHasBeenCreatedWarning();
         }
         finally {
-            System.out.println(appender.getLayout());
             appender.close();
             saveIntoJSON(pathLocationWithLog, orderId, orderDate);
         }
     }
 
-    private void saveIntoJSON(String pathLocationForLog, int orderId, Timestamp orderDate) throws IOException {
+    private void saveIntoJSON(String pathLocationForLog, int orderId, String orderDate) throws IOException {
 
         String filePathForJSON = "./src/main/logs/logsAsJSON/orderID" + orderId + ".json";
 
