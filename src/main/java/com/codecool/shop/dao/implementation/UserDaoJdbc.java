@@ -124,7 +124,9 @@ public class UserDaoJdbc implements UserDao {
     public User createObjectFromJson(String jsonElement) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson customGson = gsonBuilder.create();
+        User user = customGson.fromJson(jsonElement, Customer.class);
+        add(user);
 
-        return customGson.fromJson(jsonElement, Customer.class);
+        return user;
     }
 }
