@@ -29,9 +29,9 @@ public class UserDaoJdbc implements UserDao {
             statement.setString(3, user.getPassword());
             statement.setBoolean(4, user.isAdmin());
             if (user instanceof Customer) {
-                statement.setString(4, ((Customer) user).getAddress());
-                statement.setBigDecimal(5, ((Customer) user).getWallet());
-                statement.setString(6, ((Customer) user).getDefaultCurrencyString());
+                statement.setString(5, ((Customer) user).getAddress());
+                statement.setBigDecimal(6, ((Customer) user).getWallet());
+                statement.setString(7, ((Customer) user).getDefaultCurrencyString());
             }
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
