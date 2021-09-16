@@ -39,9 +39,11 @@ public class UserService {
     }
 
     public User createUserObjectFromJson(String jsonElement) {
-        JsonObject jsonObject = new Gson().fromJson(jsonElement, JsonObject.class);
-        byte[] hashPassword = Util.hashPassword(jsonObject.get("password").getAsString());
-        jsonObject.addProperty("password", Arrays.toString(hashPassword));
+        // Password hashing not working
+//        JsonObject jsonObject = new Gson().fromJson(jsonElement, JsonObject.class);
+//        byte[] hashPassword = Util.hashPassword(jsonObject.get("password").getAsString());
+//        jsonObject.addProperty("password", Arrays.toString(hashPassword));
+
 
         return userDao.createObjectFromJson(jsonElement);
     }
