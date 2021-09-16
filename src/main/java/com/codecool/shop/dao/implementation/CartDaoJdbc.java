@@ -38,7 +38,6 @@ public class CartDaoJdbc implements CartDao {
     public void updateCart(CartService cart) {
         int userId = cart.getUserId();
         try {
-//            this.remove(userId);
             this.add(cart);
         } catch (SQLException e) {
             logger.error(e.getMessage());
