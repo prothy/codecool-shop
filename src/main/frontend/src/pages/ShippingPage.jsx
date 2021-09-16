@@ -29,7 +29,7 @@ function ShippingPage({history}) {
             <h1>Shipping</h1>
             <Form onSubmit={submitHandler}>
 
-                <Form.Group controlId="address">
+                <Form.Group controlId="address" className="py-2">
                     <Form.Label>Address</Form.Label>
                     <Form.Control
                         required
@@ -41,7 +41,7 @@ function ShippingPage({history}) {
                     </Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId="city">
+                <Form.Group controlId="city" className="py-2">
                     <Form.Label>City</Form.Label>
                     <Form.Control
                         required
@@ -53,7 +53,7 @@ function ShippingPage({history}) {
                     </Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId="postalCode">
+                <Form.Group controlId="postalCode" className="py-2">
                     <Form.Label>Postal Code</Form.Label>
                     <Form.Control
                         required
@@ -65,7 +65,7 @@ function ShippingPage({history}) {
                     </Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId="country">
+                <Form.Group controlId="country" className="py-2">
                     <Form.Label>Country</Form.Label>
                     <Form.Control
                         required
@@ -77,7 +77,7 @@ function ShippingPage({history}) {
                     </Form.Control>
                 </Form.Group>
 
-                <Button type="submit" variant="primary">
+                <Button type="submit" variant="primary" className="py-2">
                     Continue
                 </Button>
             </Form>
