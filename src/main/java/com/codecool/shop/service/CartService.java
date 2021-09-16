@@ -57,7 +57,7 @@ public class CartService {
         boolean containsProduct = false;
 
         for (CartItem cartItem : cart) {
-            if (cartItem.getProduct() == product) {
+            if (cartItem.getProduct().getId() == product.getId()) {
                 int currentQuantity = cartItem.getQuantity();
                 cartItem.setQuantity(currentQuantity + quantity);
                 containsProduct = true;
