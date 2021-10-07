@@ -8,12 +8,12 @@ Also enjoy these files that we created in the process of planning this applicati
 
 First, the UML diagram for the backend:
 
-![UML diagram for the project](./img/UML.png)
+<img src="https://github.com/prothy/codecool-shop/blob/master/img/UML.png" alt="UML diagram for the project" height=auto width=500>
 
 And herewith a couple of design files that I created in Figma. We more or less followed the structure, but freestyled a bit when it came to the actual implementation:
 
-![Design image file for desktop view](./img/Desktop%20-%201.png)
+<img src="https://github.com/prothy/codecool-shop/blob/master/img/Desktop%20-%201.png" alt="Design image file for desktop view" height=auto width=500>
 
 and the shopping cart:
 
-![Design image file for shopping cart](./img/Cart.png)
+<img src="https://github.com/prothy/codecool-shop/blob/master/img/Cart.png" alt="Design image file for shopping cart" height=auto width=300>
